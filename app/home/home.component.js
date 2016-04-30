@@ -24,10 +24,28 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                     this._newsArr = [
                         'North Tacoma resident takes reins of Gig Harbor Library',
                         'New manager of library collections',
-                        'Calling all makers! Apply to be an exhibitor for MakrerFest',
+                        'Calling all makers! Apply to be an exhibitor for MakerFest',
                         'April is Poetry Month at the Library'
                     ];
-                    this.quicklinksArray = [this._quicklinksTop, this._quicklinksMid, this._quicklinksBot];
+                    this.quicklinksTop = [
+                        { imgName: 'Get a Free Library Card', imgLoc: './app/assets/images/quicklinks/getacard.png' },
+                        { imgName: 'Homework Help', imgLoc: './app/assets/images/quicklinks/homework.png' },
+                        { imgName: 'Online Classes', imgLoc: './app/assets/images/quicklinks/get-smart.png' },
+                        { imgName: 'Locations/Hours', imgLoc: './app/assets/images/quicklinks/map.png' }
+                    ];
+                    this.quicklinksMid = [
+                        { imgName: 'Download E-Books', imgLoc: './app/assets/images/quicklinks/ebooks.png' },
+                        { imgName: 'Download Audiobooks', imgLoc: './app/assets/images/quicklinks/audiobooks.png' },
+                        { imgName: 'Download Music', imgLoc: './app/assets/images/quicklinks/music.png' },
+                        { imgName: 'Download Movies', imgLoc: './app/assets/images/quicklinks/movies.png' }
+                    ];
+                    this.quicklinksBot = [
+                        { imgName: 'Download Magazines', imgLoc: './app/assets/images/quicklinks/magazines.png' },
+                        { imgName: 'E-Sources', imgLoc: './app/assets/images/quicklinks/esources.png' },
+                        { imgName: 'Job + Business Center', imgLoc: './app/assets/images/quicklinks/jbc.png' },
+                        { imgName: 'Join an Email List', imgLoc: './app/assets/images/quicklinks/email.png' }
+                    ];
+                    this.quicklinksArr = [this.quicklinksTop, this.quicklinksMid, this.quicklinksBot];
                 }
                 HomeComponent = __decorate([
                     core_1.Component({

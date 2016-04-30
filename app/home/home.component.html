@@ -40,28 +40,28 @@
                 </legend>
                 <div class="col-md-4 news-feed">
                     <div class="well well-lg" style="padding-top: 0;">
-                        <div class="text-center">
-                            <label for=""><h5>Library News and Updates</h5></label>
+                        <div class="news-title text-center">
+                            <label>Library News and Updates</label>
                         </div>
                         <div class="well well-sm news-well">
-                            <li *ngFor="#story of _newsArr">
-                                {{story}} <a href="#">More &raquo;</a>
-                            </li>
-                            <li class="text-right">
+                            <ul style="margin-bottom: 0;">
+                                <li *ngFor="#story of _newsArr">
+                                    {{story}} <a href="#">More &raquo;</a>
+                                </li>
+                            </ul>
+                            <div class="text-right">
                                 <a class="more-link" href="#">View All &raquo;</a>
-                            </li>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-8">
-                    <div class="row" *ngFor='#quicklinksRow of quicklinksArray'>
-                        
-                        <div class="col-md-3 well-block-quicklink" *ngFor="#link of quicklinksRow">
-                            
+                    <div class="row" style="margin-top: 4px;">
+                        <div class="col-md-3 well-block-quicklink" *ngFor="#link of quicklinksTop">
                             <div class="well well-sm well-quicklink">
                                 <div class="icon-quicklink text-center">
                                     <a href="#">
-                                        <img [src]='{{link.imgLoc}}'' [alt]='{{link.imgName}}'>
+                                        <img [src]='link.imgLoc' [alt]='link.imgName'>
                                     </a>
                                 </div>
                                 <div class="icon-label-quicklink text-center">
@@ -69,142 +69,34 @@
                                 </div>
                             </div>
                         </div>
-                        <!--<div class="col-md-3 well-block-quicklink">
-                            <div class="well well-sm well-quicklink">
-                                <div class="icon-quicklink text-center">
-                                    <a href="#">
-                                        <img src="./app/assets/images/getacard.png" alt="Get a Free Library Card">
-                                    </a>
-                                </div>
-                                <div class="icon-label-quicklink text-center">
-                                    <a href="">Homework Help</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 well-block-quicklink">
-                            <div class="well well-sm well-quicklink">
-                                <div class="icon-quicklink text-center">
-                                    <a href="#">
-                                        <img src="./app/assets/images/getacard.png" alt="Get a Free Library Card">
-                                    </a>
-                                </div>
-                                <div class="icon-label-quicklink text-center">
-                                    <a href="">Online Classes</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 well-block-quicklink">
-                            <div class="well well-sm well-quicklink">
-                                <div class="icon-quicklink text-center">
-                                    <a href="#">
-                                        <img src="./app/assets/images/getacard.png" alt="Get a Free Library Card">
-                                    </a>
-                                </div>
-                                <div class="icon-label-quicklink text-center">
-                                    <a href="">Location/Hours</a>
-                                </div>
-                            </div>
-                        </div>-->
                     </div>
                     <div class="row">
-                        <div class="col-md-3 well-block-quicklink" *ngFor="#link of quicklinksRow">
+                        <div class="col-md-3 well-block-quicklink" *ngFor="#link of quicklinksMid">
                             <div class="well well-sm well-quicklink">
                                 <div class="icon-quicklink text-center">
                                     <a href="#">
-                                        <img [src]='{{link.imgLoc}}'' [alt]='{{link.imgName}}'>
+                                        <img [src]='link.imgLoc' [alt]='link.imgName'>
                                     </a>
                                 </div>
                                 <div class="icon-label-quicklink text-center">
-                                    <a href="">{{imgName}}</a>
+                                    <a href="">{{link.imgName}}</a>
                                 </div>
                             </div>
                         </div>
-                        <!--<div class="col-md-3 well-block-quicklink">
-                            <div class="well well-sm well-quicklink">
-                                <div class="icon-quicklink text-center">
-                                    <a href="#">
-                                        <img src="./app/assets/images/getacard.png" alt="Get a Free Library Card">
-                                    </a>
-                                </div>
-                                <div class="icon-label-quicklink text-center">
-                                    <a href="">Download Audiobooks</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 well-block-quicklink">
-                            <div class="well well-sm well-quicklink">
-                                <div class="icon-quicklink text-center">
-                                    <a href="#">
-                                        <img src="./app/assets/images/getacard.png" alt="Get a Free Library Card">
-                                    </a>
-                                </div>
-                                <div class="icon-label-quicklink text-center">
-                                    <a href="">Download Music</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 well-block-quicklink">
-                            <div class="well well-sm well-quicklink">
-                                <div class="icon-quicklink text-center">
-                                    <a href="#">
-                                        <img src="./app/assets/images/getacard.png" alt="Get a Free Library Card">
-                                    </a>
-                                </div>
-                                <div class="icon-label-quicklink text-center">
-                                    <a href="">Download Movies</a>
-                                </div>
-                            </div>
-                        </div>-->
                     </div>
                     <div class="row">
-                        <div class="col-md-3 well-block-quicklink" *ngFor="#link of quicklinksRow">
+                        <div class="col-md-3 well-block-quicklink" *ngFor="#link of quicklinksBot">
                             <div class="well well-sm well-quicklink">
                                 <div class="icon-quicklink text-center">
                                     <a href="#">
-                                        <img [src]='{{link.imgLoc}}'' [alt]='{{link.imgName}}'>
+                                        <img [src]='link.imgLoc' [alt]='link.imgName'>
                                     </a>
                                 </div>
                                 <div class="icon-label-quicklink text-center">
-                                    <a href="">{{imgName}}</a>
+                                    <a href="">{{link.imgName}}</a>
                                 </div>
                             </div>
                         </div>
-                        <!--<div class="col-md-3 well-block-quicklink">
-                            <div class="well well-sm well-quicklink">
-                                <div class="icon-quicklink text-center">
-                                    <a href="#">
-                                        <img src="./app/assets/images/getacard.png" alt="Get a Free Library Card">
-                                    </a>
-                                </div>
-                                <div class="icon-label-quicklink text-center">
-                                    <a href="">E-Sources</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 well-block-quicklink">
-                            <div class="well well-sm well-quicklink">
-                                <div class="icon-quicklink text-center">
-                                    <a href="#">
-                                        <img src="./app/assets/images/getacard.png" alt="Get a Free Library Card">
-                                    </a>
-                                </div>
-                                <div class="icon-label-quicklink text-center">
-                                    <a href="">Job + Business Center</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 well-block-quicklink">
-                            <div class="well well-sm well-quicklink">
-                                <div class="icon-quicklink text-center">
-                                    <a href="#">
-                                        <img src="./app/assets/images/getacard.png" alt="Get a Free Library Card">
-                                    </a>
-                                </div>
-                                <div class="icon-label-quicklink text-center">
-                                    <a href="">Join an Email List</a>
-                                </div>
-                            </div>
-                        </div>-->
                     </div>
                 </div>
             </fieldset>

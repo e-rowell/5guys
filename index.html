@@ -2,37 +2,38 @@
 <html>
 
 <head lang="en">
-    <base href="/">
-    <title>Clark Country Library</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="/">
+  <title>Clark Country Library</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <link href="app/app.component.css" rel="stylesheet" />
-    <link rel="stylesheet" href="app/shared/nav.component.css"/>
+  <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+  <link href="app/app.component.css" rel="stylesheet" />
+  <link rel="stylesheet" href="app/shared/nav.component.css" />
+  <link rel="stylesheet" href="assets/site.css" />
 
-    <!-- 1. Load libraries -->
-    <!-- IE required polyfills, in this exact order -->
-    <script src="node_modules/angular2/es6/dev/src/testing/shims_for_IE.js"></script>
-    <script src="node_modules/es6-shim/es6-shim.min.js"></script>
-    <script src="node_modules/systemjs/dist/system-polyfills.js"></script>
-    <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
-    
-    <script src="node_modules/systemjs/dist/system.src.js"></script>
-    <script src="node_modules/rxjs/bundles/Rx.js"></script>
-    <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
-    
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  <!-- 1. Load libraries -->
+  <!-- IE required polyfills, in this exact order -->
+  <script src="node_modules/angular2/es6/dev/src/testing/shims_for_IE.js"></script>
+  <script src="node_modules/es6-shim/es6-shim.min.js"></script>
+  <script src="node_modules/systemjs/dist/system-polyfills.js"></script>
+  <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
 
-    <!-- Required for http -->
-    <script src="node_modules/angular2/bundles/http.dev.js"></script>
+  <script src="node_modules/systemjs/dist/system.src.js"></script>
+  <script src="node_modules/rxjs/bundles/Rx.js"></script>
+  <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
 
-    <!-- Required for routing -->
-    <script src="node_modules/angular2/bundles/router.dev.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
-    <!-- 2. Configure SystemJS -->
-    <script>
-        System.config({
+  <!-- Required for http -->
+  <script src="node_modules/angular2/bundles/http.dev.js"></script>
+
+  <!-- Required for routing -->
+  <script src="node_modules/angular2/bundles/router.dev.js"></script>
+
+  <!-- 2. Configure SystemJS -->
+  <script>
+    System.config({
         packages: {        
           app: {
             format: 'register',
@@ -42,11 +43,36 @@
       });
       System.import('app/main')
             .then(null, console.error.bind(console));
-    </script>
+  </script>
 </head>
 
 <body>
-    <ccl-app>Loading App...</ccl-app>
+  <div id="wrap">
+    <div id="main" class="container clear-top">
+      <ccl-app>Loading App...</ccl-app>
+
+    </div>
+  </div>
 </body>
+
+<div class="navbar navbar-fixed-bottom">
+  <div class="row">
+    <div class="col-sm-2">
+      <img src="app\assets\images\header-logo.png" alt="Header Logo">
+    </div>
+    <div class="col-sm-9">
+      <div class="text-left">
+        <p>Clark Country Library</p>
+        <p>1103 Hudson Rd. E</p>
+        <p>Vancouver, WA 98133</p>
+      </div>
+    </div>
+    <div id="EasterEgg" class="col-sm-1 text-right">
+      Easter Egg
+    </div>
+  </div>
+
+
+</div>
 
 </html>
