@@ -19,13 +19,13 @@ import { HomeComponent } from '../home/home.component';
     // { path: '/product/:id', name: 'ProductDetail', component: ProductDetailComponent }
 ])
 export class NavComponent {
-    tooltipText: string = 'Team Members: Ethan Rowell, Nicholas Hays';
-    
+    tooltipText: string = 'Team Members: Ethan Rowell, Nicholas Hays, Jacob Tillett';
+
     ngOnInit(): void {
         $('.easterEgg').attr({
          'data-toggle': 'tooltip',
          'data-placement':'left',
-         'title': this.tooltipText   
-        }).tooltip();       
+         'title': this.tooltipText
+        }).tooltip();
     }
 }
