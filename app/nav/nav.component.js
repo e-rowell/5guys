@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/common', 'ng2-bootstrap/ng2-bootstrap', 'angular2/http', 'rxjs/Rx', 'angular2/router', './nav/nav.component', './home/home.component'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', 'angular2/http', '../home/home.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,42 +10,40 @@ System.register(['angular2/core', 'angular2/common', 'ng2-bootstrap/ng2-bootstra
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, ng2_bootstrap_1, http_1, router_1, nav_component_1, home_component_1;
-    var AppComponent;
+    var core_1, router_1, http_1, home_component_1;
+    var NavComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (common_1_1) {
-                common_1 = common_1_1;
-            },
-            function (ng2_bootstrap_1_1) {
-                ng2_bootstrap_1 = ng2_bootstrap_1_1;
-            },
-            function (http_1_1) {
-                http_1 = http_1_1;
-            },
-            function (_1) {},
             function (router_1_1) {
                 router_1 = router_1_1;
             },
-            function (nav_component_1_1) {
-                nav_component_1 = nav_component_1_1;
+            function (http_1_1) {
+                http_1 = http_1_1;
             },
             function (home_component_1_1) {
                 home_component_1 = home_component_1_1;
             }],
         execute: function() {
-            AppComponent = (function () {
-                function AppComponent() {
-                    this.pageTitle = 'Clark Country Library';
+            NavComponent = (function () {
+                function NavComponent() {
+                    this.tooltipText = "Team Members: Ethan Rowell,\n    Edward Koval";
                 }
-                AppComponent = __decorate([
+                NavComponent.prototype.ngOnInit = function () {
+                    $('.easterEgg').attr({
+                        'data-toggle': 'tooltip',
+                        'data-placement': 'left',
+                        'title': this.tooltipText
+                    }).tooltip();
+                };
+                NavComponent = __decorate([
                     core_1.Component({
-                        selector: 'ccl-app',
-                        template: "<nav-comp></nav-comp>",
-                        directives: [ng2_bootstrap_1.TOOLTIP_DIRECTIVES, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES, router_1.ROUTER_DIRECTIVES, nav_component_1.NavComponent],
+                        selector: 'nav-comp',
+                        templateUrl: 'app/nav/nav.component.html',
+                        styleUrls: ['app/nav/nav.component.css'],
+                        directives: [router_1.ROUTER_DIRECTIVES, NavComponent],
                         providers: [http_1.HTTP_PROVIDERS,
                             router_1.ROUTER_PROVIDERS]
                     }),
@@ -53,11 +51,11 @@ System.register(['angular2/core', 'angular2/common', 'ng2-bootstrap/ng2-bootstra
                         { path: '/home', name: 'Home', component: home_component_1.HomeComponent, useAsDefault: true }
                     ]), 
                     __metadata('design:paramtypes', [])
-                ], AppComponent);
-                return AppComponent;
+                ], NavComponent);
+                return NavComponent;
             }());
-            exports_1("AppComponent", AppComponent);
+            exports_1("NavComponent", NavComponent);
         }
     }
 });
-//# sourceMappingURL=app.component.js.map
+//# sourceMappingURL=nav.component.js.map

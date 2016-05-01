@@ -8,8 +8,8 @@
 
   <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
   <link href="app/app.component.css" rel="stylesheet" />
-  <link rel="stylesheet" href="app/shared/nav.component.css" />
-  <link rel="stylesheet" href="assets/site.css" />
+  <link rel="stylesheet" href="app/nav/nav.component.css" />
+  <link rel="stylesheet" href="app/assets/site.css" />
 
   <!-- 1. Load libraries -->
   <!-- IE required polyfills, in this exact order -->
@@ -22,8 +22,8 @@
   <script src="node_modules/rxjs/bundles/Rx.js"></script>
   <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
 
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
   <!-- Required for http -->
   <script src="node_modules/angular2/bundles/http.dev.js"></script>
@@ -34,45 +34,33 @@
   <!-- 2. Configure SystemJS -->
   <script>
     System.config({
-        packages: {        
-          app: {
-            format: 'register',
-            defaultExtension: 'js'
-          }
+      packages: {
+        app: {
+          format: 'register',
+          defaultExtension: 'js'
+        },
+        "node_modules/ng2-bootstrap": {
+          defaultExtension: 'js'
+        },
+        "node_modules/moment": {
+          defaultExtension: 'js'
         }
-      });
-      System.import('app/main')
-            .then(null, console.error.bind(console));
+      },
+      paths: {
+        "ng2-bootstrap/ng2-bootstrap": "node_modules/ng2-bootstrap/ng2-bootstrap",
+        "moment": "node_modules/moment/moment"
+      }
+    });
+    System.import('app/main')
+      .then(null, console.error.bind(console));
   </script>
 </head>
 
 <body>
-  <div id="wrap">
-    <div id="main" class="container clear-top">
-      <ccl-app>Loading App...</ccl-app>
-
-    </div>
+  <div id="main" class="container clear-top">
+    <ccl-app>Loading App...</ccl-app>
   </div>
+
 </body>
-
-<div class="navbar navbar-fixed-bottom">
-  <div class="row">
-    <div class="col-sm-2">
-      <img src="app\assets\images\header-logo.png" alt="Header Logo">
-    </div>
-    <div class="col-sm-9">
-      <div class="text-left">
-        <p>Clark Country Library</p>
-        <p>1103 Hudson Rd. E</p>
-        <p>Vancouver, WA 98133</p>
-      </div>
-    </div>
-    <div id="EasterEgg" class="col-sm-1 text-right">
-      Easter Egg
-    </div>
-  </div>
-
-
-</div>
 
 </html>

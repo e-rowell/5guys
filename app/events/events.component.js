@@ -11,32 +11,27 @@ System.register(['angular2/core'], function(exports_1, context_1) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1;
-    var ProductFilterPipe;
+    var EventsComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             }],
         execute: function() {
-            ProductFilterPipe = (function () {
-                function ProductFilterPipe() {
+            EventsComponent = (function () {
+                function EventsComponent() {
                 }
-                ProductFilterPipe.prototype.transform = function (value, args) {
-                    var filter = args[0] ? args[0].toLocaleLowerCase() : null;
-                    return filter ? value.filter(function (product) {
-                        return product.productName.toLocaleLowerCase().indexOf(filter) !== -1;
-                    }) : value;
-                };
-                ProductFilterPipe = __decorate([
-                    core_1.Pipe({
-                        name: 'productFilter'
+                EventsComponent = __decorate([
+                    core_1.Component({
+                        templateUrl: 'app/events/events.component.html',
+                        styleUrls: ['app/events/events.component.css']
                     }), 
                     __metadata('design:paramtypes', [])
-                ], ProductFilterPipe);
-                return ProductFilterPipe;
+                ], EventsComponent);
+                return EventsComponent;
             }());
-            exports_1("ProductFilterPipe", ProductFilterPipe);
+            exports_1("EventsComponent", EventsComponent);
         }
     }
 });
-//# sourceMappingURL=product-filter.pipe.js.map
+//# sourceMappingURL=events.component.js.map

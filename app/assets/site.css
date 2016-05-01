@@ -1,9 +1,10 @@
-html, body {
+html,
+body {
   height: 100%;
 }
 
 body {
-    padding-bottom: 70px;
+  padding-bottom: 70px;
 }
 
 #wrap {
@@ -11,14 +12,31 @@ body {
 }
 
 #main {
-  overflow:auto;
-  padding-bottom:150px; /* this needs to be bigger than footer height*/
+  /*overflow:auto;
+  padding-bottom:150px;  this needs to be bigger than footer height*/
+}
+
+.footer-row {
+  display: flex;
+  align-items: center;
+  font-size: 7pt;
+  margin-bottom: 10px;
+}
+
+#footer-logo {
+  margin: 10px;
+  float: left;
+	width: 215px;
+	background: transparent url('app\assets\images\header-logo.png') 18px 6px no-repeat;
+	height: 82px;
+	color: #fff;
 }
 
 .footer {
-  position: relative;
-  margin-top: -150px; /* negative value of footer height */
-  height: 150px;
-  clear:both;
-  padding-top:20px;
-} 
+  /*position: relative;*/
+  /*margin-top: -150px;*/
+  /* negative value of footer height */
+  height: 100px;
+  /*clear: both;*/
+  padding-top: 20px;
+}

@@ -45,7 +45,6 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                         { imgName: 'Job + Business Center', imgLoc: './app/assets/images/quicklinks/jbc.png' },
                         { imgName: 'Join an Email List', imgLoc: './app/assets/images/quicklinks/email.png' }
                     ];
-                    this.quicklinksArr = [this.quicklinksTop, this.quicklinksMid, this.quicklinksBot];
                 }
                 HomeComponent = __decorate([
                     core_1.Component({

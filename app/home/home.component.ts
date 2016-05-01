@@ -30,5 +30,4 @@ export class HomeComponent {
         { imgName: 'Job + Business Center', imgLoc: './app/assets/images/quicklinks/jbc.png' },
         { imgName: 'Join an Email List', imgLoc: './app/assets/images/quicklinks/email.png' }
     ];
-    public quicklinksArr: any[] = [this.quicklinksTop, this.quicklinksMid, this.quicklinksBot];
 }
