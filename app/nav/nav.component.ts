@@ -19,7 +19,7 @@ import { HomeComponent } from '../home/home.component';
     // { path: '/product/:id', name: 'ProductDetail', component: ProductDetailComponent }
 ])
 export class NavComponent {
-    tooltipText: string = 'Team Members: Ethan Rowell,';
+    tooltipText: string = 'Team Members: Ethan Rowell, Nicholas Hays';
     
     ngOnInit(): void {
         $('.easterEgg').attr({
