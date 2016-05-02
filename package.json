@@ -13,7 +13,7 @@
   },
   "license": "ISC",
   "dependencies": {
-    "angular2": "2.0.0-beta.15",
+    "angular2": "2.0.0-beta.16",
     "bootstrap": "^3.3.6",
     "es6-shim": "^0.35.0",
     "jquery": "*",
@@ -21,7 +21,7 @@
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.2",
     "systemjs": "0.19.26",
-    "zone.js": "0.6.10",
+    "zone.js": "0.6.12",
     "moment": "*"
   },
   "devDependencies": {
