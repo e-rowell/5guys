@@ -29,7 +29,7 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', '../home/h
         execute: function() {
             NavComponent = (function () {
                 function NavComponent() {
-                    this.tooltipText = 'Team Members: Ethan Rowell, Nicholas Hays';
+                    this.tooltipText = 'Team Members: Ethan Rowell, Nicholas Hays, Jacob Tillett, Edward Koval, Ben P';
                 }
                 NavComponent.prototype.ngOnInit = function () {
                     $('.easterEgg').attr({
