@@ -1,7 +1,29 @@
 {
   "name": "clark-county-library",
   "version": "1.0.0",
-  "author": "Ethan Rowell, Nicholas Hays, Edward Koval, Ben Pasero, Jacob Tillett",
+  "authors":  [ 
+    {
+    "name": "Ethan Rowell",
+    "email": "ethan.rowell11@gmail.com"
+  },
+  {
+    "name": "Nicholas Hays",
+    "email": "nicholashays89@gmail.com"
+  },
+  {
+    "name": "Ben Pasero",
+    "email": "paserb@uw.edu"
+  },
+  {
+    "name": "Jacob Tillett",
+    "email": "tillettj@uw.edu"
+  },
+  {
+    "name": "Edward Koval",
+    "email": "ekoval@uw.edu"
+  }
+  ],
+  
   "description": "Website for the Clark County Library.",
   "scripts": {
     "start": "concurrent \"npm run tscw\" \"npm run lite\" ",
@@ -26,11 +48,12 @@
   },
   "devDependencies": {
     "concurrently": "^2.0.0",
+    "karma": "^0.13.22",
     "lite-server": "^2.2.0",
+    "tscw": "*",
     "tslint": "^3.7.4",
     "typescript": "^1.8.10",
-    "typings": "^0.7.12",
-    "tscw": "*"
+    "typings": "^0.7.12"
   },
   "repository": {}
 }
