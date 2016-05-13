@@ -2,53 +2,64 @@
     <legend>
         <h3>{{eventName}}</h3>
     </legend>
-    <label>Event Description</label>
-    <div class="row">
-        <p>{{eventDescription}}</p>
-    </div>
+    <div class="col-sm-6">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <div class="row">
+                    <label class="control-label" for="EventDescription">Event Description</label>
+                    <p id="EventDescription">{{eventDescription}}</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <label class="control-label" for="EventRequirements">Event Requirements</label>
+                    <p id="EventRequirements">{{eventRequirements}}</p>
+                </div>
+            </div>
+        </div>
 
-    <label>Event Requirements</label>
-    <div class="row">
-        <p>{{eventRequirements}}</p>
-    </div>
-
-
-    <div style="margin-top: 40px;">
-
-        <div class="form-group">
-            <div class="row">
-                <div class="col-sm-4">
+        <div class="col-sm-8" style="margin-top: 40px;">
+            <div class="form-group">
+                <div class="row">
                     <label for="artworkTitle" class="control-label">Artwork Title:</label>
                     <input id="artworkTitle" type="text" class="form-control"/>
                 </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="row" style="position: relative;">
-                <div class="col-sm-4">
-                    <label for="filePath" class="control-label">File Path:</label>
-                    <input id="filePath" class="form-control" type="text"/>
-                </div>
-                <div class="col-sm-2">
-                    <button type="button" class="btn btn-default" style="margin-top: 25px;">Browse</button>
+            <div class="form-group">
+                <div class="row">
+                    <div class="input-group">
+                        <label for="filePath" class="control-label">File Path:</label>
+                        <input id="filePath" class="form-control" type="text"/>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" style="margin-top: 25px;">Browse</button>
+                    </span>
+                    </div>
+                    <!--
+                                    <div class="col-sm-4">
+
+                                    </div>
+                                    <div class="col-sm-2">
+                                    </div>
+                    -->
                 </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-sm-4">
+            <div class="form-group">
+
+                <div class="row">
                     <button id="submissionBtn" class="btn btn-primary">{{hasSubmittedEntry ? "Resubmit" : "Submit"}}
                     </button>
                 </div>
             </div>
         </div>
 
+    </div>
+    <div class="col-sm-12">
         <div *ngIf="hasSubmittedEntry" class="panel panel-default" style="margin-top: 50px;">
             <div class="panel-heading">
                 <h3>Current Submission</h3>
             </div>
             <div class="panel-body">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="form-group">
 
                         <div class="row">
@@ -66,26 +77,20 @@
                     </div>
                     <div class="form-group ">
                         <div class="row">
-                            <div class="col-sm-2">
-                                <button id="DownloadCurrentSubmission" class="btn btn-default">Download</button>
-                            </div>
-                            <div class="col-sm-2">
-                                <button id="WithdrawCurrentSubmission" class="btn btn-danger">Withdraw</button>
-                            </div>
+                            <button id="DownloadCurrentSubmission" class="btn btn-default">Download</button>
+                            <button id="WithdrawCurrentSubmission" class="btn btn-danger">Withdraw</button>
                         </div>
 
                     </div>
                 </div>
-                <div class="col-sm-6">
-
+                <div class="col-sm-8">
+                    <img src="app/assets/images/Easter_Egg.png" style="background-color: black;">
+                    <!--Submission Image Preview-->
                 </div>
 
-                <!--Title: -->
-                <!--File: -->
-                <!--Download Button-->
-                <!--Withdraw Button-->
-                <!--Submission Image Preview-->
             </div>
         </div>
     </div>
+
+
 </fieldset>

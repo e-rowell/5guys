@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/common', 'ng2-bootstrap/ng2-bootstrap', 'angular2/http', 'rxjs/Rx', 'angular2/router', './nav/nav.component', './home/home.component'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/common', 'angular2/http', 'rxjs/Rx', 'angular2/router', './shared/nav/nav.component', './home/home.component', './event/event.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/common', 'ng2-bootstrap/ng2-bootstra
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, ng2_bootstrap_1, http_1, router_1, nav_component_1, home_component_1;
+    var core_1, common_1, http_1, router_1, nav_component_1, home_component_1, event_component_1;
     var AppComponent;
     return {
         setters:[
@@ -19,9 +19,6 @@ System.register(['angular2/core', 'angular2/common', 'ng2-bootstrap/ng2-bootstra
             },
             function (common_1_1) {
                 common_1 = common_1_1;
-            },
-            function (ng2_bootstrap_1_1) {
-                ng2_bootstrap_1 = ng2_bootstrap_1_1;
             },
             function (http_1_1) {
                 http_1 = http_1_1;
@@ -35,6 +32,9 @@ System.register(['angular2/core', 'angular2/common', 'ng2-bootstrap/ng2-bootstra
             },
             function (home_component_1_1) {
                 home_component_1 = home_component_1_1;
+            },
+            function (event_component_1_1) {
+                event_component_1 = event_component_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
@@ -45,12 +45,13 @@ System.register(['angular2/core', 'angular2/common', 'ng2-bootstrap/ng2-bootstra
                     core_1.Component({
                         selector: 'ccl-app',
                         template: "<nav-comp></nav-comp>",
-                        directives: [ng2_bootstrap_1.TOOLTIP_DIRECTIVES, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES, router_1.ROUTER_DIRECTIVES, nav_component_1.NavComponent],
+                        directives: [common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES, router_1.ROUTER_DIRECTIVES, nav_component_1.NavComponent],
                         providers: [http_1.HTTP_PROVIDERS,
                             router_1.ROUTER_PROVIDERS]
                     }),
                     router_1.RouteConfig([
-                        { path: '/home', name: 'Home', component: home_component_1.HomeComponent, useAsDefault: true }
+                        { path: '/home', name: 'Home', component: home_component_1.HomeComponent, useAsDefault: true },
+                        { path: '/event', name: 'EventDetail', component: event_component_1.EventComponent }
                     ]), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);
