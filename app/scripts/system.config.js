@@ -1,5 +1,5 @@
 (function() {
-    /*System.config({
+    System.config({
         packages: {
             app: {
                 format: 'register',
@@ -13,6 +13,6 @@
             "moment": "node_modules/moment/moment"
         }
     });
-    System.import('public/app/main.js')
-        .then(null, console.error.bind(console));*/
+    System.import('app/main.js')
+        .then(null, console.error.bind(console));
 })();

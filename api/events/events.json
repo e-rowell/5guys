@@ -1,0 +1,37 @@
+[
+    {
+        "eventID": 1,
+        "eventName": "Coloring Contest",
+        "eventDescription": "Draw some stuff and we'll take a look at it.",
+        "eventRequirements": "Ages 10-16",
+        "scoringGuidelines": "Be nice, they're just kids."
+    },
+    {
+        "eventID": 2,
+        "eventName": "Beer Brewing",
+        "eventDescription": "Brew some beer, let's get wasted.",
+        "eventRequirements": "Ages 21+",
+        "scoringGuidelines": "Did you get drunk or not?"
+    },
+    {
+        "eventID": 5,
+        "eventName": "Poetry Contest",
+        "eventDescription": "Write up a poem and we'll read it.",
+        "eventRequirements": "Ages: All",
+        "scoringGuidelines": "Was it deep? Cool."
+    },
+    {
+        "eventID": 8,
+        "eventName": "Knitting Contest",
+        "eventDescription": "Knit some stuff and we'll wear it.",
+        "eventRequirements": "Ages: ALl",
+        "scoringGuidelines": "Was it cool or warm?"
+    },
+    {
+        "eventID": 10,
+        "eventName": "Toys for Tots",
+        "eventDescription": "Lets get these kids some toys.",
+        "eventRequirements": "Ages: All",
+        "scoringGuidelines": "Cool toys?"
+    }
+]

@@ -6,10 +6,10 @@ const app = express();
 var db;
 
 app.use(express.static(__dirname));
+app.use(express.static(__dirname + '/node_modules'));
 
 
 /*
-app.use(express.static('node_modules/bootstrap/'));
 app.use(express.static('node_modules/angular2/es6/dev/src/testing/'));
 app.use(express.static('node_modules/es6-shim/'));
 app.use(express.static('node_modules/systemjs/dist/'));

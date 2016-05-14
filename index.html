@@ -2,62 +2,44 @@
 <html>
 
 <head lang="en">
-  <base href="/">
-  <title>Clark Country Library</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="/">
+    <title>Clark Country Library</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-  <!--<link href="public/app/app.component.css" rel="stylesheet" />-->
-  <!--<link rel="stylesheet" href="public/app/shared/nav/nav.component.css" />-->
-  <!--<link rel="stylesheet" href="public/app/assets/site.css" />-->
+    <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
+    <!--<link href="public/app/app.component.css" rel="stylesheet" />-->
+    <!--<link rel="stylesheet" href="public/app/shared/nav/nav.component.css" />-->
+    <!--<link rel="stylesheet" href="public/app/assets/site.css" />-->
 
-  <!-- 1. Load libraries -->
-  <!-- IE required polyfills, in this exact order -->
-  <script src="node_modules/angular2/es6/dev/src/testing/shims_for_IE.js"></script>
-  <script src="node_modules/es6-shim/es6-shim.min.js"></script>
-  <script src="node_modules/systemjs/dist/system-polyfills.js"></script>
-  <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
+    <!-- 1. Load libraries -->
+    <!-- IE required polyfills, in this exact order -->
+    <script src="node_modules/angular2/es6/dev/src/testing/shims_for_IE.js"></script>
+    <script src="node_modules/es6-shim/es6-shim.min.js"></script>
+    <script src="node_modules/systemjs/dist/system-polyfills.js"></script>
+    <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
 
-  <script src="node_modules/systemjs/dist/system.src.js"></script>
-  <script src="node_modules/rxjs/bundles/Rx.js"></script>
-  <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+    <script src="node_modules/rxjs/bundles/Rx.js"></script>
+    <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
 
-  <script src="node_modules/jquery/dist/jquery.min.js"></script>
-  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 
-  <!-- Required for http -->
-  <script src="node_modules/angular2/bundles/http.dev.js"></script>
+    <!-- Required for http -->
+    <script src="node_modules/angular2/bundles/http.dev.js"></script>
 
-  <!-- Required for routing -->
-  <script src="node_modules/angular2/bundles/router.dev.js"></script>
+    <!-- Required for routing -->
+    <script src="node_modules/angular2/bundles/router.dev.js"></script>
 
-  <!-- 2. Configure SystemJS -->
-  <!--<script src="public/app/scripts/system.config.js"></script>-->
+    <!-- 2. Configure SystemJS -->
+    <script src="app/scripts/system.config.js"></script>
 
-  <script>
-    System.config({
-      packages: {
-        app: {
-          format: 'register',
-          defaultExtension: 'js'
-        },
-        "node_modules/moment": {
-          defaultExtension: 'js'
-        }
-      },
-      paths: {
-        "moment": "node_modules/moment/moment"
-      }
-    });
-    System.import('app/main.js')
-            .then(null, console.error.bind(console));
-  </script>
 </head>
 
-<body>
-  <div id="main" class="container clear-top">
+<body style="padding-bottom: 130px;">
+<div id="main" class="container clear-top">
     <ccl-app>Loading App...</ccl-app>
-  </div>
+</div>
 
 </body>
 

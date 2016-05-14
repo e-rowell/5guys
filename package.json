@@ -23,7 +23,7 @@
       "email": "ekoval@uw.edu"
     }
   ],
-  "description": "Website for the Clark County Library.",
+  "eventDescription": "Website for the Clark County Library.",
   "scripts": {
     "start": "concurrent \"npm run tscw\" \"npm run lite\" ",
     "tscw": "tscw",
