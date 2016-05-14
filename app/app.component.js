@@ -37,26 +37,26 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', 'rxjs/Rx',
                 event_component_1 = event_component_1_1;
             }],
         execute: function() {
-            AppComponent = (function () {
-                function AppComponent() {
+            let AppComponent = class AppComponent {
+                constructor() {
                     this.pageTitle = 'Clark Country Library';
                 }
-                AppComponent = __decorate([
-                    core_1.Component({
-                        selector: 'ccl-app',
-                        template: "<nav-comp></nav-comp>",
-                        directives: [common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES, router_1.ROUTER_DIRECTIVES, nav_component_1.NavComponent],
-                        providers: [http_1.HTTP_PROVIDERS,
-                            router_1.ROUTER_PROVIDERS]
-                    }),
-                    router_1.RouteConfig([
-                        { path: '/home', name: 'Home', component: home_component_1.HomeComponent, useAsDefault: true },
-                        { path: '/event', name: 'EventDetail', component: event_component_1.EventComponent }
-                    ]), 
-                    __metadata('design:paramtypes', [])
-                ], AppComponent);
-                return AppComponent;
-            }());
+            };
+            AppComponent = __decorate([
+                core_1.Component({
+                    selector: 'ccl-app',
+                    template: `<nav-comp></nav-comp>`,
+                    styles: ['app/app.component.css', 'app/assets/site.css'],
+                    directives: [common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES, router_1.ROUTER_DIRECTIVES, nav_component_1.NavComponent],
+                    providers: [http_1.HTTP_PROVIDERS,
+                        router_1.ROUTER_PROVIDERS]
+                }),
+                router_1.RouteConfig([
+                    { path: '/home', name: 'Home', component: home_component_1.HomeComponent, useAsDefault: true },
+                    { path: '/event', name: 'EventDetail', component: event_component_1.EventComponent }
+                ]), 
+                __metadata('design:paramtypes', [])
+            ], AppComponent);
             exports_1("AppComponent", AppComponent);
         }
     }

@@ -1,29 +1,28 @@
 {
   "name": "clark-county-library",
   "version": "1.0.0",
-  "authors":  [ 
+  "authors": [
     {
-    "name": "Ethan Rowell",
-    "email": "ethan.rowell11@gmail.com"
-  },
-  {
-    "name": "Nicholas Hays",
-    "email": "nicholashays89@gmail.com"
-  },
-  {
-    "name": "Ben Pasero",
-    "email": "paserb@uw.edu"
-  },
-  {
-    "name": "Jacob Tillett",
-    "email": "tillettj@uw.edu"
-  },
-  {
-    "name": "Edward Koval",
-    "email": "ekoval@uw.edu"
-  }
+      "name": "Ethan Rowell",
+      "email": "ethan.rowell11@gmail.com"
+    },
+    {
+      "name": "Nicholas Hays",
+      "email": "nicholashays89@gmail.com"
+    },
+    {
+      "name": "Ben Pasero",
+      "email": "paserb@uw.edu"
+    },
+    {
+      "name": "Jacob Tillett",
+      "email": "tillettj@uw.edu"
+    },
+    {
+      "name": "Edward Koval",
+      "email": "ekoval@uw.edu"
+    }
   ],
-  
   "description": "Website for the Clark County Library.",
   "scripts": {
     "start": "concurrent \"npm run tscw\" \"npm run lite\" ",
@@ -43,7 +42,10 @@
     "rxjs": "5.0.0-beta.2",
     "systemjs": "0.19.26",
     "zone.js": "0.6.12",
-    "moment": "*"
+    "moment": "*",
+    "express": "~4.13.4",
+    "body-parser": "~1.15.1",
+    "mongodb": "~2.1.18"
   },
   "devDependencies": {
     "concurrently": "^2.0.0",

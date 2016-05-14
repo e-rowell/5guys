@@ -30,34 +30,34 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', '../../hom
                 event_component_1 = event_component_1_1;
             }],
         execute: function() {
-            NavComponent = (function () {
-                function NavComponent() {
+            let NavComponent_1;
+            let NavComponent = NavComponent_1 = class NavComponent {
+                constructor() {
                     this.tooltipText = 'Team Members: Ethan Rowell, Nicholas Hays, Jacob Tillett, Edward Koval, Ben Pasero';
                 }
-                NavComponent.prototype.ngOnInit = function () {
+                ngOnInit() {
                     $('.easterEgg').attr({
                         'data-toggle': 'tooltip',
                         'data-placement': 'left',
                         'title': this.tooltipText
                     }).tooltip();
-                };
-                NavComponent = __decorate([
-                    core_1.Component({
-                        selector: 'nav-comp',
-                        templateUrl: 'app/shared/nav/nav.component.html',
-                        styleUrls: ['app/shared/nav/nav.component.css'],
-                        directives: [router_1.ROUTER_DIRECTIVES, NavComponent],
-                        providers: [http_1.HTTP_PROVIDERS,
-                            router_1.ROUTER_PROVIDERS]
-                    }),
-                    router_1.RouteConfig([
-                        { path: '/home', name: 'Home', component: home_component_1.HomeComponent, useAsDefault: true },
-                        { path: '/event', name: 'EventDetail', component: event_component_1.EventComponent }
-                    ]), 
-                    __metadata('design:paramtypes', [])
-                ], NavComponent);
-                return NavComponent;
-            }());
+                }
+            };
+            NavComponent = NavComponent_1 = __decorate([
+                core_1.Component({
+                    selector: 'nav-comp',
+                    templateUrl: 'app/shared/nav/nav.component.html',
+                    styleUrls: ['app/shared/nav/nav.component.css'],
+                    directives: [router_1.ROUTER_DIRECTIVES, NavComponent],
+                    providers: [http_1.HTTP_PROVIDERS,
+                        router_1.ROUTER_PROVIDERS]
+                }),
+                router_1.RouteConfig([
+                    { path: '/home', name: 'Home', component: home_component_1.HomeComponent, useAsDefault: true },
+                    { path: '/event', name: 'EventDetail', component: event_component_1.EventComponent }
+                ]), 
+                __metadata('design:paramtypes', [])
+            ], NavComponent);
             exports_1("NavComponent", NavComponent);
         }
     }

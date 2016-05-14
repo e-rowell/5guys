@@ -7,9 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-  <link href="app/app.component.css" rel="stylesheet" />
-  <link rel="stylesheet" href="app/shared/nav/nav.component.css" />
-  <link rel="stylesheet" href="app/assets/site.css" />
+  <!--<link href="public/app/app.component.css" rel="stylesheet" />-->
+  <!--<link rel="stylesheet" href="public/app/shared/nav/nav.component.css" />-->
+  <!--<link rel="stylesheet" href="public/app/assets/site.css" />-->
 
   <!-- 1. Load libraries -->
   <!-- IE required polyfills, in this exact order -->
@@ -22,8 +22,8 @@
   <script src="node_modules/rxjs/bundles/Rx.js"></script>
   <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 
   <!-- Required for http -->
   <script src="node_modules/angular2/bundles/http.dev.js"></script>
@@ -32,6 +32,8 @@
   <script src="node_modules/angular2/bundles/router.dev.js"></script>
 
   <!-- 2. Configure SystemJS -->
+  <!--<script src="public/app/scripts/system.config.js"></script>-->
+
   <script>
     System.config({
       packages: {
@@ -39,20 +41,16 @@
           format: 'register',
           defaultExtension: 'js'
         },
-        "node_modules/ng2-bootstrap": {
-          defaultExtension: 'js'
-        },
         "node_modules/moment": {
           defaultExtension: 'js'
         }
       },
       paths: {
-        "ng2-bootstrap/ng2-bootstrap": "node_modules/ng2-bootstrap/ng2-bootstrap",
         "moment": "node_modules/moment/moment"
       }
     });
-    System.import('app/main')
-      .then(null, console.error.bind(console));
+    System.import('app/main.js')
+            .then(null, console.error.bind(console));
   </script>
 </head>
 

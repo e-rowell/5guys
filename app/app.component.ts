@@ -12,6 +12,7 @@ import { EventComponent } from './event/event.component';
 @Component({
     selector: 'ccl-app',
     template:`<nav-comp></nav-comp>`,
+    styles: ['app/app.component.css', 'app/assets/site.css'],
     directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, ROUTER_DIRECTIVES, NavComponent],
     providers: [HTTP_PROVIDERS,
         ROUTER_PROVIDERS]

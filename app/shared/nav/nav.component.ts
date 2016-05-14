@@ -4,7 +4,7 @@ import { HTTP_PROVIDERS } from 'angular2/http';
 
 import { HomeComponent } from '../../home/home.component';
 import { EventComponent } from '../../event/event.component';
-
+ 
 
 @Component({
     selector: 'nav-comp',

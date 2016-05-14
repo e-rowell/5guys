@@ -18,8 +18,8 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 core_1 = core_1_1;
             }],
         execute: function() {
-            HomeComponent = (function () {
-                function HomeComponent() {
+            let HomeComponent = class HomeComponent {
+                constructor() {
                     this._pageTitle = 'Home';
                     this._newsArr = [
                         'North Tacoma resident takes reins of Gig Harbor Library',
@@ -46,15 +46,14 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                         { imgName: 'Join an Email List', imgLoc: './app/assets/images/quicklinks/email.png' }
                     ];
                 }
-                HomeComponent = __decorate([
-                    core_1.Component({
-                        templateUrl: 'app/home/home.component.html',
-                        styleUrls: ['app/home/home.component.css']
-                    }), 
-                    __metadata('design:paramtypes', [])
-                ], HomeComponent);
-                return HomeComponent;
-            }());
+            };
+            HomeComponent = __decorate([
+                core_1.Component({
+                    templateUrl: 'app/home/home.component.html',
+                    styleUrls: ['app/home/home.component.css']
+                }), 
+                __metadata('design:paramtypes', [])
+            ], HomeComponent);
             exports_1("HomeComponent", HomeComponent);
         }
     }

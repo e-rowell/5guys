@@ -18,22 +18,21 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 core_1 = core_1_1;
             }],
         execute: function() {
-            EventComponent = (function () {
-                function EventComponent() {
+            let EventComponent = class EventComponent {
+                constructor() {
                     this.eventName = 'Coloring Contest';
                     this.hasSubmittedEntry = true;
                 }
-                EventComponent.prototype.submitEntry = function () {
-                };
-                EventComponent = __decorate([
-                    core_1.Component({
-                        templateUrl: 'app/event/event.component.html',
-                        styleUrls: ['app/event/event.component.css']
-                    }), 
-                    __metadata('design:paramtypes', [])
-                ], EventComponent);
-                return EventComponent;
-            }());
+                submitEntry() {
+                }
+            };
+            EventComponent = __decorate([
+                core_1.Component({
+                    templateUrl: 'app/event/event.component.html',
+                    styleUrls: ['app/event/event.component.css']
+                }), 
+                __metadata('design:paramtypes', [])
+            ], EventComponent);
             exports_1("EventComponent", EventComponent);
         }
     }

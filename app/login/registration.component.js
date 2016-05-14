@@ -18,18 +18,17 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 core_1 = core_1_1;
             }],
         execute: function() {
-            LoginComponent = (function () {
-                function LoginComponent() {
+            let LoginComponent = class LoginComponent {
+                constructor() {
                 }
-                LoginComponent = __decorate([
-                    core_1.Component({
-                        selector: 'login',
-                        template: 'app/login/login.component.html'
-                    }), 
-                    __metadata('design:paramtypes', [])
-                ], LoginComponent);
-                return LoginComponent;
-            }());
+            };
+            LoginComponent = __decorate([
+                core_1.Component({
+                    selector: 'login',
+                    template: 'app/login/login.component.html'
+                }), 
+                __metadata('design:paramtypes', [])
+            ], LoginComponent);
             exports_1("LoginComponent", LoginComponent);
         }
     }
