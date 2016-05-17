@@ -1,3 +1,5 @@
+//author: Nicholas Hays and Ethan Rowell
+
 import {Component} from 'angular2/core'
 @Component({
     selector: 'login',
