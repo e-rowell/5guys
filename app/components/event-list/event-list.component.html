@@ -1,5 +1,26 @@
 <fieldset>
     <legend><h3>Events</h3></legend>
 
-    <!--<table-data headerNames=""></table-data>-->
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <td>Category</td>
+            <td>Event Name</td>
+            <td>Event Start</td>
+            <td>Event End</td>
+            <td>Status</td>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr *ngFor="#event of events">
+            <td>{{event.eventCategory}}</td>
+            <td><a [routerLink]="['EventDetail', {eventName: event.eventName}]">{{event.eventName}}</a></td>
+            <td>{{event.eventStart}}</td>
+            <td>{{event.eventEnd}}</td>
+            <td>{{event.eventStatus}}</td>
+        </tr>
+
+        </tbody>
+    </table>
 </fieldset>

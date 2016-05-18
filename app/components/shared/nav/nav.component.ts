@@ -3,6 +3,7 @@ import { ROUTER_PROVIDERS, RouteConfig, ROUTER_DIRECTIVES } from 'angular2/route
 import { HTTP_PROVIDERS } from 'angular2/http';
 
 import { HomeComponent } from '../../home/home.component';
+import { EventListComponent } from '../../event-list/event-list.component';
 import { EventComponent } from '../../event/event.component';
  
 
@@ -11,15 +12,9 @@ import { EventComponent } from '../../event/event.component';
     templateUrl: 'app/components/shared/nav/nav.component.html',
     styleUrls: ['app/components/shared/nav/nav.component.css'],
     directives: [ROUTER_DIRECTIVES, NavComponent],
-    providers: [HTTP_PROVIDERS,
-        ROUTER_PROVIDERS]
+    providers: [HTTP_PROVIDERS, ROUTER_PROVIDERS]
 })
-@RouteConfig([
-    { path: '/home', name: 'Home', component: HomeComponent, useAsDefault: true },
-    { path: '/event', name: 'EventDetail', component: EventComponent }
-    // { path: '/product/:id', name: 'ProductDetail', component: ProductDetailComponent }
-])
-export class NavComponent {
+export class NavComponent implements OnInit{
     tooltipText: string = 'Team Members: Ethan Rowell, Nicholas Hays, Jacob Tillett, Edward Koval, Ben Pasero';
 
     ngOnInit(): void {

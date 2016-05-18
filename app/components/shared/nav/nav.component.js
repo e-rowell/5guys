@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', 'angular2/http', '../../home/home.component', '../../event/event.component'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', 'angular2/http'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', '../../hom
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, http_1, home_component_1, event_component_1;
+    var core_1, router_1, http_1;
     var NavComponent;
     return {
         setters:[
@@ -22,12 +22,6 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', '../../hom
             },
             function (http_1_1) {
                 http_1 = http_1_1;
-            },
-            function (home_component_1_1) {
-                home_component_1 = home_component_1_1;
-            },
-            function (event_component_1_1) {
-                event_component_1 = event_component_1_1;
             }],
         execute: function() {
             let NavComponent_1;
@@ -49,13 +43,8 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', '../../hom
                     templateUrl: 'app/components/shared/nav/nav.component.html',
                     styleUrls: ['app/components/shared/nav/nav.component.css'],
                     directives: [router_1.ROUTER_DIRECTIVES, NavComponent],
-                    providers: [http_1.HTTP_PROVIDERS,
-                        router_1.ROUTER_PROVIDERS]
-                }),
-                router_1.RouteConfig([
-                    { path: '/home', name: 'Home', component: home_component_1.HomeComponent, useAsDefault: true },
-                    { path: '/event', name: 'EventDetail', component: event_component_1.EventComponent }
-                ]), 
+                    providers: [http_1.HTTP_PROVIDERS, router_1.ROUTER_PROVIDERS]
+                }), 
                 __metadata('design:paramtypes', [])
             ], NavComponent);
             exports_1("NavComponent", NavComponent);

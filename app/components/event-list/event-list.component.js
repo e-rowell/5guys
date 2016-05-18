@@ -1,4 +1,4 @@
-System.register(['angular2/core', '../shared/table/table.component', '../../services/event.service'], function(exports_1, context_1) {
+System.register(['angular2/core', '../../services/event.service', "angular2/router"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,36 +10,34 @@ System.register(['angular2/core', '../shared/table/table.component', '../../serv
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, table_component_1, event_service_1;
+    var core_1, event_service_1, router_1;
     var EventListComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (table_component_1_1) {
-                table_component_1 = table_component_1_1;
-            },
             function (event_service_1_1) {
                 event_service_1 = event_service_1_1;
+            },
+            function (router_1_1) {
+                router_1 = router_1_1;
             }],
         execute: function() {
             let EventListComponent = class EventListComponent {
                 constructor(_eventsService) {
                     this._eventsService = _eventsService;
-                    this.headerNames = ["Category", "Event Name", "Event Start", "Event End", "Status"];
-                    this.columnTypes = ["string", "string", "string", "string", "string"];
                 }
+                // executes on page load
                 ngOnInit() {
                     this._eventsService.getEvents().subscribe(events => this.events = events, error => this.errorMessage = error);
                 }
             };
             EventListComponent = __decorate([
                 core_1.Component({
-                    selector: 'event-list',
                     templateUrl: 'app/components/event-list/event-list.component.html',
                     styleUrls: ['app/components/event-list/event-list.component.css'],
-                    directives: [table_component_1.TableComponent],
+                    directives: [router_1.ROUTER_DIRECTIVES],
                     providers: [event_service_1.EventsService]
                 }), 
                 __metadata('design:paramtypes', [event_service_1.EventsService])

@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', '../../services/event.service'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', 'angular2/http', '../../services/event.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', '../../services/event.servi
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, event_service_1;
+    var core_1, router_1, http_1, event_service_1;
     var EventComponent;
     return {
         setters:[
@@ -20,23 +20,38 @@ System.register(['angular2/core', 'angular2/router', '../../services/event.servi
             function (router_1_1) {
                 router_1 = router_1_1;
             },
+            function (http_1_1) {
+                http_1 = http_1_1;
+            },
             function (event_service_1_1) {
                 event_service_1 = event_service_1_1;
             }],
         execute: function() {
             let EventComponent = class EventComponent {
-                constructor(_eventsService, _router, _routerParams) {
+                constructor(_eventsService, _router, _routeParams, _http) {
                     this._eventsService = _eventsService;
                     this._router = _router;
-                    this._routerParams = _routerParams;
+                    this._routeParams = _routeParams;
+                    this._http = _http;
                     this.pageTitle = 'Event Detail';
-                    this.eventName = 'Coloring Contest';
                     this.hasSubmittedEntry = true;
                 }
                 submitEntry() {
                 }
-                getEvent(id) {
-                    this._eventsService.getEvent(id).subscribe(event => this.event = event, error => this.errorMessage = error);
+                ngOnInit() {
+                    if (!this.event) {
+                        console.log("In conditional");
+                        let eventName = this._routeParams.get('eventName');
+                        this.getEvent(eventName);
+                        console.log(this.event);
+                    }
+                }
+                getEvent(eventName) {
+                    console.log(eventName);
+                    this._eventsService.getEvent(eventName).subscribe(event => this.event = event, error => this.errorMessage = error);
+                }
+                getEvents() {
+                    this._http.get('/events');
                 }
                 onBack() {
                     this._router.navigate(['Events']);
@@ -52,7 +67,7 @@ System.register(['angular2/core', 'angular2/router', '../../services/event.servi
                     styleUrls: ['app/components/event/event.component.css'],
                     providers: [event_service_1.EventsService]
                 }), 
-                __metadata('design:paramtypes', [event_service_1.EventsService, router_1.Router, router_1.RouteParams])
+                __metadata('design:paramtypes', [event_service_1.EventsService, router_1.Router, router_1.RouteParams, http_1.Http])
             ], EventComponent);
             exports_1("EventComponent", EventComponent);
         }

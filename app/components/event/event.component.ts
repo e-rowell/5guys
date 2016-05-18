@@ -1,5 +1,6 @@
-import { Component, Input } from 'angular2/core';
+import { Component, Input, OnInit } from 'angular2/core';
 import { RouteParams, Router } from 'angular2/router';
+import { Http, Response } from 'angular2/http';
 
 import { EventsService } from '../../services/event.service';
 import { IEvent } from '../event/event';
@@ -9,14 +10,14 @@ import { IEvent } from '../event/event';
     styleUrls: ['app/components/event/event.component.css'],
     providers: [EventsService]
 })
-export class EventComponent {
+export class EventComponent implements OnInit{
     @Input() eventID: number;
     errorMessage: string;
     event: IEvent;
 
     pageTitle: string = 'Event Detail';
 
-    eventName: string = 'Coloring Contest';
+    /*eventName: string = 'Coloring Contest';*/
 
     // submission service
     artworkTitle: string;
@@ -30,17 +31,33 @@ export class EventComponent {
 
     constructor(private _eventsService: EventsService,
                 private _router: Router,
-                private _routerParams: RouteParams) { }
+                private _routeParams: RouteParams,
+                private _http: Http) {
+    }
 
 
     submitEntry(): void {
 
     }
 
-    getEvent(id: number) {
-        this._eventsService.getEvent(id).subscribe(
+    ngOnInit() {
+        if (!this.event) {
+            console.log("In conditional");
+            let eventName = this._routeParams.get('eventName');
+            this.getEvent(eventName);
+            console.log(this.event);
+        }
+    }
+
+    getEvent(eventName: string) {
+        console.log(eventName);
+        this._eventsService.getEvent(eventName).subscribe(
             event => this.event = event,
             error => this.errorMessage = <any>error);
+    }
+    
+    getEvents(): void {
+        this._http.get('/events')
     }
 
     onBack(): void {

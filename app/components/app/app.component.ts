@@ -8,19 +8,19 @@ import { ROUTER_PROVIDERS, RouteConfig, ROUTER_DIRECTIVES } from 'angular2/route
 import { NavComponent } from '../shared/nav/nav.component';
 import { HomeComponent } from '../home/home.component';
 import { EventComponent } from '../event/event.component';
+import { EventListComponent } from '../event-list/event-list.component';
 
 @Component({
     selector: 'ccl-app',
     template:`<nav-comp></nav-comp>`,
     styles: ['app/components/app.component.css', 'app/assets/site.css'],
-    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, ROUTER_DIRECTIVES, NavComponent],
-    providers: [HTTP_PROVIDERS,
-        ROUTER_PROVIDERS]
+    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, NavComponent],
+    providers: [HTTP_PROVIDERS]
 })
 @RouteConfig([
     { path: '/home', name: 'Home', component: HomeComponent, useAsDefault: true },
-    { path: '/event', name: 'EventDetail', component: EventComponent }
-    // { path: '/product/:id', name: 'ProductDetail', component: ProductDetailComponent }
+    { path: '/events', name: 'Events', component: EventListComponent },
+    { path: '/event/:eventName', name: 'EventDetail', component: EventComponent }
 ])
 export class AppComponent {
     pageTitle: string = 'Clark Country Library';

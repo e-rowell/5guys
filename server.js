@@ -8,48 +8,39 @@ var db;
 app.use(express.static(__dirname));
 app.use(express.static(__dirname + '/node_modules'));
 
-
-/*
-app.use(express.static('node_modules/angular2/es6/dev/src/testing/'));
-app.use(express.static('node_modules/es6-shim/'));
-app.use(express.static('node_modules/systemjs/dist/'));
-app.use(express.static('node_modules/angular2/bundles/'));
-app.use(express.static('node_modules/rxjs/bundles/'));
-*/
-
 app.use(bodyParser.urlencoded({extended: true}));
 // puts data from form into req.body
 
 
 MongoClient.connect('mongodb://test:test@ds013202.mlab.com:13202/test1', function (err, database) {
-      //start the server
-    if (err) return console.log(err)
-    db = database
+    //start the server
+    if (err) return console.log(err);
+    db = database;
 
     //do this in here so that the app only starts if we have a db connection
-    app.listen(3000, function() {
+    app.listen(3000, function () {
         console.log('listening on 3000')
     })
-})
+});
 
 
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
-})
+});
 
 app.get('/success', function (req, res) {
     res.sendFile(__dirname + '/success.html');
-})
+});
 
 /*check if the username and password are in the db
-This is a shit way to do this. how do we know the user is
-"logged in" when they are on another page?*/
+ This is a shit way to do this. how do we know the user is
+ "logged in" when they are on another page?*/
 app.post('/login', function (req, res) {
     var result = false;
 
-    db.collection('users').find().toArray( function (err, array){
+    db.collection('users').find().toArray(function (err, array) {
         for (var i = 0; i < array.length; i++) {
-            if ((array[i].username == req.body.username) 
+            if ((array[i].username == req.body.username)
                 && (array[i].password == req.body.password)) {
                 result = true;
             }
@@ -60,19 +51,31 @@ app.post('/login', function (req, res) {
         else
             res.redirect('/');
     })
-})
+});
+
+var eventsJson = require("./api/events/events.json");
+
+app.get('/getAllEvents', (req, res) => {
+    db.collection('events').find().toArray((err, result) => {
+        if (err) return console.log(err);
+        res.json(eventsJson);
+
+// renders events.ejs
+//res.render('events.ejs', {events: result})
+    })
+});
 
 app.get('/registration', function (req, res) {
     res.sendFile(__dirname + '/registration.html');
-})
+});
 
-app.post('/register', function (req,res) {
+app.post('/register', function (req, res) {
     db.collection('users').save(req.body, function (err, result) {
         if (err) return console.log(err)
 
         console.log('New user registered');
         res.redirect('/');
     })
-})
+});
 
 
