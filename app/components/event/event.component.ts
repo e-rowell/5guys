@@ -22,7 +22,7 @@ export class EventComponent implements OnInit{
     // submission service
     artworkTitle: string;
     fileName: string;
-    hasSubmittedEntry: boolean = true;
+    hasSubmittedEntry: boolean = false;
 
     // login service
     isLoggedIn: boolean; // check whether the user is logged in as input to the component.
@@ -42,22 +42,28 @@ export class EventComponent implements OnInit{
 
     ngOnInit() {
         if (!this.event) {
-            console.log("In conditional");
             let eventName = this._routeParams.get('eventName');
-            this.getEvent(eventName);
-            console.log(this.event);
+            //console.log(eventName);
+            this.getSingleEvent(eventName);
+            // console.log(this.event.eventName);
+            //this.getEvent(eventName);
+            //console.log(this.event.eventName);
         }
     }
 
     getEvent(eventName: string) {
+        console.log("in getEvent");
         console.log(eventName);
         this._eventsService.getEvent(eventName).subscribe(
             event => this.event = event,
             error => this.errorMessage = <any>error);
     }
-    
-    getEvents(): void {
-        this._http.get('/events')
+
+    getSingleEvent(eventName: string) {
+        console.log("in getSingleEvent");
+        this._eventsService.getSingleEvent(eventName).subscribe(
+            event => this.event = event,
+            error => this.errorMessage = <any>error);
     }
 
     onBack(): void {

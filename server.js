@@ -58,11 +58,14 @@ var eventsJson = require("./api/events/events.json");
 app.get('/getAllEvents', (req, res) => {
     db.collection('events').find().toArray((err, result) => {
         if (err) return console.log(err);
-        res.json(eventsJson);
-
-// renders events.ejs
-//res.render('events.ejs', {events: result})
+      res.json(eventsJson);
     })
+});
+
+app.post('/getSingleEvent', (req, res) => {
+    console.log(req.body);
+
+    res.json(eventsJson.find(e => e.eventName === req.body.eventName));
 });
 
 app.get('/registration', function (req, res) {

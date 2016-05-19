@@ -7,8 +7,10 @@ export /**
  * LoginComponent
  */
     class LoginComponent {
-    userName: string;
-    password: string;
+    userName:string;
+    password:string;
+
     constructor() {
 
     }
+}

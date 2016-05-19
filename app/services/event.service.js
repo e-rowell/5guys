@@ -32,16 +32,23 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
                     this._serverSingleEventUrl = '/getSingleEvent';
                 }
                 getEvents() {
-                    return this._http.get(this._serverEventsUrl)
+                    return this._http.get('/getAllEvents')
                         .map((response) => response.json())
                         .do(data => console.log('All: ' + JSON.stringify(data)))
                         .catch(this.handleError);
                 }
                 getEvent(eventName) {
                     let events = this.getEvents();
-                    console.log(events);
                     return this.getEvents()
                         .map((events) => events.find(e => e.eventName === eventName));
+                }
+                getSingleEvent(eventName) {
+                    let body = JSON.stringify({ eventName: eventName });
+                    let headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+                    console.log(body);
+                    return this._http.post('/getSingleEvent', body, { headers: headers })
+                        .map((response) => response.json())
+                        .catch(this.handleError);
                 }
                 /*getAllEvents(): Observable<IEvent[]> {
                     return this._http.get(this._serverEventsUrl)
@@ -63,8 +70,6 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
                     return body.data || {};
                 }
                 handleError(error) {
-                    // in a real world app, we may send the server to some remote logging infrastructure
-                    // instead of just logging it to the console
                     console.error(error);
                     return Observable_1.Observable.throw(error.json().error || 'Server error');
                 }

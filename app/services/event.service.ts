@@ -13,7 +13,7 @@ export class EventsService {
     constructor(private _http: Http) { }
 
     getEvents(): Observable<IEvent[]> {
-        return this._http.get(this._serverEventsUrl)
+        return this._http.get('/getAllEvents')
             .map((response: Response) => <IEvent[]> response.json())
             .do(data => console.log('All: ' +  JSON.stringify(data)))
             .catch(this.handleError);
@@ -21,12 +21,18 @@ export class EventsService {
 
     getEvent(eventName: string): Observable<IEvent> {
         let events: Observable<IEvent[]> = this.getEvents();
-        console.log(events);
         return this.getEvents()
             .map((events: IEvent[]) => events.find(e => e.eventName === eventName));
     }
 
-    
+    getSingleEvent(eventName: string): Observable<IEvent> {
+        let body = JSON.stringify({ eventName: eventName });
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        console.log(body);
+        return this._http.post('/getSingleEvent', body, { headers: headers })
+            .map((response: Response) => <IEvent> response.json())
+            .catch(this.handleError);
+    }
     
     /*getAllEvents(): Observable<IEvent[]> {
         return this._http.get(this._serverEventsUrl)
@@ -50,8 +56,6 @@ export class EventsService {
     }
 
     private handleError(error: Response) {
-        // in a real world app, we may send the server to some remote logging infrastructure
-        // instead of just logging it to the console
         console.error(error);
         return Observable.throw(error.json().error || 'Server error');
     }

@@ -34,24 +34,25 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', '../../ser
                     this._routeParams = _routeParams;
                     this._http = _http;
                     this.pageTitle = 'Event Detail';
-                    this.hasSubmittedEntry = true;
+                    this.hasSubmittedEntry = false;
                 }
                 submitEntry() {
                 }
                 ngOnInit() {
                     if (!this.event) {
-                        console.log("In conditional");
                         let eventName = this._routeParams.get('eventName');
-                        this.getEvent(eventName);
-                        console.log(this.event);
+                        //console.log(eventName);
+                        this.getSingleEvent(eventName);
                     }
                 }
                 getEvent(eventName) {
+                    console.log("in getEvent");
                     console.log(eventName);
                     this._eventsService.getEvent(eventName).subscribe(event => this.event = event, error => this.errorMessage = error);
                 }
-                getEvents() {
-                    this._http.get('/events');
+                getSingleEvent(eventName) {
+                    console.log("in getSingleEvent");
+                    this._eventsService.getSingleEvent(eventName).subscribe(event => this.event = event, error => this.errorMessage = error);
                 }
                 onBack() {
                     this._router.navigate(['Events']);

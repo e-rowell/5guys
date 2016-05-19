@@ -2,6 +2,9 @@ export interface IEvent {
     eventID: number;
     eventName: string;
     eventDescription: string;
-    eventRequirements: string;
     scoringGuidelines: string;
+    eventStart: string;
+    eventEnd: string;
+    eventCategory: string;
+    eventStatus: string;
 }
