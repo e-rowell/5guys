@@ -34,37 +34,13 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
                 getEvents() {
                     return this._http.get('/getAllEvents')
                         .map((response) => response.json())
-                        .do(data => console.log('All: ' + JSON.stringify(data)))
                         .catch(this.handleError);
                 }
                 getEvent(eventName) {
-                    let events = this.getEvents();
                     return this.getEvents()
                         .map((events) => events.find(e => e.eventName === eventName));
+                    //.do(data => console.log('All: ' +  JSON.stringify(data)));
                 }
-                getSingleEvent(eventName) {
-                    let body = JSON.stringify({ eventName: eventName });
-                    let headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-                    console.log(body);
-                    return this._http.post('/getSingleEvent', body, { headers: headers })
-                        .map((response) => response.json())
-                        .catch(this.handleError);
-                }
-                /*getAllEvents(): Observable<IEvent[]> {
-                    return this._http.get(this._serverEventsUrl)
-                        .map(this.extractData)
-                        .catch(this.handleError);
-                }
-            
-                getSingleEvent(name: string) {
-                    let body = JSON.stringify({ name });
-                    let headers = new Headers({ 'Content-Type': 'application/json' });
-                    let options = new RequestOptions({ headers: headers });
-                    
-                    return this._http.post(this._serverSingleEventUrl, body, options)
-                        .map(this.extractData)
-                        .catch(this.handleError);
-                }*/
                 extractData(res) {
                     let body = res.json();
                     return body.data || {};
