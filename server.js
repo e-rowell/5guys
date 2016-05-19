@@ -1,12 +1,25 @@
 const express = require('express');
+const multer  =   require('multer');
 const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 const app = express();
 
 var db;
+var storage =   multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, './uploads');
+    },
+    //filename: function (req, file, callback) {
+    //    callback(null, file.fieldname + '-' + Date.now());
+    //}
+});
+
+var upload = multer({ storage : storage}).single('userEntry');
 
 app.use(express.static(__dirname));
 app.use(express.static(__dirname + '/node_modules'));
+app.use(express.static(__dirname + '/dev_html'));
+app.use(express.static('uploads'));
 
 app.use(bodyParser.urlencoded({extended: true}));
 // puts data from form into req.body
@@ -53,20 +66,38 @@ app.post('/login', function (req, res) {
     })
 });
 
-var eventsJson = require("./api/events/events.json");
+app.post('/submitEntry', (req, res) => {
+    upload(req,res,function(err) {
+        if(err) {
+                return res.end("Error uploading file.");
+        }
+
+        db.collection('entries').save(req.file, (err, result) => {
+            if (err) return console.log(err)
+
+        })
+
+            res.end("File is uploaded");
+    });
+});
+
+
+app.post('/createEvent', (req, res) => {
+    db.collection('events').save(req.body, function (err, result) {
+        if (err) return console.log(err)
+
+        console.log('New event created');
+        res.redirect('/');//TODO get rid of this?
+    })
+});
 
 app.get('/getAllEvents', (req, res) => {
     db.collection('events').find().toArray((err, result) => {
         if (err) return console.log(err);
-      res.json(eventsJson);
+      res.send(result);
     })
 });
 
-app.post('/getSingleEvent', (req, res) => {
-    console.log(req.body);
-
-    res.json(eventsJson.find(e => e.eventName === req.body.eventName));
-});
 
 app.get('/registration', function (req, res) {
     res.sendFile(__dirname + '/registration.html');
