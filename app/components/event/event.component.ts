@@ -15,10 +15,6 @@ export class EventComponent implements OnInit{
     errorMessage: string;
     event: IEvent;
 
-    pageTitle: string = 'Event Detail';
-
-    /*eventName: string = 'Coloring Contest';*/
-
     // submission service
     artworkTitle: string;
     fileName: string;
@@ -35,7 +31,6 @@ export class EventComponent implements OnInit{
                 private _http: Http) {
     }
 
-
     submitEntry(): void {
 
     }
@@ -43,29 +38,16 @@ export class EventComponent implements OnInit{
     ngOnInit() {
         if (!this.event) {
             let eventName = this._routeParams.get('eventName');
-            //console.log(eventName);
-            this.getSingleEvent(eventName);
-            // console.log(this.event.eventName);
-            //this.getEvent(eventName);
-            //console.log(this.event.eventName);
+            this.getEvent(eventName);
         }
     }
 
     getEvent(eventName: string) {
-        console.log("in getEvent");
-        console.log(eventName);
         this._eventsService.getEvent(eventName).subscribe(
             event => this.event = event,
             error => this.errorMessage = <any>error);
     }
-
-    getSingleEvent(eventName: string) {
-        console.log("in getSingleEvent");
-        this._eventsService.getSingleEvent(eventName).subscribe(
-            event => this.event = event,
-            error => this.errorMessage = <any>error);
-    }
-
+    
     onBack(): void {
         this._router.navigate(['Events']);
     }

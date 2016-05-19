@@ -33,7 +33,6 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', '../../ser
                     this._router = _router;
                     this._routeParams = _routeParams;
                     this._http = _http;
-                    this.pageTitle = 'Event Detail';
                     this.hasSubmittedEntry = false;
                 }
                 submitEntry() {
@@ -41,18 +40,11 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', '../../ser
                 ngOnInit() {
                     if (!this.event) {
                         let eventName = this._routeParams.get('eventName');
-                        //console.log(eventName);
-                        this.getSingleEvent(eventName);
+                        this.getEvent(eventName);
                     }
                 }
                 getEvent(eventName) {
-                    console.log("in getEvent");
-                    console.log(eventName);
                     this._eventsService.getEvent(eventName).subscribe(event => this.event = event, error => this.errorMessage = error);
-                }
-                getSingleEvent(eventName) {
-                    console.log("in getSingleEvent");
-                    this._eventsService.getSingleEvent(eventName).subscribe(event => this.event = event, error => this.errorMessage = error);
                 }
                 onBack() {
                     this._router.navigate(['Events']);
