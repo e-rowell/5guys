@@ -41,10 +41,6 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/success', function (req, res) {
-    res.sendFile(__dirname + '/success.html');
-});
-
 /*check if the username and password are in the db
  This is a shit way to do this. how do we know the user is
  "logged in" when they are on another page?*/
@@ -66,6 +62,13 @@ app.post('/login', function (req, res) {
     })
 });
 
+app.post('/getEntry', (req, res) => {
+    db.collection('entries').find( {"username": {$eq: req.body.username}, "eventName": {$eq: req.body.eventName} } ).toArray((err, result) => {
+        if (err) return console.log(err);
+      res.send(result);
+    })
+});
+
 app.post('/submitEntry', (req, res) => {
     upload(req,res,function(err) {
         if(err) {
@@ -76,7 +79,7 @@ app.post('/submitEntry', (req, res) => {
             if (err) return console.log(err)
 
         })
-
+            //TODO do something reasonable 
             res.end("File is uploaded");
     });
 });
@@ -97,7 +100,6 @@ app.get('/getAllEvents', (req, res) => {
       res.send(result);
     })
 });
-
 
 app.get('/registration', function (req, res) {
     res.sendFile(__dirname + '/registration.html');
