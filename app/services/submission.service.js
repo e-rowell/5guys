@@ -28,6 +28,9 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
                 constructor(_http) {
                     this._http = _http;
                     this._submitURL = ''; // api url
+                    this.progress = Observable_1.Observable.create(observer => {
+                        this.progressObserver = observer;
+                    }).share();
                 }
                 submitEntry() {
                     let body = "";
@@ -41,6 +44,31 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
                         .subscribe(
                             response => this
                         )*/
+                }
+                makeFileRequest(url, params, files) {
+                    return Observable_1.Observable.create(observer => {
+                        let formData = new FormData(), xhr = new XMLHttpRequest();
+                        for (let i = 0; i < files.length; i++) {
+                            formData.append("uploads[]", files[i], files[i].name);
+                        }
+                        xhr.onreadystatechange = () => {
+                            if (xhr.readyState === 4) {
+                                if (xhr.status === 200) {
+                                    observer.next(JSON.parse(xhr.response));
+                                    observer.complete();
+                                }
+                                else {
+                                    observer.error(xhr.response);
+                                }
+                            }
+                        };
+                        xhr.upload.onprogress = (event) => {
+                            this.progress = Math.round(event.loaded / event.total * 100);
+                            this.progressObserver.next(this.progress);
+                        };
+                        xhr.open('POST', url, true);
+                        xhr.send(formData);
+                    });
                 }
                 handleError(error) {
                     // in a real world app, we may send the server to some remote logging infrastructure

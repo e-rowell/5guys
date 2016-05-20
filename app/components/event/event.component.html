@@ -29,18 +29,19 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="input-group">
-                            <label for="filePath" class="control-label">File Path:</label>
-                            <input id="filePath" class="form-control" type="text"/>
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" style="margin-top: 25px;">Browse</button>
-                    </span>
+                            <label id="filePath" class="form-control" type="text"></label>
+                            <span class="input-group-btn">
+                                <span class="btn btn-default btn-file">
+                                    Browse <input id="submissionEntry" (change)="fileChangeEvent($event)" type="file">
+                                </span>
+                            </span>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
 
                     <div class="row">
-                        <button id="submissionBtn" class="btn btn-primary">{{hasSubmittedEntry ? "Resubmit" : "Submit"}}
+                        <button id="submissionBtn" (click)="upload()" class="btn btn-primary">{{hasSubmittedEntry ? "Resubmit" : "Submit"}}
                         </button>
                     </div>
                 </div>
@@ -80,7 +81,8 @@
                     </div>
                 </div>
                 <div class="col-sm-8">
-                    <img id="currentSubmissionPreview" class="img-responsive center-block" src="app/assets/images/Easter_Egg.png" style="background-color: black;">
+                    <img id="currentSubmissionPreview" class="img-responsive center-block"
+                         src="app/assets/images/Easter_Egg.png" style="background-color: black;">
                 </div>
 
             </div>

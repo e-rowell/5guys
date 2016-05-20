@@ -1,16 +1,34 @@
 const express = require('express');
+const multer  =   require('multer');
 const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 const app = express();
 
 var db;
+var storage =   multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, './uploads');
+    },
+    //filename: function (req, file, callback) {
+    //    callback(null, file.fieldname + '-' + Date.now());
+    //}
+});
+
+var upload = multer({ storage : storage}).single('userEntry');
 
 app.use(express.static(__dirname));
 app.use(express.static(__dirname + '/node_modules'));
+app.use(express.static(__dirname + '/dev_html'));
+app.use(express.static('uploads'));
 
 app.use(bodyParser.urlencoded({extended: true}));
 // puts data from form into req.body
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 MongoClient.connect('mongodb://test:test@ds013202.mlab.com:13202/test1', function (err, database) {
     //start the server
@@ -58,8 +76,14 @@ var eventsJson = require("./api/events/events.json");
 app.get('/getAllEvents', (req, res) => {
     db.collection('events').find().toArray((err, result) => {
         if (err) return console.log(err);
+        
       res.json(eventsJson);
     })
+});
+
+app.post("/upload", multer({dest: "./uploads/"}).array("uploads[]", 12), function(req, res) {
+    console.log('in upload');
+    res.send(req.files);
 });
 
 app.post('/getSingleEvent', (req, res) => {

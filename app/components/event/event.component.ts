@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from 'angular2/core';
+import { Component, Input, OnInit, NgZone } from 'angular2/core';
 import { RouteParams, Router } from 'angular2/router';
 import { Http, Response } from 'angular2/http';
 
@@ -11,9 +11,10 @@ import { IEvent } from '../event/event';
     providers: [EventsService]
 })
 export class EventComponent implements OnInit{
-    @Input() eventID: number;
     errorMessage: string;
     event: IEvent;
+
+    filesToUpload: Array<File>;
 
     // submission service
     artworkTitle: string;
@@ -29,11 +30,46 @@ export class EventComponent implements OnInit{
                 private _router: Router,
                 private _routeParams: RouteParams,
                 private _http: Http) {
+        this.filesToUpload = [];
     }
 
-    submitEntry(): void {
-
+    upload() {
+        this.makeFileRequest("/upload", [], this.filesToUpload).then((result) => {
+            console.log(result);
+        }, (error) => {
+            console.error(error);
+        });
     }
+
+    fileChangeEvent(fileInput: any){
+        this.filesToUpload = <Array<File>> fileInput.target.files;
+        console.log(this.filesToUpload);
+    }
+
+    makeFileRequest(url: string, params: Array<string>, files: Array<File>) {
+        return new Promise((resolve, reject) => {
+            var formData: any = new FormData();
+            var xhr = new XMLHttpRequest();
+            for(var i = 0; i < files.length; i++) {
+                formData.append("uploads[]", files[i], files[i].name);
+            }
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        resolve(JSON.parse(xhr.response));
+                    } else {
+                        reject(xhr.response);
+                    }
+                }
+            }
+            xhr.open("POST", url, true);
+            xhr.send(formData);
+        });
+    }
+
+
+
+
 
     ngOnInit() {
         if (!this.event) {

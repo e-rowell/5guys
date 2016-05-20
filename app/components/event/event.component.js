@@ -34,8 +34,39 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', '../../ser
                     this._routeParams = _routeParams;
                     this._http = _http;
                     this.hasSubmittedEntry = false;
+                    this.filesToUpload = [];
                 }
-                submitEntry() {
+                upload() {
+                    this.makeFileRequest("/upload", [], this.filesToUpload).then((result) => {
+                        console.log(result);
+                    }, (error) => {
+                        console.error(error);
+                    });
+                }
+                fileChangeEvent(fileInput) {
+                    this.filesToUpload = fileInput.target.files;
+                    console.log(this.filesToUpload);
+                }
+                makeFileRequest(url, params, files) {
+                    return new Promise((resolve, reject) => {
+                        var formData = new FormData();
+                        var xhr = new XMLHttpRequest();
+                        for (var i = 0; i < files.length; i++) {
+                            formData.append("uploads[]", files[i], files[i].name);
+                        }
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState == 4) {
+                                if (xhr.status == 200) {
+                                    resolve(JSON.parse(xhr.response));
+                                }
+                                else {
+                                    reject(xhr.response);
+                                }
+                            }
+                        };
+                        xhr.open("POST", url, true);
+                        xhr.send(formData);
+                    });
                 }
                 ngOnInit() {
                     if (!this.event) {
@@ -50,10 +81,6 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', '../../ser
                     this._router.navigate(['Events']);
                 }
             };
-            __decorate([
-                core_1.Input(), 
-                __metadata('design:type', Number)
-            ], EventComponent.prototype, "eventID", void 0);
             EventComponent = __decorate([
                 core_1.Component({
                     templateUrl: 'app/components/event/event.component.html',

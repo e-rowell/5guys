@@ -11,6 +11,9 @@
         },
         paths: {
             "moment": "node_modules/moment/moment"
+        },
+        map: {
+            moment: 'node_modules/moment/moment.js'
         }
     });
     System.import('app/main.js')
