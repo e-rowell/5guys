@@ -49,6 +49,7 @@ System.register(['angular2/core', 'angular2/common', 'angular2/router', '../../s
                         this.artworkTitle = "";
                         this.fileName = "";
                         this.choseFile = false;
+                        this.hasSubmittedEntry = true;
                         console.log(result);
                     }, (error) => {
                         console.error(error);

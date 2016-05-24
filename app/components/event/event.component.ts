@@ -24,73 +24,21 @@ export class EventComponent implements OnInit{
     event: IEvent;
 
     /**
-     * The progress of the upload
-     */
-    // uploadProgress: number; // Observer for the upload progress
-
-    /**
-     * The array of file uploads
-     */
-    filesToUpload: Array<File>;
-
-    /**
-     * The title of the artwork.
-     */
-    artworkTitle: string;
-
-    /**
-     * Whether the user has submitted an entry or not.
-     */
-    hasSubmittedEntry: boolean = false; // check if user has submitted an entry
-
-    /**
      * The error message from the EventService.
      */
     errorMessage: string;
 
     /**
-     * User read the privacy policy.
-     */
-    readPrivacyPolicy: boolean = false;
-
-    /**
-     * 
-     */
-    agreedToPolicy: boolean = false;
-
-    /**
      * Established private services and router variables.
      * @constructor
      * @param _eventsService Service that manages getting the event details.
-     * @param _fileUploadService Service that manages uploading the the submission.
      * @param _router Router for retrieving information from the redirect.
      * @param _routeParams Route parameter for determining the event to display.
      */
     constructor(private _eventsService: EventsService,
-                private _fileUploadService: FileUploadService,
                 private _router: Router,
                 private _routeParams: RouteParams) {
-        this.filesToUpload = [];
-        // this._fileUploadService.getObserver().subscribe(p => this.uploadProgress = p);
-    }
 
-    /**
-     * Submits the entry.
-     */
-    submitEntry() {
-        this._fileUploadService.upload('/upload', ["Bob", this.artworkTitle], this.filesToUpload).then((result) => {
-            console.log(result);
-        }, (error) => {
-            console.error(error);
-        });
-    }
-
-    /**
-     *
-     * @param fileInput
-     */
-    fileChangeEvent(fileInput: any){
-        this.filesToUpload = <Array<File>> fileInput.target.files;
     }
 
     ngOnInit() {

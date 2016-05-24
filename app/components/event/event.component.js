@@ -35,46 +35,13 @@ System.register(['angular2/core', 'angular2/router', '../../services/event.servi
                  * Established private services and router variables.
                  * @constructor
                  * @param _eventsService Service that manages getting the event details.
-                 * @param _fileUploadService Service that manages uploading the the submission.
                  * @param _router Router for retrieving information from the redirect.
                  * @param _routeParams Route parameter for determining the event to display.
                  */
-                constructor(_eventsService, _fileUploadService, _router, _routeParams) {
+                constructor(_eventsService, _router, _routeParams) {
                     this._eventsService = _eventsService;
-                    this._fileUploadService = _fileUploadService;
                     this._router = _router;
                     this._routeParams = _routeParams;
-                    /**
-                     * Whether the user has submitted an entry or not.
-                     */
-                    this.hasSubmittedEntry = false; // check if user has submitted an entry
-                    /**
-                     * User read the privacy policy.
-                     */
-                    this.readPrivacyPolicy = false;
-                    /**
-                     *
-                     */
-                    this.agreedToPolicy = false;
-                    this.filesToUpload = [];
-                    // this._fileUploadService.getObserver().subscribe(p => this.uploadProgress = p);
-                }
-                /**
-                 * Submits the entry.
-                 */
-                submitEntry() {
-                    this._fileUploadService.upload('/upload', ["Bob", this.artworkTitle], this.filesToUpload).then((result) => {
-                        console.log(result);
-                    }, (error) => {
-                        console.error(error);
-                    });
-                }
-                /**
-                 *
-                 * @param fileInput
-                 */
-                fileChangeEvent(fileInput) {
-                    this.filesToUpload = fileInput.target.files;
                 }
                 ngOnInit() {
                     if (!this.event) {
@@ -96,7 +63,7 @@ System.register(['angular2/core', 'angular2/router', '../../services/event.servi
                     directives: [entry_form_component_1.EntryFormComponent],
                     providers: [event_service_1.EventsService, file_upload_service_1.FileUploadService]
                 }), 
-                __metadata('design:paramtypes', [event_service_1.EventsService, file_upload_service_1.FileUploadService, router_1.Router, router_1.RouteParams])
+                __metadata('design:paramtypes', [event_service_1.EventsService, router_1.Router, router_1.RouteParams])
             ], EventComponent);
             exports_1("EventComponent", EventComponent);
         }

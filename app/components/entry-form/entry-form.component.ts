@@ -41,6 +41,7 @@ export class EntryFormComponent {
             this.artworkTitle = "";
             this.fileName = "";
             this.choseFile = false;
+            this.hasSubmittedEntry = true;
             console.log(result);
         }, (error) => {
             console.error(error);
