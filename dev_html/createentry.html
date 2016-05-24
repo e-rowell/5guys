@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Submit entry file</title>
+</head>
+<body>
+<b>Submit an Entry</b>
+<br><br>
+<form id        =  "uploadForm"
+enctype   =  "multipart/form-data"
+action    =  "/submitEntry"
+method    =  "post"
+>
+<input type="file" name="userEntry" />
+<br><br>
+username<br>
+<input type="text" placeholder="whatever" name="username"><br>
+eventName<br>
+<input type="text" placeholder="whatever" name="eventName"><br>
+artworkTitle<br>
+<input type="text" placeholder="whatever" name="artworkTitle"><br>
+<br>
+<input type="submit" value="Submit" name="submit">
+</form>
+
+
+
+</body>
+</html>

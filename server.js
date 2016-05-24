@@ -50,10 +50,12 @@ app.get('/', function (req, res) {
 /*Better way to login*/
 app.post('/login', function (req, res) {
 
-    db.collection('users').findOne( {"username": req.body.username, "password": req.body.password } ,function (err, result) {
-        if (result) { //what if user is already logged in TODO
-            username = req.body.username;
-            res.status(200).send("login succeded")
+    db.collection('users').find().toArray(function (err, array) {
+        for (var i = 0; i < array.length; i++) {
+            if ((array[i].username == req.body.username)
+                && (array[i].password == req.body.password)) {
+                result = true;
+            }
         }
         else
             res.status(500).send("login failed");
@@ -119,21 +121,13 @@ app.post("/upload", multer({dest: "./uploads/"}).array("uploads[]", 12), functio
     res.send(req.files);
 });
 
-app.post('/getSingleEvent', (req, res) => {
-    console.log(req.body);
-
-    res.json(eventsJson.find(e => e.eventName === req.body.eventName));
-});
-
-app.get('/registration', function (req, res) {
-    res.sendFile(__dirname + '/registration.html');
-});
 
 app.post('/register', function (req, res) {
     db.collection('users').save(req.body, function (err, result) {
         if (err) return console.log(err)
 
         console.log('New user registered');
+        res.redirect('/');
     })
 });
 
