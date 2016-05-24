@@ -1,7 +1,7 @@
 (function() {
     System.config({
         packages: {
-            app: {
+            "app": {
                 format: 'register',
                 defaultExtension: 'js'
             },
@@ -16,6 +16,6 @@
             moment: 'node_modules/moment/moment.js'
         }
     });
-    System.import('app/main.js')
+    System.import('app/main')
         .then(null, console.error.bind(console));
 })();

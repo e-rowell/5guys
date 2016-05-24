@@ -3,6 +3,8 @@ import { Injectable } from 'angular2/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/share';
 
+
+
 @Injectable()
 export class FileUploadService {
     /**
@@ -34,16 +36,21 @@ export class FileUploadService {
      * Upload files through XMLHttpRequest
      *
      * @param url
+     * @param params
      * @param files
-     * @returns {Promise<T>}
+     * @returns {Promise<any>}
      */
-    public upload (url: string, files: File[]): Promise<any> {
+    public upload (url: string,  params: Array<string>, files: File[]): Promise<any> {
         return new Promise((resolve, reject) => {
             let formData: FormData = new FormData(),
                 xhr: XMLHttpRequest = new XMLHttpRequest();
 
             for (let i = 0; i < files.length; i++) {
                 formData.append("uploads[]", files[i], files[i].name);
+            }
+
+            for (let i = 0; i < params.length; i++) {
+                formData.append("params[]", params[i]);
             }
 
             xhr.onreadystatechange = () => {
@@ -57,12 +64,14 @@ export class FileUploadService {
             };
 
             FileUploadService.setUploadUpdateInterval(500);
-
+            
+            /*
             xhr.upload.onprogress = (event) => {
                 this.progress = Math.round(event.loaded / event.total * 100);
 
                 this.progressObserver.next(this.progress);
             };
+            */
 
             xhr.open('POST', url, true);
             xhr.send(formData);

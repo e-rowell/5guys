@@ -5,6 +5,6 @@ export interface IEvent {
     scoringGuidelines: string;
     eventStart: string;
     eventEnd: string;
-    eventCategory: string;
+    eventRequirements: string[];
     eventStatus: string;
 }

@@ -14,34 +14,49 @@
                 <div class="form-group">
                     <div class="row">
                         <label class="control-label" for="EventRequirements">Event Requirements</label>
-                        <p id="EventRequirements">{{event.eventCategory}}</p>
+                        <ul id="EventRequirements">
+                            <li *ngFor="#req of event.eventRequirements">{{req}}</li>
+                        </ul>
                     </div>
                 </div>
             </div>
-
-            <div class="col-sm-8" style="margin-top: 40px;">
+            <!-- Form component -->
+            <entry-form [event]="event"></entry-form>
+            <!--<div class="col-sm-8" style="margin-top: 40px !important;">
                 <div class="form-group">
                     <div class="row">
                         <label for="artworkTitle" class="control-label">Artwork Title:</label>
-                        <input id="artworkTitle" type="text" class="form-control"/>
+                        <input id="artworkTitle" [(ngModel)]="artworkTitle" type="text" class="form-control"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="row">
                         <div class="input-group">
-                            <label id="filePath" class="form-control" type="text"></label>
+                            <label for="filePath" class="control-label">File Name:</label>
+                            <label id="filePath" class="form-control" type="text">
+                                {{(filesToUpload.length > 0) ? filesToUpload[0].name : ""}}
+                            </label>
                             <span class="input-group-btn">
-                                <span class="btn btn-default btn-file">
-                                    Browse <input id="submissionEntry" (change)="fileChangeEvent($event)" type="file">
-                                </span>
+                                <label class="btn btn-default btn-file" style="margin-top: 25px !important;">
+                                    Browse<input id="submissionEntry" class="btn btn-default btn-file" style="display: none;"
+                                                  (change)="fileChangeEvent($event)" type="file"/>
+                                </label>
                             </span>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
-
                     <div class="row">
-                        <button id="submissionBtn" (click)="upload()" class="btn btn-primary">{{hasSubmittedEntry ? "Resubmit" : "Submit"}}
+                        <div class="checkbox">
+                            <label><input type="checkbox" [(ngModel)]="agreedToTerms" value="">
+                                You must read and agree to our Privacy Policy</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <button [class.disabled]="!readPrivacyPolicy && !agreedToTerms && !artworkTitle"
+                                [disabled]="!readPrivacyPolicy && !agreedToTerms && !artworkTitle" id="submissionBtn"
+                                (click)="submitEntry()" class="btn btn-primary">
+                            {{hasSubmittedEntry ? "Resubmit" : "Submit"}}
                         </button>
                     </div>
                 </div>
@@ -50,7 +65,7 @@
         </div>
     </div>
 
-    <div style="display: block; clear: both; margin-top: 50px;">
+    <div style="display: block; clear: both; margin-top: 50px !important;">
         <div *ngIf="hasSubmittedEntry" class="panel panel-default">
             <div class="panel-heading">
                 <h3>Current Submission</h3>
@@ -82,10 +97,10 @@
                 </div>
                 <div class="col-sm-8">
                     <img id="currentSubmissionPreview" class="img-responsive center-block"
-                         src="app/assets/images/Easter_Egg.png" style="background-color: black;">
+                         src="../../assets/images/Easter_Egg.png" style="background-color: black;">
                 </div>
 
-            </div>
+            </div>-->
         </div>
     </div>
 </fieldset>

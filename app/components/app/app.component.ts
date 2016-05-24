@@ -20,7 +20,7 @@ import { EventListComponent } from '../event-list/event-list.component';
 @RouteConfig([
     { path: '/home', name: 'Home', component: HomeComponent, useAsDefault: true },
     { path: '/events', name: 'Events', component: EventListComponent },
-    { path: '/event/:eventName', name: 'EventDetail', component: EventComponent }
+    { path: '/events/:eventName', name: 'EventDetail', component: EventComponent }
 ])
 export class AppComponent {
     pageTitle: string = 'Clark Country Library';

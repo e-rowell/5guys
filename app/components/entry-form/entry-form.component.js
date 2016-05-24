@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', '../../services/event.service', '../../services/file-upload.service', '../entry-form/entry-form.component'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/common', 'angular2/router', '../../services/event.service', '../../services/file-upload.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,12 +10,15 @@ System.register(['angular2/core', 'angular2/router', '../../services/event.servi
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, event_service_1, file_upload_service_1, entry_form_component_1;
-    var EventComponent;
+    var core_1, common_1, router_1, event_service_1, file_upload_service_1;
+    var EntryFormComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (common_1_1) {
+                common_1 = common_1_1;
             },
             function (router_1_1) {
                 router_1 = router_1_1;
@@ -25,81 +28,54 @@ System.register(['angular2/core', 'angular2/router', '../../services/event.servi
             },
             function (file_upload_service_1_1) {
                 file_upload_service_1 = file_upload_service_1_1;
-            },
-            function (entry_form_component_1_1) {
-                entry_form_component_1 = entry_form_component_1_1;
             }],
         execute: function() {
-            let EventComponent = class EventComponent {
-                /**
-                 * Established private services and router variables.
-                 * @constructor
-                 * @param _eventsService Service that manages getting the event details.
-                 * @param _fileUploadService Service that manages uploading the the submission.
-                 * @param _router Router for retrieving information from the redirect.
-                 * @param _routeParams Route parameter for determining the event to display.
-                 */
+            let EntryFormComponent = class EntryFormComponent {
                 constructor(_eventsService, _fileUploadService, _router, _routeParams) {
                     this._eventsService = _eventsService;
                     this._fileUploadService = _fileUploadService;
                     this._router = _router;
                     this._routeParams = _routeParams;
-                    /**
-                     * Whether the user has submitted an entry or not.
-                     */
+                    this.artworkTitle = "";
+                    this.choseFile = false;
                     this.hasSubmittedEntry = false; // check if user has submitted an entry
-                    /**
-                     * User read the privacy policy.
-                     */
-                    this.readPrivacyPolicy = false;
-                    /**
-                     *
-                     */
+                    this.readPolicy = false;
                     this.agreedToPolicy = false;
                     this.filesToUpload = [];
                     // this._fileUploadService.getObserver().subscribe(p => this.uploadProgress = p);
                 }
-                /**
-                 * Submits the entry.
-                 */
                 submitEntry() {
                     this._fileUploadService.upload('/upload', ["Bob", this.artworkTitle], this.filesToUpload).then((result) => {
+                        this.artworkTitle = "";
+                        this.fileName = "";
+                        this.choseFile = false;
                         console.log(result);
                     }, (error) => {
                         console.error(error);
                     });
                 }
-                /**
-                 *
-                 * @param fileInput
-                 */
                 fileChangeEvent(fileInput) {
                     this.filesToUpload = fileInput.target.files;
-                }
-                ngOnInit() {
-                    if (!this.event) {
-                        let eventName = this._routeParams.get('eventName');
-                        this.getEvent(eventName);
-                    }
-                }
-                getEvent(eventName) {
-                    this._eventsService.getEvent(eventName).subscribe(event => this.event = event, error => this.errorMessage = error);
-                }
-                onBack() {
-                    this._router.navigate(['Events']);
+                    this.fileName = this.filesToUpload[0].name;
+                    this.choseFile = true;
                 }
             };
-            EventComponent = __decorate([
+            __decorate([
+                core_1.Input(), 
+                __metadata('design:type', Object)
+            ], EntryFormComponent.prototype, "event", void 0);
+            EntryFormComponent = __decorate([
                 core_1.Component({
-                    templateUrl: 'app/components/event/event.component.html',
-                    styleUrls: ['app/components/event/event.component.css'],
-                    directives: [entry_form_component_1.EntryFormComponent],
-                    providers: [event_service_1.EventsService, file_upload_service_1.FileUploadService]
+                    selector: 'entry-form',
+                    templateUrl: 'app/components/entry-form/entry-form.component.html',
+                    styleUrls: ['app/components/entry-form/entry-form.component.css'],
+                    directives: [common_1.NgClass],
+                    providers: [file_upload_service_1.FileUploadService]
                 }), 
                 __metadata('design:paramtypes', [event_service_1.EventsService, file_upload_service_1.FileUploadService, router_1.Router, router_1.RouteParams])
-            ], EventComponent);
-            exports_1("EventComponent", EventComponent);
+            ], EntryFormComponent);
+            exports_1("EntryFormComponent", EntryFormComponent);
         }
     }
 });
-//# sourceMappingURL=event.component.js.map
+//# sourceMappingURL=entry-form.component.js.map
