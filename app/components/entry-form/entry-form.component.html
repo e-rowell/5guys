@@ -1,0 +1,104 @@
+<form>
+    <div class="col-sm-8" style="margin-top: 40px !important;">
+        <div class="form-group">
+            <div class="row">
+                <label for="artworkTitle" class="control-label">Artwork Title:</label>
+                <input id="artworkTitle" name="artworkTitle" ngControl="artworkTitle" required
+                       [(ngModel)]="artworkTitle" type="text" class="form-control"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="input-group">
+                    <label for="fileName" class="control-label">File Name:</label>
+                    <label [ngClass]="{'ng-invalid': !choseFile, 'ng-valid': choseFile}" id="fileName"
+                           class="form-control" type="text">{{fileName}}</label>
+                    <span class="input-group-btn">
+                        <label class="btn btn-default btn-file" style="margin-top: 25px !important;">
+                            Browse <input required name="submissionEntry" id="submissionEntry"
+                                          class="btn btn-default btn-file"
+                                          style="display: none;"
+                                          (change)="fileChangeEvent($event)" type="file"/>
+                        </label>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+
+                <label class="control-label">
+                    You must read and agree to our <a data-toggle="modal" href="#privacyModal" (click)="readPolicy = true;">
+                        Privacy Policy</a>.</label>
+
+                <div class="modal fade" id="privacyModal">
+                    <div class="modal-dialog modal-scroll" style="overflow-y: initial !important">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"
+                                        aria-hidden="true">&times;</button>
+                                <h4 class="modal-title">Privacy Policy</h4>
+                            </div>
+                            <div class="modal-body" style="height: 250px; overflow-y: auto;">
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Don't Agree</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal"
+                                        (click)="agreedToPolicy = true;">Agree</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+            </div>
+
+            <div class="row">
+                <br>
+                <button [ngClass]="{ disabled: !artworkTitle || !choseFile || !readPolicy || !agreedToPolicy }"
+                        [disabled]=" !artworkTitle || !choseFile || !readPolicy || !agreedToPolicy" id="submissionBtn"
+                        (click)="submitEntry()" class="btn btn-primary">
+                    {{hasSubmittedEntry ? "Resubmit" : "Submit"}}
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div style="display: block; clear: both; margin-top: 50px !important; width: 700px;">
+    <div *ngIf="hasSubmittedEntry" class="panel panel-default">
+        <div class="panel-heading">
+            <h4>Current Submission</h4>
+        </div>
+        <div class="panel-body">
+            <div class="col-sm-4">
+                <div class="form-group">
+
+                    <div class="row">
+                        <label class="control-label" for="CurrentArtworkTitle">Artwork Title:</label>
+                        <label id="CurrentArtworkTitle" class="form-control">{{currentArtworkTitle}}</label>
+                    </div>
+
+                </div>
+                <div class="form-group">
+
+                    <div class="row">
+                        <label class="control-label" for="CurrentFileName">File Name:</label>
+                        <label id="CurrentFileName" class="form-control">{{currentFileName}}</label>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <div class="row">
+                        <button id="DownloadCurrentSubmission" class="btn btn-default">Download</button>
+                        <button id="WithdrawCurrentSubmission" class="btn btn-danger">Withdraw</button>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <img id="currentSubmissionPreview" class="img-responsive center-block"
+                     src="../../assets/images/Easter_Egg.png" style="background-color: black;">
+            </div>
+
+        </div>
+    </div>
+</div>

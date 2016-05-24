@@ -25,7 +25,7 @@
   ],
   "eventDescription": "Website for the Clark County Library.",
   "scripts": {
-    "start": "concurrent \"npm run tscw\" \"npm run lite\" ",
+    "start": "concurrent \"npm run tscw\" \"node server.js\" ",
     "tscw": "tscw",
     "lint": "tslint ./app/**/*.ts -t verbose",
     "lite": "lite-server",

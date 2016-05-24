@@ -1,5 +1,5 @@
 const express = require('express');
-const multer  =   require('multer');
+const multer = require('multer');
 const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 const app = express();
@@ -25,6 +25,11 @@ app.use(express.static('uploads'));
 app.use(bodyParser.urlencoded({extended: true}));
 // puts data from form into req.body
 
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 MongoClient.connect('mongodb://test:test@ds013202.mlab.com:13202/test1', function (err, database) {
     //start the server
@@ -45,10 +50,12 @@ app.get('/', function (req, res) {
 /*Better way to login*/
 app.post('/login', function (req, res) {
 
-    db.collection('users').findOne( {"username": req.body.username, "password": req.body.password } ,function (err, result) {
-        if (result) { //what if user is already logged in TODO
-            username = req.body.username;
-            res.status(200).send("login succeded")
+    db.collection('users').find().toArray(function (err, array) {
+        for (var i = 0; i < array.length; i++) {
+            if ((array[i].username == req.body.username)
+                && (array[i].password == req.body.password)) {
+                result = true;
+            }
         }
         else
             res.status(500).send("login failed");
@@ -110,13 +117,22 @@ app.get('/getAllEvents', (req, res) => {
     })
 });
 
+app.post("/upload", multer({dest: "./uploads/"}).array("uploads[]", 12), function (req, res) {
+    res.send(req.files);
+});
+
 
 app.post('/register', function (req, res) {
     db.collection('users').save(req.body, function (err, result) {
         if (err) return console.log(err)
 
         console.log('New user registered');
+        res.redirect('/');
     })
 });
 
-
+// 404 catch
+app.all('*', (req, res) => {
+    console.log(`[TRACE] Server 404 request: ${req.originalUrl}`);
+    res.status(200).sendFile(__dirname + '/index.html');
+});

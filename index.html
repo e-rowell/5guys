@@ -7,9 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
-    <!--<link href="public/app/app.component.css" rel="stylesheet" />-->
-    <!--<link rel="stylesheet" href="public/app/shared/nav/nav.component.css" />-->
-    <!--<link rel="stylesheet" href="public/app/assets/site.css" />-->
+    <link href="app/assets/site.css" rel="stylesheet"/>
+    <link href="app/assets/ring.css" rel="stylesheet"/>
 
     <!-- 1. Load libraries -->
     <!-- IE required polyfills, in this exact order -->
@@ -24,6 +23,7 @@
 
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="//cdn.auth0.com/js/lock-9.0.min.js"></script>
 
     <!-- Required for http -->
     <script src="node_modules/angular2/bundles/http.dev.js"></script>
@@ -38,9 +38,13 @@
 
 <body style="padding-bottom: 130px;">
 <div id="main" class="container clear-top">
-    <ccl-app>Loading App...</ccl-app>
+    <ccl-app>
+        <div class="loading-ring-container">
+            <div class='uil-ring-css' style='transform:scale(0.25);'>
+                <div></div>
+            </div>
+        </div>
+    </ccl-app>
 </div>
-
 </body>
-
 </html>

@@ -6,7 +6,7 @@
         "eventEnd": "6/10/2016",
         "eventStatus": "Active",
         "eventDescription": "Draw some stuff and we'll take a look at it.",
-        "eventCategory": "Ages 10-16",
+        "eventRequirements": ["Ages: 10-16", "Library Member"],
         "scoringGuidelines": "Be nice, they're just kids."
     },
     {
@@ -16,7 +16,7 @@
         "eventEnd": "6/10/2016",
         "eventStatus": "Active",
         "eventDescription": "Brew some beer, let's get wasted.",
-        "eventCategory": "Ages 21+",
+        "eventRequirements": ["Ages: 21+", "Library Member"],
         "scoringGuidelines": "Did you get drunk or not?"
     },
     {
@@ -26,7 +26,7 @@
         "eventEnd": "6/10/2016",
         "eventStatus": "Active",
         "eventDescription": "Write up a poem and we'll read it.",
-        "eventCategory": "Ages: All",
+        "eventRequirements": ["Ages: All", "Library Member"],
         "scoringGuidelines": "Was it deep? Cool."
     },
     {
@@ -36,7 +36,7 @@
         "eventEnd": "6/10/2016",
         "eventStatus": "Active",
         "eventDescription": "Knit some stuff and we'll wear it.",
-        "eventCategory": "Ages: All",
+        "eventRequirements": ["Ages: All", "Library Member"],
         "scoringGuidelines": "Was it cool or warm?"
     },
     {
@@ -46,7 +46,7 @@
         "eventEnd": "6/10/2016",
         "eventStatus": "Active",
         "eventDescription": "Lets get these kids some toys.",
-        "eventCategory": "Ages: All",
+        "eventRequirements": ["Ages: All", "Library Member"],
         "scoringGuidelines": "Cool toys?"
     }
 ]

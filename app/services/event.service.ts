@@ -9,6 +9,8 @@ export class EventsService {
     private _eventsURL: string = './api/events/events.json'; // api url
     private _serverEventsUrl: string = '/getAllEvents';
     private _serverSingleEventUrl: string = '/getSingleEvent';
+    
+    
     constructor(private _http: Http) { }
 
     getEvents(): Observable<IEvent[]> {

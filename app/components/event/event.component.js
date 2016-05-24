@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', 'angular2/http', '../../services/event.service'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', '../../services/event.service', '../../services/file-upload.service', '../entry-form/entry-form.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', '../../ser
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, http_1, event_service_1;
+    var core_1, router_1, event_service_1, file_upload_service_1, entry_form_component_1;
     var EventComponent;
     return {
         setters:[
@@ -20,22 +20,28 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', '../../ser
             function (router_1_1) {
                 router_1 = router_1_1;
             },
-            function (http_1_1) {
-                http_1 = http_1_1;
-            },
             function (event_service_1_1) {
                 event_service_1 = event_service_1_1;
+            },
+            function (file_upload_service_1_1) {
+                file_upload_service_1 = file_upload_service_1_1;
+            },
+            function (entry_form_component_1_1) {
+                entry_form_component_1 = entry_form_component_1_1;
             }],
         execute: function() {
             let EventComponent = class EventComponent {
-                constructor(_eventsService, _router, _routeParams, _http) {
+                /**
+                 * Established private services and router variables.
+                 * @constructor
+                 * @param _eventsService Service that manages getting the event details.
+                 * @param _router Router for retrieving information from the redirect.
+                 * @param _routeParams Route parameter for determining the event to display.
+                 */
+                constructor(_eventsService, _router, _routeParams) {
                     this._eventsService = _eventsService;
                     this._router = _router;
                     this._routeParams = _routeParams;
-                    this._http = _http;
-                    this.hasSubmittedEntry = false;
-                }
-                submitEntry() {
                 }
                 ngOnInit() {
                     if (!this.event) {
@@ -50,17 +56,14 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', '../../ser
                     this._router.navigate(['Events']);
                 }
             };
-            __decorate([
-                core_1.Input(), 
-                __metadata('design:type', Number)
-            ], EventComponent.prototype, "eventID", void 0);
             EventComponent = __decorate([
                 core_1.Component({
                     templateUrl: 'app/components/event/event.component.html',
                     styleUrls: ['app/components/event/event.component.css'],
-                    providers: [event_service_1.EventsService]
+                    directives: [entry_form_component_1.EntryFormComponent],
+                    providers: [event_service_1.EventsService, file_upload_service_1.FileUploadService]
                 }), 
-                __metadata('design:paramtypes', [event_service_1.EventsService, router_1.Router, router_1.RouteParams, http_1.Http])
+                __metadata('design:paramtypes', [event_service_1.EventsService, router_1.Router, router_1.RouteParams])
             ], EventComponent);
             exports_1("EventComponent", EventComponent);
         }

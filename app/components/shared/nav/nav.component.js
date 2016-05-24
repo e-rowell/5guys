@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', 'angular2/http'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http'], function(
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, http_1;
+    var core_1, router_1;
     var NavComponent;
     return {
         setters:[
@@ -19,11 +19,9 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http'], function(
             },
             function (router_1_1) {
                 router_1 = router_1_1;
-            },
-            function (http_1_1) {
-                http_1 = http_1_1;
             }],
         execute: function() {
+            /*import { AuthService } from '../../../services/auth.service';*/
             let NavComponent_1;
             let NavComponent = NavComponent_1 = class NavComponent {
                 constructor() {
@@ -32,7 +30,7 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http'], function(
                 ngOnInit() {
                     $('.easterEgg').attr({
                         'data-toggle': 'tooltip',
-                        'data-placement': 'left',
+                        'data-placement': 'top',
                         'title': this.tooltipText
                     }).tooltip();
                 }
@@ -43,7 +41,7 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http'], function(
                     templateUrl: 'app/components/shared/nav/nav.component.html',
                     styleUrls: ['app/components/shared/nav/nav.component.css'],
                     directives: [router_1.ROUTER_DIRECTIVES, NavComponent],
-                    providers: [http_1.HTTP_PROVIDERS, router_1.ROUTER_PROVIDERS]
+                    providers: [router_1.ROUTER_PROVIDERS]
                 }), 
                 __metadata('design:paramtypes', [])
             ], NavComponent);
