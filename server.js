@@ -10,9 +10,9 @@ var storage =  multer.diskStorage({
     destination: function (req, file, callback) {
         callback(null, './uploads');
     },
-    //filename: function (req, file, callback) {
-    //    callback(null, file.fieldname + '-' + Date.now());
-    //}
+    filename: function (req, file, callback) {
+        callback(null, file.originalname);
+    }
 });
 
 var upload = multer({ storage : storage}).single('userEntry');
