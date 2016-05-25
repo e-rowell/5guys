@@ -2,6 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
+const open = require('open');
 const app = express();
 
 var db;
@@ -43,6 +44,7 @@ MongoClient.connect('mongodb://test:test@ds013202.mlab.com:13202/test1', functio
     //do this in here so that the app only starts if we have a db connection
     app.listen(3000, function() {
         console.log('listening on 3000')
+        open('http://localhost:3000/');
     })
 });
 
@@ -58,11 +60,14 @@ app.post('/login', function(req, res) {
         for (var i = 0; i < array.length; i++) {
             if ((array[i].username == req.body.username) && (array[i].password == req.body.password)) {
                 result = true;
-            } else {
-                res.status(500).send("login failed");
             }
         }
-
+        if (result) { //what if user is already logged in TODO
+            username = req.body.username;
+            res.status(200).send("login succeded");
+        } else {
+            res.status(500).send("login failed");
+        }
     })
 });
 
