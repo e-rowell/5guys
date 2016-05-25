@@ -13,7 +13,6 @@
 
         <tbody>
         <tr *ngFor="#event of events">
-            <!--<td>{{event.eventCategory}}</td>-->
             <td><a [routerLink]="['EventDetail', {eventName: event.eventName}]">{{event.eventName}}</a></td>
             <td>{{event.eventStart}}</td>
             <td>{{event.eventEnd}}</td>

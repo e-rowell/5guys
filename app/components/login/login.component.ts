@@ -19,7 +19,7 @@ export class LoginComponent {
     }
     signIn(): void {
         let headers = new Headers({ 'Content-Type': 'application/json' });
-        console.log(userName +"and " + password);
-        this._http.post(URL, JSON.stringify("dfsafjdsklfjsaj"), { headers: headers }).map(response => response.json();
+        console.log(this.userName +"and " + this.password);
+        this._http.post(this.URL, JSON.stringify("dfsafjdsklfjsaj"), { headers: headers }).map(response => response.json());
     }
 }
