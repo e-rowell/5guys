@@ -2,6 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
+const open = require('open');
 const app = express();
 
 var db;
@@ -39,6 +40,7 @@ MongoClient.connect('mongodb://test:test@ds013202.mlab.com:13202/test1', functio
     //do this in here so that the app only starts if we have a db connection
     app.listen(3000, function () {
         console.log('listening on 3000')
+        open('http://localhost:3000/');
     })
 });
 
