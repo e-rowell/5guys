@@ -57,8 +57,12 @@ app.post('/login', function (req, res) {
                 result = true;
             }
         }
-        else
+        if (result) { //what if user is already logged in TODO
+            username = req.body.username;
+            res.status(200).send("login succeded");
+        } else {
             res.status(500).send("login failed");
+        }
     })
 });
 
