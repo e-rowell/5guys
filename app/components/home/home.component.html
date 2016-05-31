@@ -44,7 +44,7 @@
                     </div>
                     <div class="well well-sm news-well">
                         <ul style="margin-bottom: 0;">
-                            <li *ngFor="#story of _newsArr">
+                            <li *ngFor="let story of _newsArr">
                                 {{story}} <a href="#">More &raquo;</a>
                             </li>
                         </ul>
@@ -56,7 +56,7 @@
             </div>
             <div class="col-sm-8">
                 <div class="row">
-                    <div class="col-sm-3 well-block-quicklink" *ngFor="#link of quicklinksTop">
+                    <div class="col-sm-3 well-block-quicklink" *ngFor="let link of quicklinksTop">
                         <div class="well well-sm well-quicklink">
                             <div class="icon-quicklink text-center">
                                 <a href="#">
@@ -70,7 +70,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-3 well-block-quicklink" *ngFor="#link of quicklinksMid">
+                    <div class="col-sm-3 well-block-quicklink" *ngFor="let link of quicklinksMid">
                         <div class="well well-sm well-quicklink">
                             <div class="icon-quicklink text-center">
                                 <a href="#">
@@ -84,7 +84,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-3 well-block-quicklink" *ngFor="#link of quicklinksBot">
+                    <div class="col-sm-3 well-block-quicklink" *ngFor="let link of quicklinksBot">
                         <div class="well well-sm well-quicklink">
                             <div class="icon-quicklink text-center">
                                 <a href="#">

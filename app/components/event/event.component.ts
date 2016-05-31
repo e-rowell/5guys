@@ -1,20 +1,21 @@
-import { Component, Input, OnInit } from 'angular2/core';
+import { Component, OnInit } from 'angular2/core';
 import { RouteParams, Router } from 'angular2/router';
-import { Http, Response } from 'angular2/http';
 
 import { EventsService } from '../../services/event.service';
 import { FileUploadService } from '../../services/file-upload.service';
 import { IEvent } from '../event/event';
 import { EntryFormComponent } from '../entry-form/entry-form.component';
+import { JudgeComponent } from '../judge/judge.component';
+import { LibrarianComponent } from '../librarian/librarian.component';
 
 @Component({
     templateUrl: 'app/components/event/event.component.html',
     styleUrls: ['app/components/event/event.component.css'],
-    directives: [EntryFormComponent],
+    directives: [EntryFormComponent, JudgeComponent, LibrarianComponent],
     providers: [EventsService, FileUploadService]
 })
 /**
- * Class that display the details for the event.
+ * Class that displays the details for the event.
  */
 export class EventComponent implements OnInit{
 
@@ -27,6 +28,11 @@ export class EventComponent implements OnInit{
      * The error message from the EventService.
      */
     errorMessage: string;
+
+    /**
+     * Determines which view to show (Patron, Librarian, Judge).
+     */
+    userType: string;
 
     /**
      * Established private services and router variables.
@@ -46,6 +52,11 @@ export class EventComponent implements OnInit{
             let eventName = this._routeParams.get('eventName');
             this.getEvent(eventName);
         }
+
+        if (!this.userType) {
+            this.userType = this._routeParams.get('userType');
+        }
+        console.log(this.userType);
     }
 
     getEvent(eventName: string) {

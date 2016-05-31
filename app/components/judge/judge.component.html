@@ -1,0 +1,46 @@
+<!-- scoring guidelines ?? -->
+
+<div style="margin-top: 40px !important;">
+    <table class="table table-bordered table-condensed">
+        <thead>
+        <tr>
+            <td>Age Group</td>
+            <td>Patron ID</td>
+            <td>Artwork Name</td>
+            <td>Artwork Image</td>
+            <td>Score</td>
+        </tr>
+        </thead>
+        <tbody *ngFor="let entry of entries">
+            <tr>
+                <td>{{entry.ageGroup}}</td>
+                <td>{{entry.patronID}}</td>
+                <td>{{entry.artworkTitle}}</td>
+                <td><a data-toggle="modal" href="#artwork-preview">Artwork Preview</a>
+                    <div class="modal fade" id="artwork-preview">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title">Artwork Preview</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <img [src]="entry.artworkPath" />
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->
+                </td>
+
+                <td><input class="form-control scoring col-sm-4" type="text" [ngModel]="entry.score ? entry.score : 0"
+                (ngModelChange)="onChange(entry.patronID, $event)"/>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button class="btn btn-primary" (click)="submitScoring()">Submit Scoring</button>
+
+</div>

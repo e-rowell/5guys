@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', '../../services/event.service', '../../services/file-upload.service', '../entry-form/entry-form.component'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', '../../services/event.service', '../../services/file-upload.service', '../entry-form/entry-form.component', '../judge/judge.component', '../librarian/librarian.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', '../../services/event.servi
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, event_service_1, file_upload_service_1, entry_form_component_1;
+    var core_1, router_1, event_service_1, file_upload_service_1, entry_form_component_1, judge_component_1, librarian_component_1;
     var EventComponent;
     return {
         setters:[
@@ -28,6 +28,12 @@ System.register(['angular2/core', 'angular2/router', '../../services/event.servi
             },
             function (entry_form_component_1_1) {
                 entry_form_component_1 = entry_form_component_1_1;
+            },
+            function (judge_component_1_1) {
+                judge_component_1 = judge_component_1_1;
+            },
+            function (librarian_component_1_1) {
+                librarian_component_1 = librarian_component_1_1;
             }],
         execute: function() {
             let EventComponent = class EventComponent {
@@ -48,6 +54,10 @@ System.register(['angular2/core', 'angular2/router', '../../services/event.servi
                         let eventName = this._routeParams.get('eventName');
                         this.getEvent(eventName);
                     }
+                    if (!this.userType) {
+                        this.userType = this._routeParams.get('userType');
+                    }
+                    console.log(this.userType);
                 }
                 getEvent(eventName) {
                     this._eventsService.getEvent(eventName).subscribe(event => this.event = event, error => this.errorMessage = error);
@@ -60,7 +70,7 @@ System.register(['angular2/core', 'angular2/router', '../../services/event.servi
                 core_1.Component({
                     templateUrl: 'app/components/event/event.component.html',
                     styleUrls: ['app/components/event/event.component.css'],
-                    directives: [entry_form_component_1.EntryFormComponent],
+                    directives: [entry_form_component_1.EntryFormComponent, judge_component_1.JudgeComponent, librarian_component_1.LibrarianComponent],
                     providers: [event_service_1.EventsService, file_upload_service_1.FileUploadService]
                 }), 
                 __metadata('design:paramtypes', [event_service_1.EventsService, router_1.Router, router_1.RouteParams])

@@ -1,4 +1,4 @@
-System.register(['angular2/core', '../../services/event.service', "angular2/router"], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', '../../services/event.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,37 +10,44 @@ System.register(['angular2/core', '../../services/event.service', "angular2/rout
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, event_service_1, router_1;
+    var core_1, router_1, event_service_1, router_2;
     var EventListComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (event_service_1_1) {
-                event_service_1 = event_service_1_1;
-            },
             function (router_1_1) {
                 router_1 = router_1_1;
+                router_2 = router_1_1;
+            },
+            function (event_service_1_1) {
+                event_service_1 = event_service_1_1;
             }],
         execute: function() {
             let EventListComponent = class EventListComponent {
-                constructor(_eventsService) {
+                constructor(_eventsService, _router, _routeParams) {
                     this._eventsService = _eventsService;
+                    this._router = _router;
+                    this._routeParams = _routeParams;
                 }
                 // executes on page load
                 ngOnInit() {
                     this._eventsService.getEvents().subscribe(events => this.events = events, error => this.errorMessage = error);
+                    if (!this.userType) {
+                        this.userType = this._routeParams.get('userType');
+                    }
+                    console.log(this.userType);
                 }
             };
             EventListComponent = __decorate([
                 core_1.Component({
                     templateUrl: 'app/components/event-list/event-list.component.html',
                     styleUrls: ['app/components/event-list/event-list.component.css'],
-                    directives: [router_1.ROUTER_DIRECTIVES],
+                    directives: [router_2.ROUTER_DIRECTIVES],
                     providers: [event_service_1.EventsService]
                 }), 
-                __metadata('design:paramtypes', [event_service_1.EventsService])
+                __metadata('design:paramtypes', [event_service_1.EventsService, router_1.Router, router_1.RouteParams])
             ], EventListComponent);
             exports_1("EventListComponent", EventListComponent);
         }

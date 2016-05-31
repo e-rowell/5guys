@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', "angular2/common"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1;
+    var core_1, router_1, common_1;
     var NavComponent;
     return {
         setters:[
@@ -19,13 +19,20 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
             },
             function (router_1_1) {
                 router_1 = router_1_1;
+            },
+            function (common_1_1) {
+                common_1 = common_1_1;
             }],
         execute: function() {
-            /*import { AuthService } from '../../../services/auth.service';*/
             let NavComponent_1;
             let NavComponent = NavComponent_1 = class NavComponent {
                 constructor() {
                     this.tooltipText = 'Team Members: Ethan Rowell, Nicholas Hays, Jacob Tillett, Edward Koval, Ben Pasero';
+                    this.userTypes = ["Patron", "Librarian", "Judge"];
+                    this.currentUserType = "Patron";
+                }
+                onChange(newValue) {
+                    this.currentUserType = newValue;
                 }
                 ngOnInit() {
                     $('.easterEgg').attr({
@@ -40,7 +47,7 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
                     selector: 'nav-comp',
                     templateUrl: 'app/components/shared/nav/nav.component.html',
                     styleUrls: ['app/components/shared/nav/nav.component.css'],
-                    directives: [router_1.ROUTER_DIRECTIVES, NavComponent],
+                    directives: [router_1.ROUTER_DIRECTIVES, NavComponent, common_1.NgFor],
                     providers: [router_1.ROUTER_PROVIDERS]
                 }), 
                 __metadata('design:paramtypes', [])
