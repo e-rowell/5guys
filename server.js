@@ -103,21 +103,21 @@ app.post('/getAllEntries', (req, res) => {
     })
 });
 
-app.get('/getJudges', (req, res) => {
-    res.send({"Judy", "Dredd", "Mathis", "Alex"});
-});
+/*app.get('/getJudges', (req, res) => {
+ res.send({"Judy", "Dredd", "Mathis", "Alex"});
+ });*/
 
 app.post('/getUnassignedEntries', bodyParser.json(), (req, res) => {
     // TODO get entries in entries collection whose assignedJudge is empty
 });
 
 /*// TODO remove in place of POST route below
-app.get('/getJudgesEntries', (req, res) => {
-    db.collection('judges').find().toArray((err, result) => {
-        if (err) return console.log(err);
-        res.send(result[0].assignedEntries);
-    })
-});*/
+ app.get('/getJudgesEntries', (req, res) => {
+ db.collection('judges').find().toArray((err, result) => {
+ if (err) return console.log(err);
+ res.send(result[0].assignedEntries);
+ })
+ });*/
 
 app.post('/getJudgesEntries', bodyParser.json(), (req, res) => {
     // TODO change: query entries collection for entries that match the judge name
@@ -142,7 +142,7 @@ app.post('/submitScoring', bodyParser.json(), (req, res) => {
 });
 
 
-// TODO entry needs empty assignedJudge property
+/*// TODO entry needs empty assignedJudge property
 app.post('/submitEntry', (req, res) => {
     upload(req, res, function (err) {
         if (err) {
@@ -156,7 +156,23 @@ app.post('/submitEntry', (req, res) => {
         //TODO do something reasonable
         res.end("File is uploaded");
     });
+});*/
+
+
+app.post("/submitEntry", multer({
+    storage: storage
+}).array("uploads[]", 12), function (req, res) {
+    // handle same name file conflicts?
+    // body has { params: [ "Username", "ArtworkTitle", "" ] } // blank 3rd arg for assignedJudge
+    console.log(req.body);
+    res.send(req.files); // send back artwork path
 });
+
+
+app.post("/withdraw", (req, res) => {
+    // TODO post event name to withdraw from 
+});
+
 
 app.post('/createEvent', (req, res) => {
     db.collection('events').save(req.body, function (err, result) {
@@ -172,12 +188,6 @@ app.get('/getAllEvents', (req, res) => {
         if (err) return console.log(err);
         res.send(result);
     })
-});
-
-app.post("/upload", multer({
-    dest: "./uploads/"
-}).array("uploads[]", 12), function (req, res) {
-    res.send(req.files);
 });
 
 

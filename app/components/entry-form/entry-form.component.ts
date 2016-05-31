@@ -37,7 +37,7 @@ export class EntryFormComponent {
     }
     
     submitEntry() {
-        this._fileUploadService.upload('/upload', ["Bob", this.artworkTitle], this.filesToUpload).then((result) => {
+        this._fileUploadService.upload('/submitEntry', ["Bob The User", this.artworkTitle, ""], this.filesToUpload).then((result) => {
             this.artworkTitle = "";
             this.fileName = "";
             this.choseFile = false;
@@ -46,6 +46,11 @@ export class EntryFormComponent {
         }, (error) => {
             console.error(error);
         });
+    }
+
+
+    withdraw() {
+
     }
 
     fileChangeEvent(fileInput: any){

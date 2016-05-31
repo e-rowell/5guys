@@ -45,7 +45,7 @@ System.register(['angular2/core', 'angular2/common', 'angular2/router', '../../s
                     // this._fileUploadService.getObserver().subscribe(p => this.uploadProgress = p);
                 }
                 submitEntry() {
-                    this._fileUploadService.upload('/upload', ["Bob", this.artworkTitle], this.filesToUpload).then((result) => {
+                    this._fileUploadService.upload('/submitEntry', ["Bob The User", this.artworkTitle, ""], this.filesToUpload).then((result) => {
                         this.artworkTitle = "";
                         this.fileName = "";
                         this.choseFile = false;
@@ -54,6 +54,8 @@ System.register(['angular2/core', 'angular2/common', 'angular2/router', '../../s
                     }, (error) => {
                         console.error(error);
                     });
+                }
+                withdraw() {
                 }
                 fileChangeEvent(fileInput) {
                     this.filesToUpload = fileInput.target.files;
