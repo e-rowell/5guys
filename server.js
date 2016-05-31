@@ -103,6 +103,17 @@ app.post('/getAllEntries', (req, res) => {
     })
 });
 
+
+//assign an event to a judge
+app.post('/assignJudges', (req, res) => {
+    //place judgeName and eventName in the judge collection
+    db.collection('judges').save(req.body, function (err, result) {
+        if (err) return console.log(err);
+
+        console.log('assigned event to judge');
+    });
+});
+
 /*app.get('/getJudges', (req, res) => {
  res.send({"Judy", "Dredd", "Mathis", "Alex"});
  });*/
@@ -130,6 +141,8 @@ app.post('/getJudgesEntries', bodyParser.json(), (req, res) => {
 });
 
 
+//TODO have this add the score to the user documents also patron id
+// add patron to user id and entry
 app.post('/submitScoring', bodyParser.json(), (req, res) => {
     db.collection('judges').update(
         {judgeName: req.body.judgeName},
