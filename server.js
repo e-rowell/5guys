@@ -176,7 +176,15 @@ app.post("/submitEntry", multer({
     storage: storage
 }).array("uploads[]", 12), function (req, res) {
     // handle same name file conflicts?
-    // body has { params: [ "Username", "ArtworkTitle", "" ] } // blank 3rd arg for assignedJudge
+    // body has { params: [ "Username", "ArtworkTitle", "eventName" ] } // blank 3rd arg for assignedJudge
+    db.collection('entries').save(req.files[0], 
+                                  {username: req.params[0]},
+                                  {artworkTitle: req.params[1]},
+                                  {eventName: req.params[2]},
+                                  (err, result) => {
+            if (err) return console.log(err)
+
+        });
     console.log(req.body);
     res.send(req.files); // send back artwork path
 });
