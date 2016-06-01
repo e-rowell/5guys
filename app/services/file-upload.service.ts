@@ -33,14 +33,15 @@ export class FileUploadService {
     }
 
     /**
-     * Upload files through XMLHttpRequest
-     *
+     * 
      * @param url
-     * @param params
+     * @param userName
+     * @param artworkTitle
+     * @param eventName
      * @param files
-     * @returns {Promise<any>}
+     * @returns {Promise<T>|Promise<R>|Promise}
      */
-    public upload (url: string,  params: Array<string>, files: File[]): Promise<any> {
+    public upload (url: string,  userName: string, artworkTitle: string, eventName: string, files: File[]): Promise<any> {
         return new Promise((resolve, reject) => {
             let formData: FormData = new FormData(),
                 xhr: XMLHttpRequest = new XMLHttpRequest();
@@ -48,10 +49,13 @@ export class FileUploadService {
             for (let i = 0; i < files.length; i++) {
                 formData.append("uploads[]", files[i], files[i].name);
             }
-
-            for (let i = 0; i < params.length; i++) {
+            
+            formData.append("userName", userName);
+            formData.append("artworkTitle", artworkTitle);
+            formData.append("eventName", eventName);
+            /*for (let i = 0; i < params.length; i++) {
                 formData.append("params[]", params[i]);
-            }
+            }*/
 
             xhr.onreadystatechange = () => {
                 if (xhr.readyState === 4) {

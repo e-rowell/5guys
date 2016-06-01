@@ -82,14 +82,10 @@ app.get('/logout', (req, res) => {
 
 app.post('/getEntry', (req, res) => {
     //TODO why the fuck is this an array
-    db.collection('entries').find({
-        "username": {
-            $eq: req.body.username
-        },
-        "eventName": {
-            $eq: req.body.eventName
-        }
-    }).toArray((err, result) => {
+    db.collection('entries').findOne({
+        "username": req.body.username,
+        "eventName": req.body.eventName
+    }, (err, result) => {
         if (err) return console.log(err);
         res.send(result);
     })
@@ -177,10 +173,10 @@ app.post("/submitEntry", multer({
 }).array("uploads[]", 12), function (req, res) {
     // handle same name file conflicts?
     // body has { params: [ "Username", "ArtworkTitle", "eventName" ] } // blank 3rd arg for assignedJudge
-    db.collection('entries').save(req.files[0], 
-                                  {username: req.params[0]},
-                                  {artworkTitle: req.params[1]},
-                                  {eventName: req.params[2]},
+    db.collection('entries').save({file: req.files[0],
+                                  username: req.body.userName,
+                                  artworkTitle: req.body.artworkTitle,
+                                  eventName: req.body.eventName },
                                   (err, result) => {
             if (err) return console.log(err)
 
