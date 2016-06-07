@@ -47,6 +47,9 @@ export class EventComponent implements OnInit{
 
     }
 
+    /**
+     * Executes on page load after data bound objects have been initialized.
+     */    
     ngOnInit() {
         if (!this.event) {
             let eventName = this._routeParams.get('eventName');

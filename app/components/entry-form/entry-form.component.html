@@ -58,7 +58,7 @@
                 <button [ngClass]="{ disabled: !artworkTitle || !choseFile || !readPolicy || !agreedToPolicy }"
                         [disabled]=" !artworkTitle || !choseFile || !readPolicy || !agreedToPolicy" id="submissionBtn"
                         (click)="submitEntry()" class="btn btn-primary">
-                    {{hasSubmittedEntry ? "Resubmit" : "Submit"}}
+                    {{userEntry ? "Resubmit" : "Submit"}}
                 </button>
             </div>
         </div>
@@ -84,7 +84,7 @@
 
                     <div class="row">
                         <label class="control-label" for="CurrentFileName">File Name:</label>
-                        <label id="CurrentFileName" class="form-control">Easter_Egg.png</label>
+                        <label id="CurrentFileName" class="form-control">{{userEntry.file.filename}}</label>
                     </div>
                 </div>
                 <div class="form-group ">
@@ -97,7 +97,7 @@
             </div>
             <div class="col-sm-8">
                 <img id="currentSubmissionPreview" class="img-responsive center-block"
-                     src="/uploads/Easter_Egg.png">
+                     [src]="userEntry.file.path">
             </div>
 
         </div>

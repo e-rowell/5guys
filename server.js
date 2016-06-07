@@ -126,13 +126,21 @@ app.post('/getUnassignedEntries', bodyParser.json(), (req, res) => {
  })
  });*/
 
+
 app.post('/getJudgesEntries', bodyParser.json(), (req, res) => {
     // TODO change: query entries collection for entries that match the judge name
-    db.collection('judges').find({
-        "judgeName": req.body.judgeName
+    console.log(req.body);
+    db.collection('entries').find({
+        $and: [ { "assignedJudge": req.body.judgeName },
+                { "eventName": req.body.eventName } ]
+
+
     }).toArray((err, result) => {
         if (err) return console.log(err.message);
-        else res.send(result[0].assignedEntries);
+        else {
+            console.log(result);
+            res.send(result);
+        }
     });
 });
 
@@ -151,33 +159,18 @@ app.post('/submitScoring', bodyParser.json(), (req, res) => {
 });
 
 
-/*// TODO entry needs empty assignedJudge property
-app.post('/submitEntry', (req, res) => {
-    upload(req, res, function (err) {
-        if (err) {
-            return res.end("Error uploading file.");
-        }
-
-        db.collection('entries').save(req.file, (err, result) => {
-            if (err) return console.log(err)
-
-        });
-        //TODO do something reasonable
-        res.end("File is uploaded");
-    });
-});*/
-
-
 app.post("/submitEntry", multer({
     storage: storage
 }).array("uploads[]", 12), function (req, res) {
-    // handle same name file conflicts?
-    // body has { params: [ "Username", "ArtworkTitle", "eventName" ] } // blank 3rd arg for assignedJudge
-    db.collection('entries').save({file: req.files[0],
-                                  username: req.body.userName,
-                                  artworkTitle: req.body.artworkTitle,
-                                  eventName: req.body.eventName },
-                                  (err, result) => {
+    db.collection('entries').save({
+            file: req.files[0],
+            username: req.body.userName,
+            artworkTitle: req.body.artworkTitle,
+            eventName: req.body.eventName,
+            scoring: 0,                 // set initial scoring
+            assignedJudge: "Judy"       // testing purposes
+        },   
+        (err, result) => {
             if (err) return console.log(err)
 
         });
@@ -186,7 +179,7 @@ app.post("/submitEntry", multer({
 });
 
 
-app.post("/withdraw", (req, res) => {
+app.post("/withdrawEntry", (req, res) => {
     // TODO post event name to withdraw from 
 });
 

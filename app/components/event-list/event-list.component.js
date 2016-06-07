@@ -26,12 +26,20 @@ System.register(['angular2/core', 'angular2/router', '../../services/event.servi
             }],
         execute: function() {
             let EventListComponent = class EventListComponent {
+                /**
+                 * Constructor
+                 * @param _eventsService Instantiates and assigns private EventService object.
+                 * @param _router Instantiates and assigns private Router object.
+                 * @param _routeParams Instantiates and assigns private RouteParams object.
+                 */
                 constructor(_eventsService, _router, _routeParams) {
                     this._eventsService = _eventsService;
                     this._router = _router;
                     this._routeParams = _routeParams;
                 }
-                // executes on page load
+                /**
+                 * Executes on page load after data bound objects have been initialized.
+                 */
                 ngOnInit() {
                     this._eventsService.getEvents().subscribe(events => this.events = events, error => this.errorMessage = error);
                     if (!this.userType) {

@@ -1,44 +1,22 @@
-import { Component } from 'angular2/core';
 import { Injectable } from 'angular2/core';
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/share';
 
 
 
 @Injectable()
+/**
+ * Uploads files.
+ */
 export class FileUploadService {
-    /**
-     * @param Observable<number>
-     */
-    private progress$: Observable<number>;
 
     /**
-     * @type {number}
-     */
-    private progress: number = 0;
-
-    private progressObserver: any;
-
-    constructor () {
-        this.progress$ = new Observable(observer => {
-            this.progressObserver = observer
-        });
-    }
-
-    /**
-     * @returns {Observable<number>}
-     */
-    public getObserver (): Observable<number> {
-        return this.progress$;
-    }
-
-    /**
+     * Uploads an array of files to the URL provided.
      * 
-     * @param url
-     * @param userName
-     * @param artworkTitle
-     * @param eventName
-     * @param files
+     * @param url The api url to upload to.
+     * @param userName The username of the entrant.
+     * @param artworkTitle Title of the artwork.
+     * @param eventName Event name to be submitted under.
+     * @param files Array of files to be submitted.
      * @returns {Promise<T>|Promise<R>|Promise}
      */
     public upload (url: string,  userName: string, artworkTitle: string, eventName: string, files: File[]): Promise<any> {
@@ -53,9 +31,6 @@ export class FileUploadService {
             formData.append("userName", userName);
             formData.append("artworkTitle", artworkTitle);
             formData.append("eventName", eventName);
-            /*for (let i = 0; i < params.length; i++) {
-                formData.append("params[]", params[i]);
-            }*/
 
             xhr.onreadystatechange = () => {
                 if (xhr.readyState === 4) {
@@ -67,27 +42,8 @@ export class FileUploadService {
                 }
             };
 
-            FileUploadService.setUploadUpdateInterval(500);
-            
-            /*
-            xhr.upload.onprogress = (event) => {
-                this.progress = Math.round(event.loaded / event.total * 100);
-
-                this.progressObserver.next(this.progress);
-            };
-            */
-
             xhr.open('POST', url, true);
             xhr.send(formData);
         });
-    }
-
-    /**
-     * Set interval for frequency with which Observable inside Promise will share data with subscribers.
-     *
-     * @param interval
-     */
-    private static setUploadUpdateInterval (interval: number): void {
-        setInterval(() => {}, interval);
     }
 }

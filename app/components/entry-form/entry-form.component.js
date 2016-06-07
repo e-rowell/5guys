@@ -31,57 +31,83 @@ System.register(['angular2/core', 'angular2/common', 'angular2/router', '../../s
             }],
         execute: function() {
             let EntryFormComponent = class EntryFormComponent {
+                /**
+                 * Constructor
+                 * @param _eventsService Instantiates and assigns private EventService object.
+                 * @param _submissionService Instantiates and assigns private SubmissionService object.
+                 * @param _router Instantiates and assigns private Router object.
+                 * @param _routeParams Instantiates and assigns private RouteParams object.
+                 */
                 constructor(_eventsService, _submissionService, _router, _routeParams) {
                     this._eventsService = _eventsService;
                     this._submissionService = _submissionService;
                     this._router = _router;
                     this._routeParams = _routeParams;
-                    // uploadProgress: number; // Observer for the upload progress
+                    /**
+                     * The current user.
+                     */
+                    this.currentUser = "Peter";
+                    /**
+                     * Name of the file.
+                     */
                     this.fileName = "";
+                    /**
+                     * Title of the artwork.
+                     */
                     this.artworkTitle = "";
+                    /**
+                     * User has chosen a file.
+                     */
                     this.choseFile = false;
-                    // hasSubmittedEntry: boolean = false; // check if user has submitted an entry
+                    /**
+                     * user has read the privacy policy.
+                     */
                     this.readPolicy = false;
+                    /**
+                     * User has agreed to the privacy policy.
+                     */
                     this.agreedToPolicy = false;
                     this.filesToUpload = [];
-                    // this._fileUploadService.getObserver().subscribe(p => this.uploadProgress = p);
                 }
+                /**
+                 * Executes on page load after data bound objects have been initialized.
+                 */
                 ngOnInit() {
-                    // get entries
-                    this.getEntry("Bob", this.event.eventName);
+                    this.getEntry(this.currentUser, this.event.eventName);
                 }
-                submitEntry() {
-                    this._submissionService.submitEntry("Bob", this.artworkTitle, this.event.eventName, this.filesToUpload)
-                        .then((result) => {
-                        this.artworkTitle = "";
-                        this.fileName = "";
-                        this.choseFile = false;
-                        this.getEntry("Bob", this.event.eventName);
-                        // this.hasSubmittedEntry = true;
-                        console.log(result);
-                    }, (error) => {
-                        console.error(error);
-                    });
-                    /* // uses the params array
-                    this._fileUploadService.upload('/submitEntry',
-                        ["Bob", this.artworkTitle, this.event.eventName],
-                        this.filesToUpload).then((result) => {
-            
-                        this.artworkTitle = "";
-                        this.fileName = "";
-                        this.choseFile = false;
-                        this.hasSubmittedEntry = true;
-                        console.log(result);
-                    }, (error) => {
-                        console.error(error);
-                    });*/
-                }
+                /**
+                 * Gets the user's entry for the event.
+                 * @param userName The user.
+                 * @param eventName The event.
+                 */
                 getEntry(userName, eventName) {
                     this._submissionService.getEntry(userName, eventName)
                         .subscribe(entry => this.userEntry = entry, error => this.errorMessage = error);
                 }
+                /**
+                 * Submits the entry to the database.
+                 */
+                submitEntry() {
+                    this._submissionService.submitEntry(this.currentUser, this.artworkTitle, this.event.eventName, this.filesToUpload)
+                        .then((result) => {
+                        this.artworkTitle = "";
+                        this.fileName = "";
+                        this.choseFile = false;
+                        this.getEntry(this.currentUser, this.event.eventName);
+                        // console.log(result);
+                    }, (error) => {
+                        console.error(error);
+                    });
+                }
+                /**
+                 * Withdraws the entry from the event.
+                 */
                 withdraw() {
                 }
+                /**
+                 * Assigns the new file selected.
+                 * @param fileInput The new file to assign.
+                 */
                 fileChangeEvent(fileInput) {
                     this.filesToUpload = fileInput.target.files;
                     this.fileName = this.filesToUpload[0].name;

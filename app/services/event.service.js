@@ -25,26 +25,37 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
             }],
         execute: function() {
             let EventsService = class EventsService {
+                /**
+                 *Constructor
+                 * @param _http Instantiates and assigns private Http object.
+                 */
                 constructor(_http) {
                     this._http = _http;
-                    this._eventsURL = './api/events/events.json'; // api url
-                    this._serverEventsUrl = '/getAllEvents';
-                    this._serverSingleEventUrl = '/getSingleEvent';
                 }
+                /**
+                 * Gets all the current events.
+                 * @returns {Observable<R>}
+                 */
                 getEvents() {
                     return this._http.get('/getAllEvents')
                         .map((response) => response.json())
                         .catch(this.handleError);
                 }
+                /**
+                 * Gets the individual event from the events list.
+                 * @param eventName
+                 * @returns {Observable<R>}
+                 */
                 getEvent(eventName) {
                     return this.getEvents()
                         .map((events) => events.find(e => e.eventName === eventName));
                     //.do(data => console.log('All: ' +  JSON.stringify(data)));
                 }
-                extractData(res) {
-                    let body = res.json();
-                    return body.data || {};
-                }
+                /**
+                 * Handles the error from HTTP request.
+                 * @param error
+                 * @returns {ErrorObservable}
+                 */
                 handleError(error) {
                     console.error(error);
                     return Observable_1.Observable.throw(error.json().error || 'Server error');

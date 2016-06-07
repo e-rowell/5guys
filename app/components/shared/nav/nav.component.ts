@@ -9,15 +9,25 @@ import { NgFor } from "angular2/common";
     directives: [ROUTER_DIRECTIVES, NavComponent, NgFor],
     providers: [ROUTER_PROVIDERS]
 })
+/**
+ * Page navigation and footer.
+ */
 export class NavComponent implements OnInit{
     tooltipText: string = 'Team Members: Ethan Rowell, Nicholas Hays, Jacob Tillett, Edward Koval, Ben Pasero';
     userTypes = [ "Patron", "Librarian", "Judge" ];
     currentUserType: string = "Patron";
 
+    /**
+     * On change event.
+     * @param newValue The new value to update.
+     */
     onChange(newValue) {
         this.currentUserType = newValue;
     }
-    
+
+    /**
+     * Executes on page load after data bound objects have been initialized.
+     */
     ngOnInit(): void {
         $('.easterEgg').attr({
          'data-toggle': 'tooltip',

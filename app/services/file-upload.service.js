@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/operator/share'], function(exports_1, context_1) {
+System.register(['angular2/core', 'rxjs/add/operator/share'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,42 +10,24 @@ System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/operator/share'],
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, Observable_1;
+    var core_1;
     var FileUploadService;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (Observable_1_1) {
-                Observable_1 = Observable_1_1;
-            },
             function (_1) {}],
         execute: function() {
-            let FileUploadService_1;
-            let FileUploadService = FileUploadService_1 = class FileUploadService {
-                constructor() {
-                    /**
-                     * @type {number}
-                     */
-                    this.progress = 0;
-                    this.progress$ = new Observable_1.Observable(observer => {
-                        this.progressObserver = observer;
-                    });
-                }
+            let FileUploadService = class FileUploadService {
                 /**
-                 * @returns {Observable<number>}
-                 */
-                getObserver() {
-                    return this.progress$;
-                }
-                /**
+                 * Uploads an array of files to the URL provided.
                  *
-                 * @param url
-                 * @param userName
-                 * @param artworkTitle
-                 * @param eventName
-                 * @param files
+                 * @param url The api url to upload to.
+                 * @param userName The username of the entrant.
+                 * @param artworkTitle Title of the artwork.
+                 * @param eventName Event name to be submitted under.
+                 * @param files Array of files to be submitted.
                  * @returns {Promise<T>|Promise<R>|Promise}
                  */
                 upload(url, userName, artworkTitle, eventName, files) {
@@ -57,9 +39,6 @@ System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/operator/share'],
                         formData.append("userName", userName);
                         formData.append("artworkTitle", artworkTitle);
                         formData.append("eventName", eventName);
-                        /*for (let i = 0; i < params.length; i++) {
-                            formData.append("params[]", params[i]);
-                        }*/
                         xhr.onreadystatechange = () => {
                             if (xhr.readyState === 4) {
                                 if (xhr.status === 200) {
@@ -70,28 +49,12 @@ System.register(['angular2/core', 'rxjs/Observable', 'rxjs/add/operator/share'],
                                 }
                             }
                         };
-                        FileUploadService_1.setUploadUpdateInterval(500);
-                        /*
-                        xhr.upload.onprogress = (event) => {
-                            this.progress = Math.round(event.loaded / event.total * 100);
-            
-                            this.progressObserver.next(this.progress);
-                        };
-                        */
                         xhr.open('POST', url, true);
                         xhr.send(formData);
                     });
                 }
-                /**
-                 * Set interval for frequency with which Observable inside Promise will share data with subscribers.
-                 *
-                 * @param interval
-                 */
-                static setUploadUpdateInterval(interval) {
-                    setInterval(() => { }, interval);
-                }
             };
-            FileUploadService = FileUploadService_1 = __decorate([
+            FileUploadService = __decorate([
                 core_1.Injectable(), 
                 __metadata('design:paramtypes', [])
             ], FileUploadService);

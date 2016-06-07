@@ -22,13 +22,20 @@ System.register(['angular2/core', '../../services/entries.service'], function(ex
             }],
         execute: function() {
             let JudgeComponent = class JudgeComponent {
+                /**
+                 * Constructor.
+                 * @param _entriesService Instantiates and assigns private EntriesService object.
+                 */
                 constructor(_entriesService) {
                     this._entriesService = _entriesService;
                 }
+                /**
+                 * Executes on page load after data bound objects have been initialized.
+                 */
                 ngOnInit() {
                     if (!this.entries) {
                         // this.getEntries();
-                        this.getJudgeEntries("Judy");
+                        this.getJudgeEntries("Judy", "Coloring Contest");
                     }
                     $('.scoring').inputmask("integer", {
                         min: 0,
