@@ -70,7 +70,11 @@ describe('make event', () => {
         it('make service object', () => {
             expect(service).toBe(undefined)
         })
-        
+
+        it('service null check', () => {
+            expect(service).not.toBe(null)
+        })
+
     });
 
 
