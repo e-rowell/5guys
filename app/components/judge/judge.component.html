@@ -4,7 +4,6 @@
     <table class="table table-bordered table-condensed">
         <thead>
         <tr>
-            <td>Age Group</td>
             <td>Patron ID</td>
             <td>Artwork Name</td>
             <td>Artwork Image</td>
@@ -13,7 +12,6 @@
         </thead>
         <tbody *ngFor="let entry of entries">
             <tr>
-                <td>{{entry.ageGroup}}</td>
                 <td>{{entry.patronID}}</td>
                 <td>{{entry.artworkTitle}}</td>
                 <td><a data-toggle="modal" href="#artwork-preview">Artwork Preview</a>
