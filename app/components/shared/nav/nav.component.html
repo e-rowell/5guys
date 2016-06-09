@@ -8,7 +8,7 @@
         </div>
         <ul class="nav navbar-nav">
             <li><a [routerLink]="[ 'Home' ]">Home</a></li>
-            <li><a [routerLink]="[ 'Events', { userType: currentUserType } ]">Events</a></li>
+            <li><a [routerLink]="[ 'Events', { currentUser: currentUser } ]">Events</a></li>
             <li><a href="#">About Us</a></li>
             <li><a href="#">Contact Us</a></li>
         </ul>
@@ -27,27 +27,28 @@
                                             <div class='row form-group'>
                                                 <label for="username" class="control-label">Username</label>
                                                 <input id="username" class="form-control" type="text">
-                                                <div class="text-right">
+                                                <!--<div class="text-right">
                                                     <a href="#">Forgot username?</a>
-                                                </div>
+                                                </div>-->
                                             </div>
-                                            <div class="row form-group">
-                                                <label class="control-label" for="password">Password</label>
-                                                <input id="password" class="form-control" type="text">
-                                                <div class="text-right">
+                                            <div *ngIf="selectedUserType === 'Patron'" class="row form-group">
+                                                <label class="control-label" for="patronID">Patron ID</label>
+                                                <input id="patronID" class="form-control" type="number">
+                                                <!--<div class="text-right">
                                                     <a href="#">Forgot password?</a>
-                                                </div>
+                                                </div>-->
                                             </div>
                                             <div class="row form-group">
                                                 <label for="userType">User Type:</label>
-                                                <select id="userType" class="form-control" [ngModel]="currentUserType"
-                                                (ngModelChange)="onChange($event)">
+                                                <select id="userType" class="form-control"
+                                                (change)="onChange($event.target.value)">
                                                     <option *ngFor="let type of userTypes">{{type}}</option>
                                                 </select>
+                                                <!--[ngModel]="currentUser.userType"-->
                                                 <br>
                                             </div>
                                             <div class="row form-group">
-                                                <button class="btn btn-primary btn-block">Sign In</button>
+                                                <button class="btn btn-primary btn-block" (click)="setUser();">Set User</button>
                                             </div>
                                         </div>
                                     </div>

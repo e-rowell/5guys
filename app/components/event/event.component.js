@@ -57,10 +57,9 @@ System.register(['angular2/core', 'angular2/router', '../../services/event.servi
                         let eventName = this._routeParams.get('eventName');
                         this.getEvent(eventName);
                     }
-                    if (!this.userType) {
-                        this.userType = this._routeParams.get('userType');
+                    if (!this.currentUser) {
+                        this.currentUser = this._routeParams.get('currentUser');
                     }
-                    console.log(this.userType);
                 }
                 getEvent(eventName) {
                     this._eventsService.getEvent(eventName).subscribe(event => this.event = event, error => this.errorMessage = error);

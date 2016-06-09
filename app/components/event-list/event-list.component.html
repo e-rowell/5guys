@@ -13,7 +13,9 @@
 
         <tbody>
         <tr *ngFor="let event of events">
-            <td><a [routerLink]="[ 'EventDetail', { eventName: event.eventName, userType: userType } ]">{{event.eventName}}</a></td>
+            <td><a [routerLink]="[ 'EventDetail', { eventName: event.eventName, currentUser: currentUser } ]">
+                {{event.eventName}}</a>
+            </td>
             <td>{{event.eventStart}}</td>
             <td>{{event.eventEnd}}</td>
             <td>{{event.eventStatus}}</td>

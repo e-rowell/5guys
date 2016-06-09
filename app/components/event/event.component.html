@@ -21,9 +21,9 @@
                 </div>
             </div>
 
-            <entry-form *ngIf="userType == 'Patron'" [event]="event"></entry-form>
-            <judge *ngIf="userType == 'Judge'"></judge>
-            <librarian *ngIf="userType == 'Librarian'"></librarian>
+            <entry-form *ngIf="currentUser.userType == 'Patron'" [event]="event" [currentUser]="currentUser"></entry-form>
+            <judge *ngIf="currentUser.userType == 'Judge'"></judge>
+            <librarian *ngIf="currentUser.userType == 'Librarian'"></librarian>
 
         </div>
     </div>

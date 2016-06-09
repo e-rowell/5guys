@@ -83,7 +83,7 @@ app.get('/logout', (req, res) => {
 app.post('/getEntry', (req, res) => {
     //TODO why the fuck is this an array
     db.collection('entries').findOne({
-        "username": req.body.username,
+        "patronID": req.body.patronID,
         "eventName": req.body.eventName
     }, (err, result) => {
         if (err) return console.log(err);
@@ -164,11 +164,12 @@ app.post("/submitEntry", multer({
 }).array("uploads[]", 12), function (req, res) {
     db.collection('entries').save({
             file: req.files[0],
-            username: req.body.userName,
+            patronID: req.body.patronID,
             artworkTitle: req.body.artworkTitle,
             eventName: req.body.eventName,
             scoring: 0,                 // set initial scoring
-            assignedJudge: "Judy"       // testing purposes
+            assignedJudge: "Judy",      // testing purposes
+            ageGroup: "Ages: 10-16"     // 
         },   
         (err, result) => {
             if (err) return console.log(err)

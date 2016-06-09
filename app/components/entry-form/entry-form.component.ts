@@ -4,8 +4,9 @@ import { RouteParams, Router } from 'angular2/router';
 
 import { EventsService } from '../../services/event.service';
 import { SubmissionService } from '../../services/submission.service';
-import { IEvent } from '../event/event';
-import { IEntry } from '../judge/entry';
+import { IEvent } from '../shared/interfaces/event';
+import { IEntry } from '../shared/interfaces/entry';
+import { IUser } from '../shared/interfaces/user';
 
 @Component({
     selector: 'entry-form',
@@ -25,14 +26,18 @@ export class EntryFormComponent implements OnInit {
     @Input() event: IEvent;
 
     /**
+     * Represents the user submitting an entry.
+     */
+    @Input() currentUser: IUser;
+
+    /**
      * User's entry object.
      */
     userEntry: IEntry;
 
     /**
      * The current user.
-     */
-    currentUser: string = "Peter";
+    currentUser: string = "Peter";*/
 
     /**
      * Name of the file.
@@ -87,16 +92,16 @@ export class EntryFormComponent implements OnInit {
      * Executes on page load after data bound objects have been initialized.
      */
     ngOnInit(): void {
-        this.getEntry(this.currentUser, this.event.eventName);
+        this.getEntry(this.currentUser.patronID, this.event.eventName);
     }
 
     /**
      * Gets the user's entry for the event.
-     * @param userName The user.
+     * @param patronID The user.
      * @param eventName The event.
      */
-    getEntry(userName: string, eventName: string) {
-        this._submissionService.getEntry(userName, eventName)
+    getEntry(patronID: number, eventName: string) {
+        this._submissionService.getEntry(patronID, eventName)
             .subscribe(entry => this.userEntry = entry,
                 error => this.errorMessage = <any>error);
     }
@@ -105,13 +110,14 @@ export class EntryFormComponent implements OnInit {
      * Submits the entry to the database.
      */
     submitEntry() {
-        this._submissionService.submitEntry(this.currentUser, this.artworkTitle, this.event.eventName, this.filesToUpload)
+        this._submissionService.submitEntry(this.currentUser.patronID, this.artworkTitle,
+            this.event.eventName, this.filesToUpload)
             .then((result) => {
                 this.artworkTitle = "";
                 this.fileName = "";
                 this.choseFile = false;
 
-                this.getEntry(this.currentUser, this.event.eventName);
+                this.getEntry(this.currentUser.patronID, this.event.eventName);
 
                 // console.log(result);
             }, (error) => {

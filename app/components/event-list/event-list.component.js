@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', '../../services/event.servi
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, event_service_1, router_2;
+    var core_1, router_1, router_2, event_service_1;
     var EventListComponent;
     return {
         setters:[
@@ -42,10 +42,9 @@ System.register(['angular2/core', 'angular2/router', '../../services/event.servi
                  */
                 ngOnInit() {
                     this._eventsService.getEvents().subscribe(events => this.events = events, error => this.errorMessage = error);
-                    if (!this.userType) {
-                        this.userType = this._routeParams.get('userType');
+                    if (!this.currentUser) {
+                        this.currentUser = this._routeParams.get('currentUser');
                     }
-                    console.log(this.userType);
                 }
             };
             EventListComponent = __decorate([

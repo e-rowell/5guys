@@ -24,19 +24,19 @@ System.register(['angular2/core', 'rxjs/add/operator/share'], function(exports_1
                  * Uploads an array of files to the URL provided.
                  *
                  * @param url The api url to upload to.
-                 * @param userName The username of the entrant.
+                 * @param patronID The patronID of the entrant.
                  * @param artworkTitle Title of the artwork.
                  * @param eventName Event name to be submitted under.
                  * @param files Array of files to be submitted.
                  * @returns {Promise<T>|Promise<R>|Promise}
                  */
-                upload(url, userName, artworkTitle, eventName, files) {
+                upload(url, patronID, artworkTitle, eventName, files) {
                     return new Promise((resolve, reject) => {
                         let formData = new FormData(), xhr = new XMLHttpRequest();
                         for (let i = 0; i < files.length; i++) {
                             formData.append("uploads[]", files[i], files[i].name);
                         }
-                        formData.append("userName", userName);
+                        formData.append("patronID", patronID);
                         formData.append("artworkTitle", artworkTitle);
                         formData.append("eventName", eventName);
                         xhr.onreadystatechange = () => {

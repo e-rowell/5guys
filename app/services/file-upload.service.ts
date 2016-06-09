@@ -13,13 +13,14 @@ export class FileUploadService {
      * Uploads an array of files to the URL provided.
      * 
      * @param url The api url to upload to.
-     * @param userName The username of the entrant.
+     * @param patronID The patronID of the entrant.
      * @param artworkTitle Title of the artwork.
      * @param eventName Event name to be submitted under.
      * @param files Array of files to be submitted.
      * @returns {Promise<T>|Promise<R>|Promise}
      */
-    public upload (url: string,  userName: string, artworkTitle: string, eventName: string, files: File[]): Promise<any> {
+    public upload (url: string, patronID: number, artworkTitle: string,
+                   eventName: string, files: File[]): Promise<any> {
         return new Promise((resolve, reject) => {
             let formData: FormData = new FormData(),
                 xhr: XMLHttpRequest = new XMLHttpRequest();
@@ -28,7 +29,7 @@ export class FileUploadService {
                 formData.append("uploads[]", files[i], files[i].name);
             }
             
-            formData.append("userName", userName);
+            formData.append("patronID", patronID);
             formData.append("artworkTitle", artworkTitle);
             formData.append("eventName", eventName);
 

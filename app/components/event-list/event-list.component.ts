@@ -1,10 +1,10 @@
 import { Component, OnInit } from 'angular2/core';
 import { RouteParams, Router } from 'angular2/router';
-
-import { IEvent } from '../event/event';
-import { EventsService } from '../../services/event.service';
 import { ROUTER_DIRECTIVES } from "angular2/router";
 
+import { EventsService } from '../../services/event.service';
+import { IEvent } from '../shared/interfaces/event';
+import { IUser } from '../shared/interfaces/user';
 
 @Component({
     templateUrl: 'app/components/event-list/event-list.component.html',
@@ -16,9 +16,21 @@ import { ROUTER_DIRECTIVES } from "angular2/router";
  * Displays the current events.
  */
 export class EventListComponent implements OnInit{
+
+    /**
+     *
+     */
     errorMessage: string;
+
+    /**
+     *
+     */
     events: IEvent[];
-    userType: string;
+
+    /**
+     * 
+     */
+    currentUser: IUser;
 
     /**
      * Constructor
@@ -38,9 +50,8 @@ export class EventListComponent implements OnInit{
                 events => this.events = events,
                 error => this.errorMessage = <any>error);
         
-        if (!this.userType) {
-            this.userType = this._routeParams.get('userType');
+        if (!this.currentUser) {
+            this.currentUser = this._routeParams.get('currentUser');
         }
-        console.log(this.userType);
     }
 }

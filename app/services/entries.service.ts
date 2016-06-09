@@ -2,7 +2,7 @@ import { Injectable } from 'angular2/core';
 import { Http, Response, Headers, RequestOptions } from 'angular2/http';
 import { Observable } from 'rxjs/Observable';
 
-import { IEntry } from '../components/judge/entry';
+import { IEntry } from '../components/shared/interfaces/entry';
 
 @Injectable()
 export class EntriesService {
