@@ -30,7 +30,8 @@
     "lint": "tslint ./app/**/*.ts -t verbose",
     "lite": "lite-server",
     "typings": "typings",
-    "postinstall": "typings install"
+    "postinstall": "typings install",
+    "test": "./node_modules/.bin/mocha --reporter spec"
   },
   "license": "ISC",
   "dependencies": {
@@ -38,22 +39,26 @@
     "angular2": "2.0.0-beta.17",
     "body-parser": "~1.15.1",
     "bootstrap": "^3.3.6",
+    "chai": "^3.5.0",
     "es6-shim": "^0.35.0",
     "express": "~4.13.4",
     "jquery": "*",
     "jquery.inputmask": "^3.3.1",
     "karma": "^0.13.22",
+    "mocha": "^2.5.3",
     "moment": "*",
     "mongodb": "~2.1.18",
     "multer": "^1.1.0",
     "open": "0.0.5",
     "reflect-metadata": "0.1.2",
+    "request": "^2.72.0",
     "rxjs": "5.0.0-beta.2",
     "systemjs": "0.19.26",
     "zone.js": "0.6.12"
   },
   "devDependencies": {
     "concurrently": "^2.0.0",
+    "jasmine-core": "2.4.1",
     "karma": "^0.13.22",
     "lite-server": "^2.2.0",
     "tscw": "*",
