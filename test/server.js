@@ -2,7 +2,11 @@ var expect = require("chai").expect;
 var request = require("request");
 
 
+/*
+  a test that tries to connect to the homepage of the application.
 
+  @author Jacob Tillett
+*/
 describe("Clark County Library contest app", function() {
 
   describe("Home Page", function() {
@@ -15,11 +19,12 @@ describe("Clark County Library contest app", function() {
       });
 
     });
+  });
 
-
-  }); //end homepage
-
-  //login
+  /*
+    a test to that tries to connect to the login page
+    @author Jacob Tillett
+  */
   describe("login page", function() {
     var url = "http://localhost:3000/login";
 
@@ -32,6 +37,11 @@ describe("Clark County Library contest app", function() {
     });
   });
 
+
+  /*
+    tests the whoami page.
+    @author Jacob Tillett
+  */
   describe("whoami page", function() {
     var url = "http://localhost:3000/whoami";
 
@@ -43,6 +53,11 @@ describe("Clark County Library contest app", function() {
     });
   });
 
+  /*
+    a test that tries to connect to the logout page and checks
+    that it sent "logged out"
+    @author Jacob Tillett
+  */
   describe("logout", function() {
     var url = "http://localhost:3000/logout";
 
@@ -61,6 +76,10 @@ describe("Clark County Library contest app", function() {
     });
   });
 
+  /*
+    a test that tries and connects to the getEntry page
+    @author Jacob Tillett
+  */
   describe("getEntry page", function() {
     var url = "http://localhost:3000/getEntry";
 
@@ -72,6 +91,10 @@ describe("Clark County Library contest app", function() {
     });
   });
 
+  /*
+    a test that tries and connects to the getAllEntries page
+    @author Jacob Tillett
+  */
   describe("getAllEntries page", function() {
     var url = "http://localhost:3000/getAllEntries";
 
@@ -83,6 +106,10 @@ describe("Clark County Library contest app", function() {
     });
   });
 
+  /*
+    tests the assign judge page
+    @author Jacob Tillett
+  */
   describe("assign judge page", function() {
     var url = "http://localhost:3000/assignJudges";
 
@@ -94,6 +121,10 @@ describe("Clark County Library contest app", function() {
     });
   });
 
+  /*
+    a test that tries to connect to the getUnassignedEntries page
+    @author Jacob Tillett
+  */
   describe("get unassigned entries", function() {
     var url = "http://localhost:3000/getUnassignedEntries";
 
@@ -105,6 +136,10 @@ describe("Clark County Library contest app", function() {
     });
   });
 
+  /*
+    a test  that tries to connect to the judge entries page
+    @author Jacob Tillett
+  */
   describe("get judge entries page", function() {
     var url = "http://localhost:3000/getJudgesEntries";
 
@@ -116,6 +151,10 @@ describe("Clark County Library contest app", function() {
     });
   });
 
+  /*
+    a test that tests the submitScoring page
+    @author Jacob Tillett
+  */
   describe("submitScoring page", function() {
     var url = "http://localhost:3000/submitScoring";
 
@@ -127,6 +166,10 @@ describe("Clark County Library contest app", function() {
     });
   });
 
+  /*
+     tests the submit entry page
+     @author Jacob Tillett
+  */
   describe("submit entry page", function() {
     var url = "http://localhost:3000/submitEntry";
 
@@ -138,6 +181,10 @@ describe("Clark County Library contest app", function() {
     });
   });
 
+  /*
+    a test that tries to connect to the withdraw page
+    @author Jacob Tillett
+  */
   describe("withdraw page", function() {
     var url = "http://localhost:3000/withdraw";
 
@@ -149,6 +196,10 @@ describe("Clark County Library contest app", function() {
     });
   });
 
+  /*
+    a test that tests the create events page
+    @author Jacob Tillett
+  */
   describe("create event page", function() {
     var url = "http://localhost:3000/createEvent";
 
@@ -160,6 +211,10 @@ describe("Clark County Library contest app", function() {
     });
   });
 
+  /*
+    makes sure you can access the getAllEvents page
+    @author Jacob Tillett
+  */
   describe("get all events page", function() {
     var url = "http://localhost:3000/getAllEvents";
 
@@ -172,7 +227,10 @@ describe("Clark County Library contest app", function() {
   });
 
 
-
+  /*
+    tests the register page
+    @author Jacob Tillett
+  */
   describe("registering", function() {
     var url = "http://localhost:3000/register";
 
