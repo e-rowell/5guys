@@ -1,3 +1,4 @@
+//author: Edward Koval
 System.register([], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
@@ -5,11 +6,15 @@ System.register([], function(exports_1, context_1) {
         setters:[],
         execute: function() {
             describe('make event', () => {
+                let app;
                 let testEvent;
-                let event;
-                let service;
                 let http;
-                //event = new EventComponent();
+                let router;
+                let routeParams;
+                let event;
+                var service;
+                var eventList;
+                //eventList = new EventListComponent(service, router, routeParams);
                 testEvent = { eventID: 2,
                     eventName: 'testEvent',
                     eventDescription: 'test',
@@ -49,10 +54,24 @@ System.register([], function(exports_1, context_1) {
                     expect(testEvent.eventStatus).toBe("true");
                 });
                 describe('make service', () => {
+                    // var EventsService = require('../app/services/event.service');
+                    //
+                    // var eventService = new EventsService();
                     it('make service object', () => {
                         expect(service).toBe(undefined);
                     });
+                    it('service null check', () => {
+                        expect(service).not.toBe(null);
+                    });
                 });
+                //var events:Observable<IEvent[]> = service.getEvents();
+                // describe('EventListComponent tests', () => {
+                //     //eventList = {errorMessage:"Has an Error", events:[testEvent], userType:'Patron'};
+                //
+                //     it ('make sure component is initailized', () => {
+                //         expect(eventList).toBeDefined();
+                //     })
+                // });
                 //event = new EventComponent(service, Router, RouteParams)
             });
         }

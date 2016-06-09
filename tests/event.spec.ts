@@ -1,20 +1,33 @@
+//author: Edward Koval
+
+
 ///<reference path="../node_modules/angular2/src/http/http.d.ts"/>
-import {RouteParams, Router, Router} from 'angular2/router';
-import { Http, Response } from 'angular2/http';
+//import {toBe} from '../node_modules/jasmine-core/lib';
+import {RouteParams, Router, ROUTER_DIRECTIVES} from '../node_modules/angular2/router';
+//import { Component, OnInit } from '../node_modules/angular2/core';
+import { Http, Response } from '../node_modules/angular2/http';
 
 
 import {IEvent} from '../app/components/event/event';
 import { EventComponent } from '../app/components/event/event.component';
 import { EventListComponent } from '../app/components/event-list/event-list.component';
 import {EventsService} from '../app/services/event.service';
+import {AppComponent} from '../app/components/app/app.component';
+import {Observable} from "rxjs/Rx";
+import {InjectableMetadata} from "angular2/core";
 
 describe('make event', () => {
+    let app:AppComponent;
     let testEvent:IEvent;
-    let event:EventComponent;
-    let service:EventsService;
     let http:Http;
+    let router:Router;
+    let routeParams:RouteParams;
+    let event:EventComponent;
+    var service:EventsService;
+    var eventList:EventListComponent;
+    //eventList = new EventListComponent(service, router, routeParams);
 
-    //event = new EventComponent();
+    
 
     testEvent = {eventID: 2,
     eventName: 'testEvent',
@@ -67,6 +80,10 @@ describe('make event', () => {
 
     describe('make service', () => {
 
+        // var EventsService = require('../app/services/event.service');
+        //
+        // var eventService = new EventsService();
+
         it('make service object', () => {
             expect(service).toBe(undefined)
         })
@@ -76,6 +93,18 @@ describe('make event', () => {
         })
 
     });
+    
+
+    //var events:Observable<IEvent[]> = service.getEvents();
+
+
+    // describe('EventListComponent tests', () => {
+    //     //eventList = {errorMessage:"Has an Error", events:[testEvent], userType:'Patron'};
+    //
+    //     it ('make sure component is initailized', () => {
+    //         expect(eventList).toBeDefined();
+    //     })
+    // });
 
 
 

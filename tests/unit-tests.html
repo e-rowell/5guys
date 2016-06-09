@@ -1,3 +1,6 @@
+<!--author: Edward Koval-->
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,16 +10,19 @@
     <script src="../node_modules/jasmine-core/lib/jasmine-core/jasmine.js"></script>
     <script src="../node_modules/jasmine-core/lib/jasmine-core/jasmine-html.js"></script>
     <script src="../node_modules/jasmine-core/lib/jasmine-core/boot.js"></script>
+    <!-- <script src="event.spec.js"></script> -->
+
     <!-- <script src="1st.spec.js"></script> -->
-    <script src="event.spec.js"></script>
-    <script src="../app/components/event/event.js"></script>
-    <script src="../app/components/event/event.component.js"></script>
+
 
 
 </head>
 <body>
 <!-- #1. add the system.js library -->
 <script src="../node_modules/systemjs/dist/system.src.js"></script>
+<!-- <script src="../app/components/event/event.js"></script>
+<script src="../app/components/event/event.component.js"></script>
+<script src="../app/components/event-list/event-list.component.js"></script> -->
 
 <script>
     // #2. Configure systemjs to use the .js extension
@@ -28,7 +34,8 @@
     });
 
     // #3. Import the spec file explicitly
-    System.import('event.spec.js')
+    System.import('event.spec.js', "../app/components/event-list/event-list.component.js",
+            "../app/components/event/event.component.js", "../app/components/event/event.js", "1st.spec.js")
     // #4. wait for all imports to load ...
     //     then re-execute `window.onload` which
     //     triggers the Jasmine test-runner start
