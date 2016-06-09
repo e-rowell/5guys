@@ -10,17 +10,34 @@ import {Observable} from "rxjs/Observable";
     styleUrls: ['app/components/judge/judge.component.css'],
     providers: [EntriesService]
 })
+/**
+ * Component for judging entries.
+ */
 export class JudgeComponent implements OnInit {
+
+    /**
+     * Array of assigned entries.
+     */
     entries: IEntry[];
-    submission
+
+    /**
+     * Error message from failed HTTP request.
+     */
     errorMessage: string;
 
+    /**
+     * Constructor.
+     * @param _entriesService Instantiates and assigns private EntriesService object.
+     */
     constructor(private _entriesService: EntriesService) { }
 
+    /**
+     * Executes on page load after data bound objects have been initialized.
+     */
     ngOnInit() {
         if (!this.entries) {
             // this.getEntries();
-            this.getJudgeEntries("Judy");
+            this.getJudgeEntries("Judy", "Coloring Contest");
         }
 
         $('.scoring').inputmask("integer", {

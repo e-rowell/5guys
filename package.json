@@ -57,6 +57,7 @@
   },
   "devDependencies": {
     "concurrently": "^2.0.0",
+    "jasmine-core": "2.4.1",
     "karma": "^0.13.22",
     "lite-server": "^2.2.0",
     "tscw": "*",

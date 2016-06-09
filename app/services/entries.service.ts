@@ -10,8 +10,10 @@ export class EntriesService {
 
     constructor(private _http: Http) { }
 
-    getJudgeEntries(judgeName: string): Observable<IEntry[]> {
-        let body = JSON.stringify({ judgeName: judgeName });
+
+
+    getJudgeEntries(judgeName: string, eventName: string): Observable<IEntry[]> {
+        let body = JSON.stringify({ judgeName, eventName });
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 
@@ -20,6 +22,8 @@ export class EntriesService {
             //.do(data => console.log('All: ' +  JSON.stringify(data)))
             .catch(this.handleError);
     }
+
+
 
     // TODO send updated scoring for assignedEntries back to server
     submitScoring(judgeName: string, entries: IEntry[]): Observable<any> {
@@ -43,10 +47,12 @@ export class EntriesService {
         // TODO get entries who don't have an assigned judge name for librarian
     //}
     
-    /*assignEntries(): Observable<string> {
-        
-    }*/
 
+    /**
+     * Handles the error from HTTP request.
+     * @param error
+     * @returns {ErrorObservable}
+     */
     private handleError(error: Response) {
         console.error(error);
         return Observable.throw(error.json().error || 'Server error');

@@ -1,70 +1,87 @@
-import { Injectable } from 'angular2/core';
-import { Http, Response, Headers } from 'angular2/http';
-import { Observable } from 'rxjs/Observable';
+import {Injectable} from 'angular2/core';
+import {Http, Response, Headers, RequestOptions} from 'angular2/http';
+import {Observable} from 'rxjs/Observable';
 
-import { IEvent } from '../components/event/event';
+import {FileUploadService} from '../services/file-upload.service';
+import {IEntry} from '../components/judge/entry';
 
+/**
+ * Submits entries to the database.
+ */
 @Injectable()
 export class SubmissionService {
-    private _submitURL = ''; // api url
-    private progress;
-    private progressObserver;
 
-    constructor(private _http: Http) {
-        this.progress = Observable.create(observer => {
-            this.progressObserver = observer
-        }).share();
+    
+
+    /**
+     * Constructor
+     * @param _http Instantiates and assigns private Http object.
+     * @param _fileUploadService Instantiates and assigns private FileUploadService object.
+     */
+    constructor(private _http:Http,
+                private _fileUploadService:FileUploadService) {
     }
 
-    submitEntry(): void {
-        let body = "";
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/x-www-form-urlencoded');
-
-        /*this._http.post(this._submitURL,
-            body, {
-                headers: headers
-            })
-            .map(response => response.json())
-            .subscribe(
-                response => this
-            )*/
+    /**
+     * Submits the entry to the database.
+     *
+     * @param userName The username to store it under.
+     * @param artworkTitle Title of the artwork.
+     * @param eventName The name of the event the submission is for.
+     * @param filesToUpload The array of files to upload for the submission.
+     * @returns {Promise<any>}
+     */
+    submitEntry(userName:string, artworkTitle:string, eventName:string,
+                filesToUpload:Array<File>):Promise<any> {
+        // console.log("submitting...");
+        return this._fileUploadService.upload('/submitEntry',
+            userName, artworkTitle, eventName, filesToUpload);
     }
 
-    private makeFileRequest (url: string, params: string[], files: File[]): Observable<any> {
-        return Observable.create(observer => {
-            let formData: FormData = new FormData(),
-                xhr: XMLHttpRequest = new XMLHttpRequest();
 
-            for (let i = 0; i < files.length; i++) {
-                formData.append("uploads[]", files[i], files[i].name);
-            }
+    /**
+     * Gets the entry for the current user.
+     *
+     * @param username Username of the user to retrieve the entry for.
+     * @param eventName The event to get the entry for.
+     * @returns {Observable<R>}
+     */
+    getEntry(username:string, eventName:string):Observable<IEntry> {
+        let body = JSON.stringify({username, eventName});
+        let headers = new Headers({'Content-Type': 'application/json'});
+        let options = new RequestOptions({headers: headers});
 
-            xhr.onreadystatechange = () => {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        observer.next(JSON.parse(xhr.response));
-                        observer.complete();
-                    } else {
-                        observer.error(xhr.response);
-                    }
-                }
-            };
+        return this._http.post('/getEntry', body, options)
+            .map((response:Response) => <IEntry> response.json())
+            // .do(data => console.log('All: ' + JSON.stringify(data)))
+            .catch(this.handleError);
 
-            xhr.upload.onprogress = (event) => {
-                this.progress = Math.round(event.loaded / event.total * 100);
-
-                this.progressObserver.next(this.progress);
-            };
-
-            xhr.open('POST', url, true);
-            xhr.send(formData);
-        });
     }
 
-    private handleError(error: Response) {
-        // in a real world app, we may send the server to some remote logging infrastructure
-        // instead of just logging it to the console
+    /**
+     * Withdraws an entry from the event for a given user.
+     * @param username The user whose entry is to be removed.
+     * @param eventName The event to remove the entry from.
+     * @returns {Observable<R>}
+     */
+    withdrawEntry(username: string, eventName: string) {
+        let body = JSON.stringify({ username, eventName });
+        let headers = new Headers({'Content-Type': 'application/json'});
+        let options = new RequestOptions({headers: headers});
+
+        return this._http.post('/withdrawEntry', body, options)
+            .map((response:Response) => response.json())
+            // .do(data => console.log('All: ' + JSON.stringify(data)))
+            .catch(this.handleError);
+
+    }
+
+    /**
+     * Handles the error from HTTP request.
+     * @param error
+     * @returns {ErrorObservable}
+     */
+    private handleError(error:Response) {
         console.error(error);
         return Observable.throw(error.json().error || 'Server error');
     }

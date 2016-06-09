@@ -31,9 +31,16 @@ System.register(['angular2/core', 'angular2/router', "angular2/common"], functio
                     this.userTypes = ["Patron", "Librarian", "Judge"];
                     this.currentUserType = "Patron";
                 }
+                /**
+                 * On change event.
+                 * @param newValue The new value to update.
+                 */
                 onChange(newValue) {
                     this.currentUserType = newValue;
                 }
+                /**
+                 * Executes on page load after data bound objects have been initialized.
+                 */
                 ngOnInit() {
                     $('.easterEgg').attr({
                         'data-toggle': 'tooltip',

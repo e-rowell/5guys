@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/common', 'angular2/router', '../../services/event.service', '../../services/file-upload.service'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/common', 'angular2/router', '../../services/event.service', '../../services/submission.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/common', 'angular2/router', '../../s
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, router_1, event_service_1, file_upload_service_1;
+    var core_1, common_1, router_1, event_service_1, submission_service_1;
     var EntryFormComponent;
     return {
         setters:[
@@ -26,37 +26,88 @@ System.register(['angular2/core', 'angular2/common', 'angular2/router', '../../s
             function (event_service_1_1) {
                 event_service_1 = event_service_1_1;
             },
-            function (file_upload_service_1_1) {
-                file_upload_service_1 = file_upload_service_1_1;
+            function (submission_service_1_1) {
+                submission_service_1 = submission_service_1_1;
             }],
         execute: function() {
             let EntryFormComponent = class EntryFormComponent {
-                constructor(_eventsService, _fileUploadService, _router, _routeParams) {
+                /**
+                 * Constructor
+                 * @param _eventsService Instantiates and assigns private EventService object.
+                 * @param _submissionService Instantiates and assigns private SubmissionService object.
+                 * @param _router Instantiates and assigns private Router object.
+                 * @param _routeParams Instantiates and assigns private RouteParams object.
+                 */
+                constructor(_eventsService, _submissionService, _router, _routeParams) {
                     this._eventsService = _eventsService;
-                    this._fileUploadService = _fileUploadService;
+                    this._submissionService = _submissionService;
                     this._router = _router;
                     this._routeParams = _routeParams;
+                    /**
+                     * The current user.
+                     */
+                    this.currentUser = "Peter";
+                    /**
+                     * Name of the file.
+                     */
+                    this.fileName = "";
+                    /**
+                     * Title of the artwork.
+                     */
                     this.artworkTitle = "";
+                    /**
+                     * User has chosen a file.
+                     */
                     this.choseFile = false;
-                    this.hasSubmittedEntry = false; // check if user has submitted an entry
+                    /**
+                     * user has read the privacy policy.
+                     */
                     this.readPolicy = false;
+                    /**
+                     * User has agreed to the privacy policy.
+                     */
                     this.agreedToPolicy = false;
                     this.filesToUpload = [];
-                    // this._fileUploadService.getObserver().subscribe(p => this.uploadProgress = p);
                 }
+                /**
+                 * Executes on page load after data bound objects have been initialized.
+                 */
+                ngOnInit() {
+                    this.getEntry(this.currentUser, this.event.eventName);
+                }
+                /**
+                 * Gets the user's entry for the event.
+                 * @param userName The user.
+                 * @param eventName The event.
+                 */
+                getEntry(userName, eventName) {
+                    this._submissionService.getEntry(userName, eventName)
+                        .subscribe(entry => this.userEntry = entry, error => this.errorMessage = error);
+                }
+                /**
+                 * Submits the entry to the database.
+                 */
                 submitEntry() {
-                    this._fileUploadService.upload('/submitEntry', ["Bob The User", this.artworkTitle, ""], this.filesToUpload).then((result) => {
+                    this._submissionService.submitEntry(this.currentUser, this.artworkTitle, this.event.eventName, this.filesToUpload)
+                        .then((result) => {
                         this.artworkTitle = "";
                         this.fileName = "";
                         this.choseFile = false;
-                        this.hasSubmittedEntry = true;
-                        console.log(result);
+                        this.getEntry(this.currentUser, this.event.eventName);
+                        // console.log(result);
                     }, (error) => {
                         console.error(error);
                     });
                 }
+                /**
+                 * Withdraws the entry from the event.
+                 */
                 withdraw() {
                 }
+                /**
+                 * Assigns the new file selected.
+                 * @param fileInput The new file to assign.
+                 */
                 fileChangeEvent(fileInput) {
                     this.filesToUpload = fileInput.target.files;
                     this.fileName = this.filesToUpload[0].name;
@@ -73,9 +124,9 @@ System.register(['angular2/core', 'angular2/common', 'angular2/router', '../../s
                     templateUrl: 'app/components/entry-form/entry-form.component.html',
                     styleUrls: ['app/components/entry-form/entry-form.component.css'],
                     directives: [common_1.NgClass],
-                    providers: [file_upload_service_1.FileUploadService]
+                    providers: [submission_service_1.SubmissionService]
                 }), 
-                __metadata('design:paramtypes', [event_service_1.EventsService, file_upload_service_1.FileUploadService, router_1.Router, router_1.RouteParams])
+                __metadata('design:paramtypes', [event_service_1.EventsService, submission_service_1.SubmissionService, router_1.Router, router_1.RouteParams])
             ], EntryFormComponent);
             exports_1("EntryFormComponent", EntryFormComponent);
         }

@@ -49,6 +49,9 @@ System.register(['angular2/core', 'angular2/router', '../../services/event.servi
                     this._router = _router;
                     this._routeParams = _routeParams;
                 }
+                /**
+                 * Executes on page load after data bound objects have been initialized.
+                 */
                 ngOnInit() {
                     if (!this.event) {
                         let eventName = this._routeParams.get('eventName');

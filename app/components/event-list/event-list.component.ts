@@ -5,22 +5,34 @@ import { IEvent } from '../event/event';
 import { EventsService } from '../../services/event.service';
 import { ROUTER_DIRECTIVES } from "angular2/router";
 
+
 @Component({
     templateUrl: 'app/components/event-list/event-list.component.html',
     styleUrls: ['app/components/event-list/event-list.component.css'],
     directives: [ROUTER_DIRECTIVES],
     providers: [EventsService]
 })
+/**
+ * Displays the current events.
+ */
 export class EventListComponent implements OnInit{
     errorMessage: string;
     events: IEvent[];
     userType: string;
 
+    /**
+     * Constructor
+     * @param _eventsService Instantiates and assigns private EventService object.
+     * @param _router Instantiates and assigns private Router object.
+     * @param _routeParams Instantiates and assigns private RouteParams object.
+     */
     constructor(private _eventsService: EventsService,
                 private _router: Router,
                 private _routeParams: RouteParams) { }
 
-    // executes on page load
+    /**
+     * Executes on page load after data bound objects have been initialized.
+     */
     ngOnInit(): void {
         this._eventsService.getEvents().subscribe(
                 events => this.events = events,

@@ -28,8 +28,8 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
                 constructor(_http) {
                     this._http = _http;
                 }
-                getJudgeEntries(judgeName) {
-                    let body = JSON.stringify({ judgeName: judgeName });
+                getJudgeEntries(judgeName, eventName) {
+                    let body = JSON.stringify({ judgeName: judgeName, eventName: eventName });
                     let headers = new http_1.Headers({ 'Content-Type': 'application/json' });
                     let options = new http_1.RequestOptions({ headers: headers });
                     return this._http.post('/getJudgesEntries', body, options)
@@ -53,9 +53,11 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
                 //getUnassignedEntries(eventName: string): Observable<IEntry[]> {
                 // TODO get entries who don't have an assigned judge name for librarian
                 //}
-                /*assignEntries(): Observable<string> {
-                    
-                }*/
+                /**
+                 * Handles the error from HTTP request.
+                 * @param error
+                 * @returns {ErrorObservable}
+                 */
                 handleError(error) {
                     console.error(error);
                     return Observable_1.Observable.throw(error.json().error || 'Server error');
