@@ -4,8 +4,13 @@ const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 const app = express();
 
+//mongo client
 var db;
+
+//global username (not used at the moment)
 var username = false;
+
+//multer keeps the original filename and stores in uploads
 var storage = multer.diskStorage({
     destination: function (req, file, callback) {
         callback(null, './uploads');
@@ -19,6 +24,7 @@ var upload = multer({
     storage: storage
 }).single('userEntry');
 
+//directories we need access to
 app.use(express.static(__dirname));
 app.use(express.static(__dirname + '/node_modules'));
 app.use(express.static(__dirname + '/dev_html'));
@@ -27,17 +33,14 @@ app.use(express.static('uploads'));
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
 app.use(bodyParser.json());
 
-
-// puts data from form into req.body
-
-/*app.use(function(req, res, next) {
- res.header("Access-Control-Allow-Origin", "*");
- res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
- next();
- });*/
-
+/**
+* Sets up the mongo client by connecting to the database at mlab. Prints
+* error message if the database is down (not likely)
+* @author Ben p
+*/
 MongoClient.connect('mongodb://test:test@ds013202.mlab.com:13202/test1', function (err, database) {
     //start the server
     if (err) return console.log(err);
@@ -50,12 +53,19 @@ MongoClient.connect('mongodb://test:test@ds013202.mlab.com:13202/test1', functio
     })
 });
 
-
+/**
+* Returns the index when the "root" url is visited.
+* @author Ben p
+*/
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
 });
 
-/*Better way to login*/
+/**
+* Unimplemented server side log in method. Saves the current user in a
+* var that other routes have access to. 
+* @author Ben p
+*/
 app.post('/login', function (req, res) {
 
     db.collection('users').findOne({
@@ -70,18 +80,28 @@ app.post('/login', function (req, res) {
     })
 });
 
+/**
+* Returns the username string. not used
+* @author Ben p
+*/
 app.get('/whoami', (req, res) => {
     res.send(username);
 });
 
+/**
+* Unused method to log a user out.
+*/
 app.get('/logout', (req, res) => {
     //TODO error when not logged in?
     username = false;
     res.status(200).send("logged out");
 });
 
+/**
+* Returns a json entry based on a username and an even name.
+* @author Ben p
+*/
 app.post('/getEntry', (req, res) => {
-    //TODO why the fuck is this an array
     db.collection('entries').findOne({
         "username": req.body.username,
         "eventName": req.body.eventName
@@ -91,6 +111,11 @@ app.post('/getEntry', (req, res) => {
     })
 });
 
+/**
+* Returns all entries in an event.
+* @param req contains an eventName
+* @author Ben p
+*/
 app.post('/getAllEntries', (req, res) => {
     db.collection('entries').find({
         "eventName": req.body.eventName
@@ -101,6 +126,11 @@ app.post('/getAllEntries', (req, res) => {
 
 
 //assign an event to a judge
+/**
+* Assigns an event to a judge in the database
+* @param req contains a judgeName and eventName in its body
+* @author Ben p
+*/
 app.post('/assignJudges', (req, res) => {
     //place judgeName and eventName in the judge collection
     db.collection('judges').save(req.body, function (err, result) {
@@ -110,23 +140,18 @@ app.post('/assignJudges', (req, res) => {
     });
 });
 
-/*app.get('/getJudges', (req, res) => {
- res.send({"Judy", "Dredd", "Mathis", "Alex"});
- });*/
-
+/*
+* Retrives unassigned entries. Not implemented yet
+*/
 app.post('/getUnassignedEntries', bodyParser.json(), (req, res) => {
     // TODO get entries in entries collection whose assignedJudge is empty
 });
 
-/*// TODO remove in place of POST route below
- app.get('/getJudgesEntries', (req, res) => {
- db.collection('judges').find().toArray((err, result) => {
- if (err) return console.log(err);
- res.send(result[0].assignedEntries);
- })
- });*/
-
-
+/**
+* Gets entries assigned to a specific judge and event.
+* @param req body contains assignedJudge and eventName
+* @author Ethan R
+*/
 app.post('/getJudgesEntries', bodyParser.json(), (req, res) => {
     // TODO change: query entries collection for entries that match the judge name
     console.log(req.body);
@@ -144,9 +169,13 @@ app.post('/getJudgesEntries', bodyParser.json(), (req, res) => {
     });
 });
 
-
-//TODO have this add the score to the user documents also patron id
-// add patron to user id and entry
+/**
+* Submits a score to the database
+* TODO have this add the score to the user documents also patron id
+* add patron to user id and entry
+* @param req body contains judge name and entries
+* @author Ethan R 
+*/
 app.post('/submitScoring', bodyParser.json(), (req, res) => {
     db.collection('judges').update(
         {judgeName: req.body.judgeName},
@@ -158,7 +187,13 @@ app.post('/submitScoring', bodyParser.json(), (req, res) => {
     );
 });
 
-
+/**
+* Submits an entry file. Uploads a file to the server and commits file
+* information to the database.
+* @param req contains file info for multer
+* @author Ben P
+* @author Ethan R
+*/
 app.post("/submitEntry", multer({
     storage: storage
 }).array("uploads[]", 12), function (req, res) {
@@ -179,20 +214,31 @@ app.post("/submitEntry", multer({
 });
 
 
+/**
+* Withdraw a previous entry (not implemented)
+*/
 app.post("/withdrawEntry", (req, res) => {
     // TODO post event name to withdraw from 
 });
 
 
+/**
+* Creates a new event in the database
+* @param req contains information about the event
+* @author Ben p
+*/
 app.post('/createEvent', (req, res) => {
     db.collection('events').save(req.body, function (err, result) {
         if (err) return console.log(err);
 
         console.log('New event created');
-        res.redirect('/'); //TODO get rid of this?
     })
 });
 
+/**
+* Returns all events from the database
+* @author Ethan R
+*/
 app.get('/getAllEvents', (req, res) => {
     db.collection('events').find().toArray((err, result) => {
         if (err) return console.log(err);
@@ -200,7 +246,11 @@ app.get('/getAllEvents', (req, res) => {
     })
 });
 
-
+/**
+* Adds a new user to the database
+* @param req contains user json
+* @author Ben P
+*/
 app.post('/register', function (req, res) {
     db.collection('users').save(req.body, function (err, result) {
         if (err) return console.log(err);
@@ -210,7 +260,10 @@ app.post('/register', function (req, res) {
     })
 });
 
-// 404 catch - needs to be at the bottom
+/** 
+* 404 catch - needs to be at the bottom
+* @author Ethan R
+*/
 app.all('*', (req, res) => {
     console.log(`[TRACE] Server 404 request: ${req.originalUrl}`);
     res.status(200).sendFile(__dirname + '/index.html');
