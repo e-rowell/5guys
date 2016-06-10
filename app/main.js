@@ -17,6 +17,10 @@ System.register(['angular2/platform/browser', 'angular2/http', 'angular2/router'
                 app_component_1 = app_component_1_1;
             }],
         execute: function() {
+            /**
+             * Bootstraps the app component.
+             * @author Ethan Rowell
+             */
             browser_1.bootstrap(app_component_1.AppComponent, [http_1.HTTP_PROVIDERS, router_1.ROUTER_PROVIDERS, router_1.RouteConfig]);
         }
     }

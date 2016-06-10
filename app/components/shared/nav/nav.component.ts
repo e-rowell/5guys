@@ -13,19 +13,17 @@ import { IUser } from '../interfaces/user';
 })
 /**
  * Page navigation and footer.
+ * @author Ethan Rowell
  */
 export class NavComponent implements OnInit {
     tooltipText: string = 'Team Members: Ethan Rowell, Nicholas Hays, Jacob Tillett, Edward Koval, Ben Pasero';
-    userTypes = [ "Patron", "Librarian", "Judge" ];
-    currentUserType: string = "Patron";
+    userTypes = [ "Public", "Patron", "Judge" ];
     currentUser: IUser;
-    selectedUserType: string = "Patron";
+    selectedUserType: string = "Public";
 
     constructor() {
         this.currentUser = <IUser>{};
-        this.currentUser.patronID = 123456;
-        this.currentUser.username = "Jim";
-        this.currentUser.userType = "Judge";
+        this.currentUser.userType = "Public";
     }
 
     /**

@@ -23,11 +23,18 @@ System.register(['angular2/core', 'angular2/http'], function(exports_1, context_
             }],
         execute: function() {
             let LoginComponent = class LoginComponent {
-                constructor(http) {
+                /**
+                 * Constructor
+                 * @param http Instantiates and assigns private Http object.
+                 */
+                constructor(_http) {
+                    this._http = _http;
                     this.pageTitle = "Login";
                     this.URL = "/login2";
-                    this._http = http;
                 }
+                /**
+                 * Signs the user in.
+                 */
                 signIn() {
                     let headers = new http_2.Headers({ 'Content-Type': 'application/json' });
                     console.log(this.userName + "and " + this.password);

@@ -1,5 +1,6 @@
 /**
  * Interface for Entries
+ * @author Ethan Rowell
  */
 export interface IEntry {
     /**
@@ -32,13 +33,37 @@ export interface IEntry {
     score: number;
 
     /**
+     * The judge assigned to this entry.
+     */
+    assignedJudge: string;
+
+    /**
      * File information.
      */
     file: {
+        /**
+         * Unmodified name of the file.
+         */
         originalname: string,
+
+        /**
+         * Parent destination folder.
+         */
         destination: string,
+
+        /**
+         * Name of the file.
+         */
         filename: string,
+
+        /**
+         * Path to the submission.
+         */
         path: string,
+
+        /**
+         * Size of the file.
+         */
         size: number
     }
 }

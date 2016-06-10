@@ -7,6 +7,7 @@ import {IEntry} from '../components/shared/interfaces/entry';
 
 /**
  * Submits entries to the database.
+ * @author Ethan Rowell
  */
 @Injectable()
 export class SubmissionService {
@@ -55,14 +56,17 @@ export class SubmissionService {
 
     /**
      * Withdraws an entry from the event for a given user.
+     *
      * @param patronID The patron's ID whose entry is to be removed.
      * @param eventName The event to remove the entry from.
      * @returns {Observable<R>}
      */
     withdrawEntry(patronID:number, eventName: string) {
         let body = JSON.stringify({ patronID, eventName });
-        let headers = new Headers({'Content-Type': 'application/json'});
-        let options = new RequestOptions({headers: headers});
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
+        console.log("in submission withdraw");
 
         return this._http.post('/withdrawEntry', body, options)
             .map((response:Response) => response.json())
@@ -72,6 +76,7 @@ export class SubmissionService {
 
     /**
      * Handles the error from HTTP request.
+     *
      * @param error
      * @returns {ErrorObservable}
      */

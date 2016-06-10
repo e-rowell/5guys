@@ -17,6 +17,7 @@ import { LibrarianComponent } from '../librarian/librarian.component';
 })
 /**
  * Class that displays the details for the event.
+ * @author Ethan Rowell
  */
 export class EventComponent implements OnInit{
 
@@ -62,12 +63,19 @@ export class EventComponent implements OnInit{
         }
     }
 
+    /**
+     * Gets the event information.
+     * @param eventName The event name to retrieve.
+     */
     getEvent(eventName: string) {
         this._eventsService.getEvent(eventName).subscribe(
             event => this.event = event,
             error => this.errorMessage = <any>error);
     }
-    
+
+    /**
+     * On browser back.
+     */
     onBack(): void {
         this._router.navigate(['Events']);
     }

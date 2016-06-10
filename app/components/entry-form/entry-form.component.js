@@ -44,9 +44,6 @@ System.register(['angular2/core', 'angular2/common', 'angular2/router', '../../s
                     this._router = _router;
                     this._routeParams = _routeParams;
                     /**
-                     * The current user.
-                    currentUser: string = "Peter";*/
-                    /**
                      * Name of the file.
                      */
                     this.fileName = "";
@@ -76,6 +73,7 @@ System.register(['angular2/core', 'angular2/common', 'angular2/router', '../../s
                 }
                 /**
                  * Gets the user's entry for the event.
+                 *
                  * @param patronID The user.
                  * @param eventName The event.
                  */
@@ -101,10 +99,13 @@ System.register(['angular2/core', 'angular2/common', 'angular2/router', '../../s
                 /**
                  * Withdraws the entry from the event.
                  */
-                withdraw() {
+                withdrawEntry() {
+                    console.log("in withdraw");
+                    this._submissionService.withdrawEntry(this.currentUser.patronID, this.event.eventName);
                 }
                 /**
                  * Assigns the new file selected.
+                 *
                  * @param fileInput The new file to assign.
                  */
                 fileChangeEvent(fileInput) {

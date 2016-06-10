@@ -1,11 +1,10 @@
 import { Injectable } from 'angular2/core';
 import 'rxjs/add/operator/share';
 
-
-
 @Injectable()
 /**
  * Uploads files.
+ * @author Ethan Rowell
  */
 export class FileUploadService {
 

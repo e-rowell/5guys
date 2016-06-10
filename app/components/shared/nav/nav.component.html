@@ -24,19 +24,25 @@
                                       id="login-nav">
                                     <div class="panel" style="margin-bottom: 0px !important;">
                                         <div class="panel-body">
-                                            <div class='row form-group'>
+                                            <!-- Set to false for testing -->
+                                            <div *ngIf="false" class='row form-group'>
                                                 <label for="username" class="control-label">Username</label>
                                                 <input id="username" class="form-control" type="text">
-                                                <!--<div class="text-right">
+                                                <div class="text-right">
                                                     <a href="#">Forgot username?</a>
-                                                </div>-->
+                                                </div>
                                             </div>
+                                            <div *ngIf="false" class="row form-group">
+                                                <label class="control-label" for="password">Patron ID</label>
+                                                <input id="password" class="form-control" type="password">
+                                                <div class="text-right">
+                                                    <a href="#">Forgot password?</a>
+                                                </div>
+                                            </div>
+
                                             <div *ngIf="selectedUserType === 'Patron'" class="row form-group">
                                                 <label class="control-label" for="patronID">Patron ID</label>
                                                 <input id="patronID" class="form-control" type="number">
-                                                <!--<div class="text-right">
-                                                    <a href="#">Forgot password?</a>
-                                                </div>-->
                                             </div>
                                             <div class="row form-group">
                                                 <label for="userType">User Type:</label>

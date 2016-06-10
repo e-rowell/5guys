@@ -21,7 +21,6 @@ System.register(['angular2/core', '../../services/entries.service'], function(ex
                 entries_service_1 = entries_service_1_1;
             }],
         execute: function() {
-            /*import MaskedInput from '@msafi.angular2-text-mask';*/
             let JudgeComponent = class JudgeComponent {
                 /**
                  * Constructor.
@@ -43,22 +42,27 @@ System.register(['angular2/core', '../../services/entries.service'], function(ex
                         max: 10
                     });
                 }
-                // update score for the patron
+                /**
+                 * On change of scoring, update the local observable entry's scoring property.
+                 * @param patronID The patron ID of the entry.
+                 * @param score The new score to update.
+                 */
                 onChange(patronID, score) {
                     this.entries.find(entry => entry.patronID == patronID).score = score;
                 }
-                /*getEntries() {
-                    this._entriesService.getEntries().subscribe(
-                        entries => this.entries = entries,
-                        error => this.errorMessage = <any>error);
-                }*/
+                /**
+                 * Get the entries that belong to the judge.
+                 * @param judgeName The whose entries are to be retrieved.
+                 * @param eventName The event name that the entries are for.
+                 */
                 getJudgeEntries(judgeName, eventName) {
                     this._entriesService.getJudgeEntries(judgeName, eventName).subscribe(entries => this.entries = entries, error => this.errorMessage = error);
                 }
-                // TODO submite this.entries.assignedEntries back to server to update scoring
+                /**
+                 * Update scoring for judge's assigned entries.
+                 */
                 submitScoring() {
-                    let message = this._entriesService.submitScoring("Judy", this.entries);
-                    console.log(message);
+                    this._entriesService.submitScoring("Judy", this.entries);
                 }
             };
             JudgeComponent = __decorate([
@@ -66,8 +70,7 @@ System.register(['angular2/core', '../../services/entries.service'], function(ex
                     selector: 'judge',
                     templateUrl: 'app/components/judge/judge.component.html',
                     styleUrls: ['app/components/judge/judge.component.css'],
-                    providers: [entries_service_1.EntriesService] /*,
-                    directives: [MaskedInput]*/
+                    providers: [entries_service_1.EntriesService]
                 }), 
                 __metadata('design:paramtypes', [entries_service_1.EntriesService])
             ], JudgeComponent);

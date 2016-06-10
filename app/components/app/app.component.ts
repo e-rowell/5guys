@@ -24,6 +24,7 @@ import { EventListComponent } from '../event-list/event-list.component';
 ])
 /**
  * The main App Component.
+ * @author Ethan Rowell
  */
 export class AppComponent {
     pageTitle: string = 'Clark Country Library';

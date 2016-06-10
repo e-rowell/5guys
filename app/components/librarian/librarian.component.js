@@ -22,6 +22,10 @@ System.register(['angular2/core', '../../services/entries.service'], function(ex
             }],
         execute: function() {
             let LibrarianComponent = class LibrarianComponent {
+                /**
+                 *
+                 * @param _entriesService
+                 */
                 constructor(_entriesService) {
                     this._entriesService = _entriesService;
                 }

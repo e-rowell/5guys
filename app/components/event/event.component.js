@@ -61,9 +61,16 @@ System.register(['angular2/core', 'angular2/router', '../../services/event.servi
                         this.currentUser = this._routeParams.get('currentUser');
                     }
                 }
+                /**
+                 * Gets the event information.
+                 * @param eventName The event name to retrieve.
+                 */
                 getEvent(eventName) {
                     this._eventsService.getEvent(eventName).subscribe(event => this.event = event, error => this.errorMessage = error);
                 }
+                /**
+                 * On browser back.
+                 */
                 onBack() {
                     this._router.navigate(['Events']);
                 }

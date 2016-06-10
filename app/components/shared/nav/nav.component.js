@@ -28,13 +28,10 @@ System.register(['angular2/core', 'angular2/router', "angular2/common"], functio
             let NavComponent = NavComponent_1 = class NavComponent {
                 constructor() {
                     this.tooltipText = 'Team Members: Ethan Rowell, Nicholas Hays, Jacob Tillett, Edward Koval, Ben Pasero';
-                    this.userTypes = ["Patron", "Librarian", "Judge"];
-                    this.currentUserType = "Patron";
-                    this.selectedUserType = "Patron";
+                    this.userTypes = ["Public", "Patron", "Judge"];
+                    this.selectedUserType = "Public";
                     this.currentUser = {};
-                    this.currentUser.patronID = 123456;
-                    this.currentUser.username = "Jim";
-                    this.currentUser.userType = "Judge";
+                    this.currentUser.userType = "Public";
                 }
                 /**
                  * On change event.

@@ -1,19 +1,17 @@
 import { Component, OnInit } from 'angular2/core';
-import {Observable} from "rxjs/Observable";
 
 import { IEntry } from '../shared/interfaces/entry';
 import { EntriesService } from '../../services/entries.service';
-/*import MaskedInput from '@msafi.angular2-text-mask';*/
 
 @Component({
     selector: 'judge',
     templateUrl: 'app/components/judge/judge.component.html',
     styleUrls: ['app/components/judge/judge.component.css'],
-    providers: [EntriesService]/*,
-    directives: [MaskedInput]*/
+    providers: [EntriesService]
 })
 /**
  * Component for judging entries.
+ * @author Ethan Rowell
  */
 export class JudgeComponent implements OnInit {
 
@@ -48,27 +46,30 @@ export class JudgeComponent implements OnInit {
         })
     }
 
-    // update score for the patron
+    /**
+     * On change of scoring, update the local observable entry's scoring property.
+     * @param patronID The patron ID of the entry.
+     * @param score The new score to update.
+     */
     onChange(patronID: number, score: number) {
         this.entries.find( entry => entry.patronID == patronID).score = score;
     }
 
-    /*getEntries() {
-        this._entriesService.getEntries().subscribe(
-            entries => this.entries = entries,
-            error => this.errorMessage = <any>error);
-    }*/
-
+    /**
+     * Get the entries that belong to the judge.
+     * @param judgeName The whose entries are to be retrieved.
+     * @param eventName The event name that the entries are for.
+     */
     getJudgeEntries(judgeName: string, eventName: string) {
         this._entriesService.getJudgeEntries(judgeName, eventName).subscribe(
             entries => this.entries = entries,
             error => this.errorMessage = <any>error);
     }
 
-    // TODO submite this.entries.assignedEntries back to server to update scoring
+    /**
+     * Update scoring for judge's assigned entries.
+     */
     submitScoring() {
-        let message: Observable<any> = this._entriesService.submitScoring("Judy", this.entries);
-        console.log(message);
+        this._entriesService.submitScoring("Judy", this.entries);
     }
-
 }

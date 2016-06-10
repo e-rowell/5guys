@@ -7,16 +7,25 @@ import {Headers, HTTP_BINDINGS} from 'angular2/http';
     styleUrls: ['app/components/login/login.component.css'],
     providers: [HTTP_BINDINGS]
 })
+/**
+ * Component for handling user login.
+ * @author Nick Hays
+ */
 export class LoginComponent {
     pageTitle: string = "Login";
     URL: string = "/login2";
     userName: string;
     password: string;
-    private _http: Http;
 
-    constructor(http: Http) { 
-        this._http = http;
-    }
+    /**
+     * Constructor
+     * @param http Instantiates and assigns private Http object.
+     */
+    constructor(private _http: Http) { }
+
+    /**
+     * Signs the user in.
+     */
     signIn(): void {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         console.log(this.userName +"and " + this.password);

@@ -152,18 +152,15 @@ app.post('/getUnassignedEntries', bodyParser.json(), (req, res) => {
 * @param req body contains assignedJudge and eventName
 * @author Ethan R
 */
-app.post('/getJudgesEntries', bodyParser.json(), (req, res) => {
+app.post('/getJudgesEntries', (req, res) => {
     // TODO change: query entries collection for entries that match the judge name
-    console.log(req.body);
     db.collection('entries').find({
         $and: [ { "assignedJudge": req.body.judgeName },
                 { "eventName": req.body.eventName } ]
 
-
     }).toArray((err, result) => {
         if (err) return console.log(err.message);
         else {
-            console.log(result);
             res.send(result);
         }
     });
@@ -176,15 +173,18 @@ app.post('/getJudgesEntries', bodyParser.json(), (req, res) => {
 * @param req body contains judge name and entries
 * @author Ethan R 
 */
-app.post('/submitScoring', bodyParser.json(), (req, res) => {
-    db.collection('judges').update(
-        {judgeName: req.body.judgeName},
-        {$set: {assignedEntries: req.body.entries}},
-        (err, result) => {
+app.post('/submitScoring', (req, res) => {
+    console.log("in submit scoring");
+
+    for (var entry of req.entries) {
+        db.collection('entries').update(
+            { judgeName: req.body.judgeName, patronID: entry.patronID },
+            { scoring: entry.scoring },
+        (err, result) =>  {
             if (err) console.log(err.message);
             res.send(result);
-        }
-    );
+        });
+    }
 });
 
 /**
@@ -203,8 +203,8 @@ app.post("/submitEntry", multer({
             artworkTitle: req.body.artworkTitle,
             eventName: req.body.eventName,
             scoring: 0,                 // set initial scoring
-            assignedJudge: "Judy",      // testing purposes
-            ageGroup: "Ages: 10-16"     // 
+            assignedJudge: "Judy",      // testing purposes - assigning judges not implemented.
+            ageGroup: "Ages: 10-16"     // testing purposes - age groups not received from event
         },   
         (err, result) => {
             if (err) return console.log(err)
@@ -221,18 +221,18 @@ app.post("/submitEntry", multer({
 * @author Ben P
 */
 app.post("/withdrawEntry", (req, res) => {
+    console.log("In withdrawEntry" + req.body);
+
     // TODO post event name to withdraw from 
-		//withdraw from entries based on patronID eventName
+    //withdraw from entries based on patronID & eventName
     db.collection('entries').deleteOne({
             patronID: req.body.patronID,
             eventName: req.body.eventName
-        },   
+        },
         (err, result) => {
             if (err) return console.log(err)
-
+            console.log(result);
         });
-
-
 });
 
 

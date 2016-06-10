@@ -29,6 +29,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', '../servic
         execute: function() {
             /**
              * Submits entries to the database.
+             * @author Ethan Rowell
              */
             let SubmissionService = class SubmissionService {
                 /**
@@ -69,6 +70,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', '../servic
                 }
                 /**
                  * Withdraws an entry from the event for a given user.
+                 *
                  * @param patronID The patron's ID whose entry is to be removed.
                  * @param eventName The event to remove the entry from.
                  * @returns {Observable<R>}
@@ -77,12 +79,14 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', '../servic
                     let body = JSON.stringify({ patronID: patronID, eventName: eventName });
                     let headers = new http_1.Headers({ 'Content-Type': 'application/json' });
                     let options = new http_1.RequestOptions({ headers: headers });
+                    console.log("in submission withdraw");
                     return this._http.post('/withdrawEntry', body, options)
                         .map((response) => response.json())
                         .catch(this.handleError);
                 }
                 /**
                  * Handles the error from HTTP request.
+                 *
                  * @param error
                  * @returns {ErrorObservable}
                  */

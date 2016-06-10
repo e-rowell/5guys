@@ -14,21 +14,22 @@ import { IUser } from '../shared/interfaces/user';
 })
 /**
  * Displays the current events.
+ * @author Ethan Rowell
  */
 export class EventListComponent implements OnInit{
 
     /**
-     *
+     * The error message.
      */
     errorMessage: string;
 
     /**
-     *
+     * The list of events to display.
      */
     events: IEvent[];
 
     /**
-     * 
+     * The current user browsing.
      */
     currentUser: IUser;
 

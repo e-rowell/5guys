@@ -17,6 +17,7 @@ import { IUser } from '../shared/interfaces/user';
 })
 /**
  * Form for submitting entries.
+ * @author Ethan Rowell
  */
 export class EntryFormComponent implements OnInit {
 
@@ -34,10 +35,6 @@ export class EntryFormComponent implements OnInit {
      * User's entry object.
      */
     userEntry: IEntry;
-
-    /**
-     * The current user.
-    currentUser: string = "Peter";*/
 
     /**
      * Name of the file.
@@ -97,6 +94,7 @@ export class EntryFormComponent implements OnInit {
 
     /**
      * Gets the user's entry for the event.
+     * 
      * @param patronID The user.
      * @param eventName The event.
      */
@@ -128,12 +126,14 @@ export class EntryFormComponent implements OnInit {
     /**
      * Withdraws the entry from the event.
      */
-    withdraw() {
-
+    withdrawEntry() {
+        console.log("in withdraw");
+        this._submissionService.withdrawEntry(this.currentUser.patronID, this.event.eventName);
     }
 
     /**
      * Assigns the new file selected.
+     * 
      * @param fileInput The new file to assign.
      */
     fileChangeEvent(fileInput: any){

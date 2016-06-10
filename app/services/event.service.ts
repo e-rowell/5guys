@@ -7,6 +7,7 @@ import { IEvent } from '../components/shared/interfaces/event';
 @Injectable()
 /**
  * Gets current events.
+ * @author Ethan Rowell
  */
 export class EventsService {
 

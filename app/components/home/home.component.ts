@@ -6,6 +6,7 @@ import { Component } from 'angular2/core';
 })
 /**
  * Displays the home page.
+ * @author Ethan Rowell
  */
 export class HomeComponent {
 
