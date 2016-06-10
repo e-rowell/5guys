@@ -43,25 +43,24 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', '../servic
                 /**
                  * Submits the entry to the database.
                  *
-                 * @param userName The username to store it under.
+                 * @param patronID The patrons assigned ID number.
                  * @param artworkTitle Title of the artwork.
                  * @param eventName The name of the event the submission is for.
                  * @param filesToUpload The array of files to upload for the submission.
                  * @returns {Promise<any>}
                  */
-                submitEntry(userName, artworkTitle, eventName, filesToUpload) {
-                    // console.log("submitting...");
-                    return this._fileUploadService.upload('/submitEntry', userName, artworkTitle, eventName, filesToUpload);
+                submitEntry(patronID, artworkTitle, eventName, filesToUpload) {
+                    return this._fileUploadService.upload('/submitEntry', patronID, artworkTitle, eventName, filesToUpload);
                 }
                 /**
                  * Gets the entry for the current user.
                  *
-                 * @param username Username of the user to retrieve the entry for.
+                 * @param patronID Patron ID of the user to retrieve the entry for.
                  * @param eventName The event to get the entry for.
                  * @returns {Observable<R>}
                  */
-                getEntry(username, eventName) {
-                    let body = JSON.stringify({ username: username, eventName: eventName });
+                getEntry(patronID, eventName) {
+                    let body = JSON.stringify({ patronID: patronID, eventName: eventName });
                     let headers = new http_1.Headers({ 'Content-Type': 'application/json' });
                     let options = new http_1.RequestOptions({ headers: headers });
                     return this._http.post('/getEntry', body, options)
@@ -70,12 +69,12 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable', '../servic
                 }
                 /**
                  * Withdraws an entry from the event for a given user.
-                 * @param username The user whose entry is to be removed.
+                 * @param patronID The patron's ID whose entry is to be removed.
                  * @param eventName The event to remove the entry from.
                  * @returns {Observable<R>}
                  */
-                withdrawEntry(username, eventName) {
-                    let body = JSON.stringify({ username: username, eventName: eventName });
+                withdrawEntry(patronID, eventName) {
+                    let body = JSON.stringify({ patronID: patronID, eventName: eventName });
                     let headers = new http_1.Headers({ 'Content-Type': 'application/json' });
                     let options = new http_1.RequestOptions({ headers: headers });
                     return this._http.post('/withdrawEntry', body, options)

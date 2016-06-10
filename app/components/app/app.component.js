@@ -55,8 +55,8 @@ System.register(['angular2/core', 'angular2/common', 'angular2/http', 'rxjs/Rx',
                 }),
                 router_1.RouteConfig([
                     { path: '/home', name: 'Home', component: home_component_1.HomeComponent, useAsDefault: true },
-                    { path: '/events', name: 'Events', component: event_list_component_1.EventListComponent },
-                    { path: '/events/:eventName/:userType', name: 'EventDetail', component: event_component_1.EventComponent }
+                    { path: '/events/:currentUser', name: 'Events', component: event_list_component_1.EventListComponent },
+                    { path: '/events/:eventName/:currentUser', name: 'EventDetail', component: event_component_1.EventComponent }
                 ]), 
                 __metadata('design:paramtypes', [])
             ], AppComponent);

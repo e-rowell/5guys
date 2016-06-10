@@ -21,6 +21,7 @@ System.register(['angular2/core', '../../services/entries.service'], function(ex
                 entries_service_1 = entries_service_1_1;
             }],
         execute: function() {
+            /*import MaskedInput from '@msafi.angular2-text-mask';*/
             let JudgeComponent = class JudgeComponent {
                 /**
                  * Constructor.
@@ -45,15 +46,14 @@ System.register(['angular2/core', '../../services/entries.service'], function(ex
                 // update score for the patron
                 onChange(patronID, score) {
                     this.entries.find(entry => entry.patronID == patronID).score = score;
-                    console.log(this.entries);
                 }
                 /*getEntries() {
                     this._entriesService.getEntries().subscribe(
                         entries => this.entries = entries,
                         error => this.errorMessage = <any>error);
                 }*/
-                getJudgeEntries(judgeName) {
-                    this._entriesService.getJudgeEntries(judgeName).subscribe(entries => this.entries = entries, error => this.errorMessage = error);
+                getJudgeEntries(judgeName, eventName) {
+                    this._entriesService.getJudgeEntries(judgeName, eventName).subscribe(entries => this.entries = entries, error => this.errorMessage = error);
                 }
                 // TODO submite this.entries.assignedEntries back to server to update scoring
                 submitScoring() {
@@ -66,7 +66,8 @@ System.register(['angular2/core', '../../services/entries.service'], function(ex
                     selector: 'judge',
                     templateUrl: 'app/components/judge/judge.component.html',
                     styleUrls: ['app/components/judge/judge.component.css'],
-                    providers: [entries_service_1.EntriesService]
+                    providers: [entries_service_1.EntriesService] /*,
+                    directives: [MaskedInput]*/
                 }), 
                 __metadata('design:paramtypes', [entries_service_1.EntriesService])
             ], JudgeComponent);

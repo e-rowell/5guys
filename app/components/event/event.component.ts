@@ -3,7 +3,8 @@ import { RouteParams, Router } from 'angular2/router';
 
 import { EventsService } from '../../services/event.service';
 import { FileUploadService } from '../../services/file-upload.service';
-import { IEvent } from '../event/event';
+import { IEvent } from '../shared/interfaces/event';
+import { IUser } from '../shared/interfaces/user';
 import { EntryFormComponent } from '../entry-form/entry-form.component';
 import { JudgeComponent } from '../judge/judge.component';
 import { LibrarianComponent } from '../librarian/librarian.component';
@@ -30,9 +31,9 @@ export class EventComponent implements OnInit{
     errorMessage: string;
 
     /**
-     * Determines which view to show (Patron, Librarian, Judge).
+     * Determines which view to show (Patron, Librarian, Judge) based on the user's type.
      */
-    userType: string;
+    currentUser: IUser;
 
     /**
      * Established private services and router variables.
@@ -49,17 +50,16 @@ export class EventComponent implements OnInit{
 
     /**
      * Executes on page load after data bound objects have been initialized.
-     */    
+     */
     ngOnInit() {
         if (!this.event) {
             let eventName = this._routeParams.get('eventName');
             this.getEvent(eventName);
         }
 
-        if (!this.userType) {
-            this.userType = this._routeParams.get('userType');
+        if (!this.currentUser) {
+            this.currentUser = this._routeParams.get('currentUser');
         }
-        console.log(this.userType);
     }
 
     getEvent(eventName: string) {

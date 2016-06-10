@@ -45,8 +45,7 @@ System.register(['angular2/core', 'angular2/common', 'angular2/router', '../../s
                     this._routeParams = _routeParams;
                     /**
                      * The current user.
-                     */
-                    this.currentUser = "Peter";
+                    currentUser: string = "Peter";*/
                     /**
                      * Name of the file.
                      */
@@ -73,27 +72,27 @@ System.register(['angular2/core', 'angular2/common', 'angular2/router', '../../s
                  * Executes on page load after data bound objects have been initialized.
                  */
                 ngOnInit() {
-                    this.getEntry(this.currentUser, this.event.eventName);
+                    this.getEntry(this.currentUser.patronID, this.event.eventName);
                 }
                 /**
                  * Gets the user's entry for the event.
-                 * @param userName The user.
+                 * @param patronID The user.
                  * @param eventName The event.
                  */
-                getEntry(userName, eventName) {
-                    this._submissionService.getEntry(userName, eventName)
+                getEntry(patronID, eventName) {
+                    this._submissionService.getEntry(patronID, eventName)
                         .subscribe(entry => this.userEntry = entry, error => this.errorMessage = error);
                 }
                 /**
                  * Submits the entry to the database.
                  */
                 submitEntry() {
-                    this._submissionService.submitEntry(this.currentUser, this.artworkTitle, this.event.eventName, this.filesToUpload)
+                    this._submissionService.submitEntry(this.currentUser.patronID, this.artworkTitle, this.event.eventName, this.filesToUpload)
                         .then((result) => {
                         this.artworkTitle = "";
                         this.fileName = "";
                         this.choseFile = false;
-                        this.getEntry(this.currentUser, this.event.eventName);
+                        this.getEntry(this.currentUser.patronID, this.event.eventName);
                         // console.log(result);
                     }, (error) => {
                         console.error(error);
@@ -118,6 +117,10 @@ System.register(['angular2/core', 'angular2/common', 'angular2/router', '../../s
                 core_1.Input(), 
                 __metadata('design:type', Object)
             ], EntryFormComponent.prototype, "event", void 0);
+            __decorate([
+                core_1.Input(), 
+                __metadata('design:type', Object)
+            ], EntryFormComponent.prototype, "currentUser", void 0);
             EntryFormComponent = __decorate([
                 core_1.Component({
                     selector: 'entry-form',

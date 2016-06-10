@@ -4,6 +4,6 @@ import { ROUTER_PROVIDERS, RouteConfig } from 'angular2/router';
 
 
 // Our main component
-import { AppComponent } from './components/app/app.component';
+import { AppComponent } from '../app/components/app/app.component';
 
 bootstrap(AppComponent, [HTTP_PROVIDERS, ROUTER_PROVIDERS, RouteConfig]);

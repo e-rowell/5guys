@@ -19,8 +19,8 @@ import { EventListComponent } from '../event-list/event-list.component';
 })
 @RouteConfig([
     { path: '/home', name: 'Home', component: HomeComponent, useAsDefault: true },
-    { path: '/events', name: 'Events', component: EventListComponent },
-    { path: '/events/:eventName/:userType', name: 'EventDetail', component: EventComponent }
+    { path: '/events/:currentUser', name: 'Events', component: EventListComponent },
+    { path: '/events/:eventName/:currentUser', name: 'EventDetail', component: EventComponent }
 ])
 /**
  * The main App Component.

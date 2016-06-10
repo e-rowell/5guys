@@ -30,13 +30,26 @@ System.register(['angular2/core', 'angular2/router', "angular2/common"], functio
                     this.tooltipText = 'Team Members: Ethan Rowell, Nicholas Hays, Jacob Tillett, Edward Koval, Ben Pasero';
                     this.userTypes = ["Patron", "Librarian", "Judge"];
                     this.currentUserType = "Patron";
+                    this.selectedUserType = "Patron";
+                    this.currentUser = {};
+                    this.currentUser.patronID = 123456;
+                    this.currentUser.username = "Jim";
+                    this.currentUser.userType = "Judge";
                 }
                 /**
                  * On change event.
                  * @param newValue The new value to update.
                  */
                 onChange(newValue) {
-                    this.currentUserType = newValue;
+                    this.selectedUserType = newValue;
+                }
+                /**
+                 * Sets the current user's information from the Login inputs.
+                 */
+                setUser() {
+                    this.currentUser.patronID = $('#patronID').val();
+                    this.currentUser.username = $('#username').val();
+                    this.currentUser.userType = $('#userType').val();
                 }
                 /**
                  * Executes on page load after data bound objects have been initialized.
@@ -47,6 +60,7 @@ System.register(['angular2/core', 'angular2/router', "angular2/common"], functio
                         'data-placement': 'top',
                         'title': this.tooltipText
                     }).tooltip();
+                    // $('#patronID').inputmask('number')
                 }
             };
             NavComponent = NavComponent_1 = __decorate([

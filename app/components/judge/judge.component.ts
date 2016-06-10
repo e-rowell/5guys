@@ -1,14 +1,16 @@
 import { Component, OnInit } from 'angular2/core';
-
-import { IEntry } from '../judge/entry';
-import { EntriesService } from '../../services/entries.service';
 import {Observable} from "rxjs/Observable";
+
+import { IEntry } from '../shared/interfaces/entry';
+import { EntriesService } from '../../services/entries.service';
+/*import MaskedInput from '@msafi.angular2-text-mask';*/
 
 @Component({
     selector: 'judge',
     templateUrl: 'app/components/judge/judge.component.html',
     styleUrls: ['app/components/judge/judge.component.css'],
-    providers: [EntriesService]
+    providers: [EntriesService]/*,
+    directives: [MaskedInput]*/
 })
 /**
  * Component for judging entries.
@@ -49,7 +51,6 @@ export class JudgeComponent implements OnInit {
     // update score for the patron
     onChange(patronID: number, score: number) {
         this.entries.find( entry => entry.patronID == patronID).score = score;
-        console.log(this.entries);
     }
 
     /*getEntries() {
@@ -58,8 +59,8 @@ export class JudgeComponent implements OnInit {
             error => this.errorMessage = <any>error);
     }*/
 
-    getJudgeEntries(judgeName: string) {
-        this._entriesService.getJudgeEntries(judgeName).subscribe(
+    getJudgeEntries(judgeName: string, eventName: string) {
+        this._entriesService.getJudgeEntries(judgeName, eventName).subscribe(
             entries => this.entries = entries,
             error => this.errorMessage = <any>error);
     }
