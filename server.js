@@ -76,7 +76,7 @@ app.post('/login', function (req, res) {
             res.status(200).send("login succeded")
         }
         else
-            res.status(500).send("login failed");
+            console.log(req.body.username)//res.status(500).send("login failed");
     })
 });
 
@@ -217,9 +217,22 @@ app.post("/submitEntry", multer({
 
 /**
 * Withdraw a previous entry (not implemented)
+* @author Ethan R
+* @author Ben P
 */
 app.post("/withdrawEntry", (req, res) => {
     // TODO post event name to withdraw from 
+		//withdraw from entries based on patronID eventName
+    db.collection('entries').deleteOne({
+            patronID: req.body.patronID,
+            eventName: req.body.eventName
+        },   
+        (err, result) => {
+            if (err) return console.log(err)
+
+        });
+
+
 });
 
 
